@@ -1,0 +1,3 @@
+[submodule "pyqcm"]
+	path = pyqcm
+	url = https://github.com/pyqcm-project/pyqcm.git

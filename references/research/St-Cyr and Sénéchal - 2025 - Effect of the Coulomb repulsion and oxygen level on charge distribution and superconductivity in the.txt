@@ -1,0 +1,1100 @@
+Effect of the Coulomb repulsion and oxygen level on charge distribution and superconductivity in 
+the Emery model for cuprates superconductors.
+Louis-Bernard St-Cyr¹ and David Sénéchal¹
+¹Département de physique and Institut quantique, Université de Sherbrooke, Sherbrooke, Québec, 
+Canada J1K 2R1
+(Dated: March 12, 2025)
+The Emery model (aka the three-band Hubbard model) offers a simplified description of the 
+copper-oxide planes that form the building blocks of high-temperature superconductors. By contrast 
+with the even simpler one-band Hubbard model, it differentiates between copper and oxygen orbitals 
+and thus between oxygen occupation (np) and copper occupation (nd ). Here we demonstrate, using 
+cluster dynamical mean field theory, how the two occupations are related to the on-site Coulomb 
+repulsion U on the copper orbital and to the energy difference εp between oxygen and copper 
+orbitals. Since the occupations (np and nd ) have been estimated from NMR for a few materials (LCO, 
+YBCO and NCCO), this allows us to estimate the value of U  εp for these materials, within this 
+model. We compute the density of states for these and the effect of (U , εp ) on the nd -np curve, 
+superconductivity, and antiferromagnetism.
+
+
+I. INTRODUCTION
+
+High-temperature superconductors, nearly forty years af-ter their discovery, still constitute a 
+theoretical challenge. The dozens of materials in this category all share a com-
+
+
+
+
+
+−tpp
+′
+pp
+
+−
++
+tpd
++
+− −  − +
+
+mon feature:  planes of copper oxide (CuO₂).  Thus one would naturally expect a universal 
+explanation of super-conductivity in cuprates based on a model of these planes only. The one-band 
+Hubbard model has long been the fo-cus of research in this direction, in part because of its 
+rel-ative simplicity: a few hopping parameters, the Coulomb repulsion U and the chemical potential 
+controlling the elec-
+
+
+2py
+tpp
+
+
+
+
+
+2pₓ
++
+−tpd
+
+
+
+′
+pp
+−tpp
+tpp
+
+tron density. That model features a single band crossing the Fermi level, argued to be a 
+combination of copper dₓ2 y2 and oxygen pₓ and py orbitals, forming excitations above
+what we call the Zhang-Rice singlet [1]. Various theoret-ical approaches applied to this model have 
+provided evi-dence for a dome of d-wave superconductivity away from half-filling, in addition to a 
+robust antiferromagnetic phase close to half-filling [2–6], although there is also evidence, in 
+some parameter range, that superconductivity is not the lowest-energy state [7, 8].
+A more realistic description of the CuO₂ planes is pro-vided by the Emery-VSA 
+(Varma-Schmitt-Rink-Abrahams) model [9, 10], which involves the copper dₓ2 y2 orbital and two 
+oxygen p-orbitals per unit cell. Within that model,
+the question of the distribution of holes between the cop-per and oxygen orbitals now has meaning. 
+Since the oc-cupation of both orbitals can be estimated from nuclear magnetic resonance (NMR) 
+experiments [11], a compari-son with NMR data can in principle be used to impose con-straints on 
+some of the parameters of that model, namely the on-site Coulomb interaction on the copper orbitals 
+and the energy levels of both orbitals. This is what this paper is mainly about. This will also 
+lead us to revisit the relation of superconductivity with U and the matter of localized vs 
+itinerant antiferromagnetism in NCCO.
+This paper is organized as follow: In Sect. II we review the definition of the Emery model and the 
+method used (Cluster dynamical mean-field theory or CDMFT). The lat-ter is mostly discussed in the 
+Appendix. In Sect. III we
+3dₓ2 −y2
+
+
+Figure 1. Schematic representation of the Emery model used in this work: Copper dₓ2 y2 orbitals are 
+shown in red and Oxygen pₓ ,py orbitals in blue. Nonzero hopping parameters are indicated. The gray 
+square defines the unit cell, and the beige square the super unit cell used in CDMFT (see 
+appendix).
+
+
+present our numerical results for the relative hole and elec-tron distribution among the Cu and O 
+orbitals as a function of doping, interaction strength U and oxygen energy level εp . We also show 
+the effect of these parameters on the su-perconducting order parameter at zero temperature and we 
+compare the charge-distribution curves with those of real materials obtained from NMR. Finally in 
+Sect. IV we dis-cuss the applicability of the Emery model to these materials and conclude.
+
+
+
+II. MODEL AND METHOD
+
+A. The Emery model
+
+Let us first review the basics of the Emery model. It is schematically illustrated in Fig. 1. In 
+second-quantized lan-guage, the kinetic energy Hkin. and interaction Hint. are ex-
+
+2
+
+
+pressed as follows:
+
+Hkin. =   (εp  µ)(nr+ax
+r,σ
+
+
++ nr₊ₐy ) − µnr
+in energy between the oxygen and copper orbital and the energy εd of the copper orbital is used as 
+reference. tpd is the first-neighbor hopping amplitude between a copper and the oxygen orbitals 
+that are directly around it. tpp is the
+
++ tpd X X
+X 𝑐d† pr₊𝑐ₐ,σ + H.c
+hopping amplitude between two nearest-neighbor oxygen orbitals (diagonally) and t′pp is the 
+third-neighbor hopping
+
+r a=aₓ ,ay 𝑐=±1
+amplitude between two oxygen orbitals over a copper or-
+
+
++ tpp
+r
+𝑐,𝑐X= 1
+
+†
+r+𝑐aₓ ,σ
+
+pr+𝑐′ ay ,σ + H.c
+bital. The sign convention for the hopping parameters used in this work is illustrated in Fig. 1. U 
+represents the energy
+
+
++ t′pp
+Xr a=Xaₓ ,ay
+
+p†
+r−a,σ
+
+pr+a,σ
++ H.c}   (1)
+cost of double occupancy caused by the Coulomb repulsion between electrons located on the same 
+copper orbital. The corresponding local repulsion Up on the oxygen orbitals is neglected because of 
+its smaller value, as justified by density
+
+
+Hint.
+= U  nr
+r
+
+nr↓
+,        (2)
+functional theory (DFT)[12], and also because the oxygen orbitals are nearly filled in the cases of 
+interest. The chemi-cal potential µ allows to control the filling (electron or hole
+
+where r labels the position of the copper atoms and 2aₓ = 2ay are the Bravais square lattice 
+vectors. The operator dr,σ annihilates an electron of spin σ on the copper 3dₓ2 −y2 or-
+doping) of the system.
+We can express the kinetic part Hkin. more compactly in reciprocal space:
+
+bital located at the position r. The operator pr₊ₐ,σ annihi-lates an electron of spin σ on the 
+oxygen 2pₓ or 2py orbital
+
+Hkin.
+†
+k,σ
+hkΦ
+
+k,σ
+(3)
+
+located at r + aₓ,y . nr,σ
+†
+r,σ
+dr,σ
+is the number of elec-                ᵏσ
+
+trons of spin σ in the Cu orbital at site r, whereas nr₊ₐx and
+where the different annihilation operators are assembled in
+nr₊ₐy are the number of electrons (summed over spins) on   the multiplet Φk,σ = (dkσ  x   k         
+× 3 matrix hk
+σ) and the 3
+each of the oxygen orbitals. εp represents the difference  is
+
+   0       tpd (1 − e−ⁱᵏx )      tpd (1 − e−ⁱᵏy )   
+hk =  tpd (1 − eⁱᵏx )   εp + 2t′pp cos kₓ   tpp(1 − eⁱᵏx )(1 − e−ⁱᵏy )  .             (4)
+tpd (1 − eⁱᵏy ) tpp(1 − e−ⁱᵏx )(1 − eⁱᵏy )   εp + 2t′pp cos ky
+
+
+
+Note that we did not renormalize εp by including the  2tpp contribution of the oxygen orbital 
+energy, in contrast with Ref. [13].
+Since the unit cell contains three orbitals, the maximum occupation is n = 6. The “half-filling” 
+state is set to five electrons per unit cell, with the O orbitals being fully filled and the Cu 
+orbital half-filled, in the zero-hopping limit. At finite hopping the O orbitals are slightly less 
+than fully filled and the Cu orbital is slightly more than half-filled [11]. Such an undoped state 
+describes a charge transfer insula-tor (CTI) when the interaction U is large enough to split the Cu 
+energy band into an upper (UHB) and lower (LHB) Hubbard band [14]. At those large U values, the UHB 
+is pushed past the energy of the oxygen band, also called the charge-transfer band (CTB). Partial 
+holes on the O orbitals cause a loss of electronic weight in the CTB and give rise to the 
+Zhang-Rice singlet band (ZRB) [1] made of low-energy states formed by the mixing of Cu and 
+neighboring O or-bitals. In a CTI, an insulating gap, called a charge transfer gap (CTG), is formed 
+between the ZRB and the UHB upon increasing U . This CTG in the Emery model is the analog of the 
+Mott gap in a Mott insulator (MI). The different spectral features of the Emery model are 
+illustrated in the density of
+states of Fig. 6a below.
+Finally, a note on double counting. The relative energy level εp between O and Cu orbitals computed 
+from DFT is subject to a renormalization when the Coulomb inter-action U is introduced. Indeed, 
+Coulomb interactions are already taken into account at the DFT level and impact the value of εp . 
+When U is introduced in an explicit way in the Emery model, the DFT effect of that local Coulomb 
+in-teraction should be subtracted in order to avoid counting it twice. This of course is rather 
+difficult to evaluate exactly. A rough estimate of this double counting can be obtained by 
+computing the effect of U at the mean-field (Hartree) level, i.e., by replacing
+Unr↑nr↓ by U n¯r↑nr↓ + nr↑n¯r↓ − n¯r↑n¯r↓ ,  (5)
+where n¯rσ is the occupation of the Cu orbital of spin σ at site
+r. In the paramagnetic state, n¯r = n¯r and this brings a con-
+tribution ¹ U n¯r to the copper orbital energy εd that must be subtracted, which leads to a 
+corresponding correction ¹ U n¯r to εp since εd is used as the reference energy. Such a cor-rection 
+was already applied in Refs [15, 16] but manifestly
+depends on U . Hence one cannot set U in the model with-out also playing with εp . This is why in 
+the following we
+
+
+
+study both the effect of U and εp on the properties of the model.
+
+
+
+
+
+
+B. Cluster dynamical mean-field theory
+
+
+In this work we approximately solve the Emery model using cluster dynamical mean field theory 
+(CDMFT) [17, 18] with an exact diagonalization (ED) impurity solver at zero temperature, 
+implemented in the open-source library Pyqcm [19]. CDMFT is an extension of dynamical mean
+3
+
+
+Table I. Hopping parameters used in this work, from Refs [15, 16].
+Material   tpd /tpp    t′pp /tpp   (εp  εd )/tpp
+BSSCO    2.139    0.258    2.01
+LSCO     2.172   0.1609    4.08
+YBCO     1.902    0.223    3.05
+NCCO     2.148    0.389    2.98
+III. RESULTS
+A. Doping curves
+The effect of U and εp on the distribution of holes and
+
+field theory (DMFT). DMFT is an embedding procedure that incorporates the correlations of a single 
+correlated orbital with its lattice environment into a hybridization of that orbital with a set of 
+non-interacting orbitals (the “bath”). DMFT assumes that the self-energy is purely local, i.e., its 
+momentum dependence is neglected. To include the latter,
+which is essential to describe dₓ2 y2 superconductivity in cuprates, we need to upgrade the 
+single-site impurity prob-lem (DMFT) into a cluster impurity problem (CDMFT), in which a four-site 
+cluster of Cu atoms is embedded into an
+effective environment. In this work the decomposition of the infinite lattice into clusters is done 
+in the same way as in Ref. [20]: the lattice is tiled with identical units, each of which 
+consisting of a cluster of Nd = 4 correlated Cu sites and another, overlapping cluster of NO = 8 
+uncorrelated oxygen sites, as shown in Fig. 1. The correlated Cu cluster is augmented by an 
+8-orbital bath that represents that clus-ter’s environment, and defines an “impurity problem”. See 
+Appendix A for technical details.
+electrons in the Emery model can be seen by plotting the
+occupation of O orbitals against that of the Cu orbital. We have computed the distribution of 
+electrons and holes for a range of values of U and εp in a model of Bi₂Sr₂Ca₂Cu₃O₁₀ (BSCCO) as 
+shown in Fig. 2. The hopping parameters are taken from ref. [15]. Note that we also obtained 
+solutions on the “wrong” side of half-filling for this material (and for others in this paper), 
+i.e, for both hole and electron doping, irrespective of its actual hole- or electron-doped 
+character.
+Let nd (np) denote the average occupation of copper (oxygen) orbitals. In Fig. 2, one notices a 
+discontinuity in the slope ¹ dnd /dnp of the curves at half-filling, i.e., along the diagonal gray 
+line defined by nd + 2np = 5. This dis-continuity occurs for all curves with U > 9 on the figure 
+and is a signature of the charge transfer gap (CTG). On the hole-doped side, the smaller slope 
+indicates that the hole density increases faster on the O orbitals than on the Cu orbital when 
+removing electrons. By contrast, the slope on the electron-doped side indicates that the doped 
+electrons mostly go to the Cu orbital. Note from Fig. 2a that the slope discontinuity between the 
+electron- and hole-doped sides of the curve increases with U , that is, as U gets stronger, the
+
+1.0
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+
+
+
+
+
+
+e-doped
+
+
+U = 8, εp = 2
+U = 9, εp = 2
+h-doped
+
+
+
+
+
+
+
+e-doped
+
+
+
+U = 10, εp = 2
+h-doped
+doped hole (electrons) go increasingly towards the O (Cu) orbitals. Both of these observations are 
+in agreement with experimental data [21, 22] (see Fig. 5) and with theoreti-cal calculations using 
+a different impurity solver [23, 24]. In the atomic limit, i.e., when setting all hopping terms to 
+zero (but keeping εp ), the corresponding curve would fol-low the np = 2 axis on the electron-doped 
+side, and the nd = 1 axis on the hole-doped side (orange lines on the
+
+0.4
+
+0.3
+U = 9.5, εp = 2 U = 11, εp = 2 U = 12, εp = 2
+
+
+(a)
+U = 12, εp = 4 U = 14, εp = 6 U = 16, εp = 8
+
+
+(b)
+figure). At lower values of U , crossing the half-filling axis has no effect on the slope of the 
+curve, corresponding to a continuously hybridized Cu-O band at the Fermi level.
+
+0.2
+0.0     0.2     0.4
+4 − 2np
+0.0     0.2     0.4
+4 − 2np
+In the zero-hopping limit, the CTG gap is precisely ∆n = U  εp . We will call this the nominal gap, 
+as opposed to the real CTG gap obtained from the computed density of
+
+Figure 2. Relative filling nd of copper and np of oxygen in a model for Bi₂Sr₂Ca2Cu₃O₁₀. Panel (a): 
+the effect of U for a fixed value of εp . Panel (b): the effect of U when the nominal gap U  εp is 
+kept constant. The gray line sits at half-filling and the blue lines at ±15% doping. The orange 
+lines show the zero-hopping limit.
+states when hopping is present. The actual CTG is much smaller than U  εp because of the finite 
+bandwidth in the presence of hopping. From Fig. 2b, one sees that increasing εp while keeping the 
+nominal gap U  εp constant barely af-fects the position of the curve along the half-filling line 
+and makes the curves flatter on the hole-doped side while hav-ing no effect on the electron-doped 
+side. Indeed, increasing
+
+4
+
+
+εp pushes the lower Hubbard band to even lower energies, thus making the charge transfer band even 
+more dominated by the oxygens and removing copper content from the ZRS band. Hence added holes go 
+more and more on the oxy-gen atoms. On the other hand, that increase has apparently much less 
+effect on the oxygen content of the upper Hub-bard band, because the relative location of the UHB 
+and the
+
+
+2.5
+
+
+2.0
+
+
+1.5
+
+(a)
+8
+2
+6
+4  2
+
+
+
+2  2
+
+2  0.17
+
+0.16
+J
+0.15
+
+0.14 2
+
+2
+(b)        4  2
+2
+2
+
+CTB remains roughly the same, and so does the actual CTG. We conclude from this that the ZRS band 
+gets its Cu content from both the lower and upper Hubbard bands.
+0.25
+
+
+
+
+0.05
+Ψmax
+0.04
+
+
+(c)
+8     9    10
+U − εp
+
+2
+
+
+
+
+2
+
+
+
+
+0.05
+Ψmax
+0.04
+0.10  0.11  0.12  0.13
+(U − εp )−¹
+(d)           2
+2
+
+0.20
+U = 8, εp = 2 U = 9, εp = 2 U = 9.5, εp = 2
+U = 11, εp = 2
+U = 12, εp = 2
+0.03
+2
+2  4              2   4
+2                 2
+6    0.03           6
+8        2          8
+
+0.15
+
+0.10
+0.14  0.15  0.16  0.17
+J
+0.10  0.11  0.12  0.13
+(U − εp )−¹
+
+
+
+0.05
+
+0.00
+0.25
+
+0.20
+
+0.15
+
+
+
+
+
+
+
+U = 10, εp = 2
+U = 12, εp = 4
+
+
+
+
+
+
+
+U = 14, εp = 6
+U = 16, εp = 8
+Figure 4. Various properties of the Emery model computed from CDMFT and the parameters used for 
+BSCCO in Fig. 2. Panel (a) shows the CTG computed from the density of states, as a func-tion of U  
+εp . Panel (b) shows the superexchange estimate J as a function of (U  εp )−¹. Panel (c) shows the 
+maximum supercon-
+ducting order parameter on the hole-doped side (see Fig. 3) as a
+function of the superexchange J at half-filling, and Panel (d) the same quantity as a function of 
+(U  εp )−¹. The value of εp is writ-ten next to each data point.
+
+
+0.10
+
+0.05
+
+0.00
+−0.5  −0.4  −0.3  −0.2  −0.1   0.0   0.1   0.2   0.3
+Figure 3. d-wave superconducting order parameter vs electron-doping x in a models for BSCCO with 
+varying U at fixed εp (top) and varying U at constant CTG, i.e., varying εp (bottom).
+B. Superconductivity
+Fig. 3 shows the d-wave superconducting order parame-ter Ψ, the average of the pairing operator 
+(A13), as a func-tion of electron doping x (negative for hole doping) for the same values of U and 
+εp as in Fig. 2. On the top panel, U is varied while
+In Ref. [20] it was argued that the main factor influenc-ing Ψmax was the effective super-exchange 
+J computed at half-filling. This quantity is computed on the impurity (the four-site plaquette) and 
+is the position of the first (domi-nant) pole in the dynamic antiferromagnetic spin suscep-tibility 
+as a function of frequency [20, 25]. Fig. 4b shows how J depends on the inverse nominal gap, 
+whereas Fig. 4c shows how Ψmax is related to J . As can be seen, the relation between the two is 
+roughly linear for fixed εp = 2 until the CTG almost closes. The linear relation also holds as a 
+func-tion of the inverse nominal gap (Fig. 4d). Note that the data shown in red, with constant 
+nominal gap, corresponds to a single value of J , but a sizeable variation of Ψmax, demon-strating 
+that J is not the only factor at play.
+Interestingly, all curves of Ψ with a nonzero CTG also show a discontinuity in the hole-doped 
+region, that appears at optimal doping, as illustrated in Fig. 3. This discontinu-ity within the 
+superconducting phase was also observed in Refs [20, 26] and marks the boundary between a supercon-
+
+εp is kept constant, whereas in the bottom
+panel U is varied while U  εp is kept constant. We first note that superconductivity exists even 
+when the CTG vanishes (U = 8 and U = 9). It is even at its maximum at half-filling just under the 
+Mott transition (U = 9), but shifts to-wards the hole-doped region as U is lowered to U = 8. Note 
+that these calculations ignore the presence of antiferromag-netism near half-filling. In all cases, 
+the maximum order parameter Ψmax on the electron-doped side is not affected by U or εp , whereas it 
+decreases with U on the hole-doped side, although less markedly if the nominal gap U  εp is kept 
+constant.
+ducting phase with and without pseudogap.
+
+
+C. Comparison with NMR
+
+We studied three different cuprate compounds and com-puted the hole distribution between oxygen and 
+copper sites in the superconducting phase, with the goal of estimat-ing the strengths of the 
+Coulomb interaction U and of the orbital energy εp in those materials. We looked at two hole-doped 
+cuprates, La₂CuO₄ (LCO) and YBa₂Cu₃O₇ (YBCO),
+
+5
+
+
+1.0
+
+0.9
+
+0.8
+
+
+hole-doped
+
+
+LCO U = 14, εp = 4 LCO U = 20, εp = 10 YBCO U = 9, εp = 3
+0.3
+
+
+0.2
+
+(a)           Cu
+LCO            Ox
+U = 14, εp = 4
+
+
+0.7
+
+0.6
+
+0.5
+
+0.4
+
+
+
+
+
+∆n = 10
+
+
+
+
+
+
+
+
+∆n = 6
+
+
+
+
+
+
+
+
+
+∆n = 5
+NCCO U = 8, εp = 3 NCCO U = 12, εp = 7
+LCO (exp.) YBCO (exp.) NCCO (exp.) atomic limit
+
+
+0.1
+
+
+0.0
+0.3
+LHB        ZRB
+
+CTB
+CTG UHB
+
+
+(b)
+
+
+0.3
+electron-doped
+0.0   0.1   0.2   0.3   0.4   0.5   0.6   0.7   0.8
+4 − 2np
+0.2
+0.1
+YBCO
+U = 9, εp = 3
+
+Figure 5. Relative filling nd of Cu np of O orbitals. NMR data from [11] (squares) compared with 
+our CDMFT results for LCO, YBCO and NCCO. The orange lines are the zero-hopping limit of the Emery 
+model. The values of the nominal gap ∆n = U  εp are indicated.
+using the hopping parameters from Ref. [15] given in Ta-ble I, and varying also εp from the values 
+of that table. We also looked at one electron-doped cuprate, Nd₂CuO₄ (NCCO), using the band 
+parameters from Ref. [16]. We compare in Fig. 5 the hole distributions of these three ma-terials 
+computed from CDMFT with the nuclear magnetic resonance (NMR) data from Ref. [11]. For each of the 
+three
+
+
+0.0
+0.3
+
+
+0.2
+
+
+0.1
+
+
+0.0
+
+
+
+(c)
+NCCO
+U = 8, εp = 3
+
+
+
+
+
+
+−20   −15   −10   −5   0    5
+
+
+
+materials, we computed the doping curves for many values of U and the value of εp of Table I. We 
+show in Fig. 5 only those curves that cross half-filling closest to their respec-tive experimental 
+data points. We also show doping curves (small open symbols) for larger values of U and 
+correspond-ingly larger values of εp for LCO and NCCO, thus keeping the nominal gap ∆n = U  εp 
+constant.
+Fig. 6 shows the computed density of states (DoS) at half-
+filling for each of the three materials studied, with the val-ues of U corresponding to the full 
+circles in Fig. 5. We see that LCO has a large CTG of approximately 3.5tpp (panel (a)), whereas in 
+YBCO this gap is only about 1.0tpp (panel (b)) and in NCCO the CTG has disappeared (panel (c)). The 
+absence of gap at the Fermi level for NCCO was also pre-dicted by a hybrid DFT-DMFT study [16] in 
+the case where long range magnetic order is not allowed, like here.
+We do not observe a superconducting dome on the elec-tron doped side in NCCO, rather like the U = 8 
+curve for BSCCO in Fig. 3a, even though there should be one as the material is superconducting. As 
+we mentioned before, DMFT+LDA computations on a similar model showed that by allowing long range 
+magnetic order a gap should open up around the Fermi level at half-filling [16]. We modified the 
+impurity model (A2) in order to allow for antiferromag-netic order, to see wether a CTG would 
+appear for NCCO at U = 8.0. To measure the strength of the antiferromagnetic order we defined the 
+order parameter
+Figure 6. Density of states for the solutions crossing the half-filling axis of Fig. 5 for each of 
+the three cuprate compounds. The Fermi level is the vertical red line. The Cu contribution is shown 
+in red and the contribution of one of the oxygen orbitals in blue (the two oxygens contribute equal 
+amounts).
+
+
+(U , εp ) = (8.0, 3) only a weak antiferromagnetic order was observed, which was not strong enough 
+to open a CTG. We then studied the relationship between the value of interac-tion U and the 
+antiferromagnetic order parameter, as shown in Fig. 7. We notice a discontinuity in the value of  M 
+in between U  9.06 and U  8.90. This discontinuity is characterized by the opening of an 
+antiferromagnetic order-induced CTG at the Fermi level, as can be seen from Fig. 8. The nature of 
+antiferromagnetism goes from local to itiner-ant as U is decreased across this discontinuity.
+
+
+IV. DISCUSSION AND CONCLUSION
+
+Comparing the hole distribution data from NMR and CDMFT should in principle allow us to set the 
+interaction strength U and the relative band energy εp in the Emery model. Knowing band parameters 
+from first-principles cal-culations, one can produce curves similar to Fig. 2 and ap-proximately 
+identify the right U −εp by looking at the inter-
+
+M =  eQ·ʳ(nr
+r
+− nr↓
+)       (6)
+section of their curves with the half-filling axis and compare it with a NMR measurement on the 
+undoped compound, like in Fig. 5. Ideally, (nd , np) NMR data and the CDMFT
+
+with the antiferromagnetic wave-vector Q = (𝑢, 𝑢). At
+results would have the same slope away from half-filling.
+
+6
+
+
+
+
+0.6
+
+0.4
+
+0.2
+
+0.0
+
+
+
+
+
+
+
+
+εp = 3 NCCO (half-filling)
+8     9     10    11    12
+U
+values U = 20 and εp = 10 (open blue circles in Fig. 5): A larger value of εp lowers the 
+hybridization of the Cu and O bands and produces a flatter curve. Maybe also our neglect of the 
+local Coulomb interactions on the oxygens (Up) is to blame, as its importance will grow with hole 
+doping. Fi-nally, this may just be an inherent insufficiency of the Emery model to describe the 
+actual material, which only a treat-ment of all orbitals could resolve, in the line of Ref. [27].
+More serious is the disagreement between the data for NCCO (open red squares on Fig. 5) and the 
+model’s predic-tions on the electron-doped side. The NMR data consists of two points only, but 
+these two points hint at a rather large
+
+Figure 7. Amplitude of the antiferromagnetic order parameter of
+NCCO at half-filling in relation to the interaction strength U .
+value of dnd /dnp, as if the upper Hubbard band contained little oxygen, even though the values of 
+U and εp are such that the CTG vanishes.
+
+0.6
+
+
+0.4
+
+
+0.2
+
+
+0.0
+0.6
+
+
+0.4
+
+
+0.2
+
+
+0.0
+0.6
+
+
+0.4
+
+
+0.2
+
+
+0.0
+
+(a) U=9.06 (normal)
+
+
+
+
+
+
+
+
+
+
+(b) U=9.06 (AF)
+
+
+
+
+
+
+
+
+
+
+(c) U=8.89 (AF)
+The value U  εp = 5 for NCCO, as determined by the Cu        position of (np, nd ) at half-filling, 
+was not large enough to Ox         open a CTG even when allowing long range antiferromag-netic 
+order. Figs 7 and 8 show that a CTG opens up at the
+Fermi level between U = 8.90 and U = 9.06 for εp = 3, leading to a jump in the AF order parameter M 
+. Knowing that NCCO is a superconductor, we should observe a non-negligible value of the SC order 
+parameter Ψ at U  εp = 5 if it is indeed the right value to describe NCCO in the Emery model, but 
+we don’t (not shown). We are clearly underesti-mating the value of U  εp in that case. For 
+hole-doped com-pounds, which are commonly believed to possess greater U values than their 
+electron-doped counterparts [16, 28], this underestimation is less of a problem since they stand 
+further from the transition between a CTI and a metal. As for the electron-doped cuprates, some 
+argue that they are simply not in the CTI regime [16]. This also points towards a possible (small) 
+disconnect between the computation of densities and that of the SC order parameter, the latter 
+be-ing more affected by the finite size of the cluster since it is less of a local quantity: 
+neglecting inter-cluster components of the anomalous self-energy has more consequences when 
+computing Ψ.
+Let us point out some deficiencies of the Emery model or
+of our treatment thereof:
+
+−20   −15   −10   −5    0    5
+
+
+
+Figure 8. DoS of NCCO in the normal phase in which we allowed for long range antiferromagnetic 
+order. The two values of interac-tion U shown are the values on the border of the discontinuity in 
+Fig. 7.
+
+
+From Fig. 5 one sees that this is not exactly the case, al-though the agreement for YBCO is 
+satisfactory given the dispersion of NMR data.
+In LCO, the slope from the 4 NMR data points is smaller than predicted by CDMFT for εp = 4. This 
+behavior indi-cates that the O and Cu orbitals are actually less hybridized than the DFT-derived 
+parameters of the Emery model lead us to believe. There could be many causes. Maybe the value of εp 
+is actually larger than predicted by DFT. Indeed, our results are closer to the mark if we adopt 
+the more extreme
+1. In principle one could construct a tight-binding model that fits the DFT band structure 
+perfectly, with a large-enough number of orbitals. The Emery model keeps only three of them, hence 
+some hydbridization with other bands is lost and this will affect the occupation numbers nd and np, 
+especially if we venture too far from half-filling, the usual operating point at which the model 
+parameters are derived.
+2. In the model itself, we have neglected all interactions but the on-site interaction U on copper 
+orbitals, ef-fectively treating other orbitals in the mean-field ap-proximation. Since the 
+occupation np of oxygens is close to 2, this is not such a bad approximation (fluc-tuations of 
+these interactions are small) but it is less and less valid as hole-doping increases.
+3. The value of εp , as insisted upon above, is strongly renormalized by the interaction, so much 
+so that it is
+
+7
+
+
+better to treat it as an adjustable parameter. However, that renormalization is doping dependent, 
+and this was ignored here.
+Despite these shortcomings, the Emery model achieves a lot [20]: it reproduces the correlation 
+between super-
+the energy of a bath orbital and the θrα are elements of the hybridization matrix that allows 
+electrons to hop between cluster and bath orbitals. The effect of the bath environ-ment on the 
+electron Green function is contained in the hy-bridization function:
+
+conductivity and superexchange[29], charge transfer gap
+[30, 31] and oxygen hole doping [22].
+
+𝑇rr′
+(ω) = X θrαθr∗′ α
+	
+
+(A5)
+
+pation np and copper occupation nd can help determine the degree of correlation U  εp in the model 
+and set this param-eter combination from observations. This works reason-ably well for the 
+hole-doped cuprates LSCO (U  εp = 10) and YBCO (U  εp = 6), but less so for the electron-doped 
+cuprate NCCO. In the latter case, U  εp may be strongly un-derestimated, or the weaker correlations 
+make the CDMFT approach used here less accurate.
+
+
+ACKNOWLEDGMENTS
+
+Fruitful conversations with A.-M. S. Tremblay are grate-fully acknowledged. This work has been 
+financially sup-ported by the Natural Sciences and Engineering Research Council of Canada (Grants 
+No. RGPIN-2020-05060) and by the Canada First Research Excellence Fund. Computational resources 
+were provided by the Digital Research Alliance of Canada and Calcul Québec.
+
+
+Appendix A: Cluster dynamical mean-field theory
+
+In the appendix we review some technical details of clus-ter dynamical mean field theory (CDMFT) 
+[32, 33] as ap-
+We can extract the correlated cluster’s self-energy Σc from the Cu orbital Green function obtained 
+via ED through Dyson’s equation:
+G−c 1(ω) = ω − t − Γ(ω) − Σc (ω).    (A6)
+Here Gc is the exact 8  8 Green function of the Cu or-bitals on the correlated cluster (8 because 
+of spin). The self-energy is solely associated to the Cu cluster since we neglect correlation on 
+the O orbitals. From this self-energy, we construct an approximation to the Green function of the 
+infinite system
+G−¹(k˜, ω) = G0−1(k˜, ω) − Σc (ω).    (A7)
+Where G0−1 is the non-interacting part of the lattice Green function and k˜ is the reduced wave 
+vector in the Brillouin zone of the super-lattice of repeated clusters. Here G0−1(k˜) is a 24  24 
+matrix, since it also contains the contribution
+of the oxygen orbitals, and Σc has been padded with zeros from 8  8 to 24  24 to include the null 
+contribution of the oxygen orbitals to the self-energy. From this expression, we can in turn 
+calculate the local Green function:
+G¯ (ω) =  L X     1     .     (A8)
+
+plied to our problem. General reviews of CDMFT may be found in Refs [19, 34]. We define an impurity 
+problem con-
+N k˜ G0−1(k˜) − Σc (ω)
+
+sisting of 4 unit cells of the Emery model, which we further decompose into a 4-site, correlated 
+cluster of Cu dₓ2 y2 or-bitals, plus an 8-site, uncorrelated cluster of O p orbitals.
+The correlated Cu cluster is augmented by an 8-orbital bath that represents that cluster’s 
+environment, and defines an “impurity problem” whose Hamiltonian is
+The goal of CDMFT is then, through self-consistency, to ob-tain a local Green function that is 
+equal to the exactly-solved Green function of the cluster: Gc (ω) = G¯ (ω), when re-stricted to the 
+correlated (Cu) degrees of freedom. With a finite number of bath orbitals, it is impossible for 
+those two functions to coincide perfectly at all frequencies. A dis-
+
+Himp
+= Hclus
++ Hbath
++ Hhyb
+,     (A1)
+tance function is then defined to minimize the difference between the two solutions:
+
+with the following partial Hamiltonians:
+d = X
+
+W (G−¹(iω ) G−¹(iω ))
+
+²   (A9)
+
+Hclus = U X nr nr
+− X trr c† cr
+
+(A2)
+n  c   n
+iωn ,𝑐,𝑐′
+n 𝑐𝑐
+
+r  ↑ ↓
+X
+	
+
+
+r,r′ ,σ
+′ rσ σ
+(again, in the above equation, G¯ −1 is restricted to the Cu
+
+Hhyb = X θrα(c† bασ + H.c)      (A4)
+weights Wn that are usually taken to be constant up to some
+
+rσ
+r,α,σ
+
+The index r stands for site within the cluster and α is the bath orbital index. The trr′ are 
+elements of the cluster hop-ping matrix t, crσ and bασ are destruction operators on clus-ter and 
+bath orbitals, respectively, for spin σ =↑, ↓. ϵα is
+cutoff frequency ωc . The distance function is minimized with the help of some minimization method 
+(here we use the Nelder-Mead algorithm [35]), varying the bath param-eters, ϵα and θµα. The newly 
+obtained bath parameters are then used to update the impurity model, and the procedure is iterated 
+until convergence.
+
+8
+
+
+Once a self-consistent local Green function has been found, different observables of the system can 
+be computed. Consider for instance a general one-body operator Sˆ:
+Sˆ = X sαβ c† cβ .       (A10)
+We then use the Nambu formalism, which here amounts to a particle-hole transformation on the 
+spin-down part of the problem and allows to formulate the problem in the same Green function 
+language as in the normal solution. The Nambu off-diagonal blocks of the Green function and 
+self-energy then contain the anomalous parts of these quanti-
+
+αβ                   ties. A superconducting order parameter with d
+x 2 −y2
+sym-
+
+The ground state expectation value of such an operator is [19]
+metry is then defined as Ψ = ∆ˆ /N with N the number of unit cells in the lattice and the singlet 
+pairing operator ∆ˆ defined as:
+S¯  , ∞ dω d2k˜  tr s k˜ G k˜,    tr s(k˜) } , (A11) ∆ˆ = X (dr↑dr′ ↓ − dr↓dr′ ↑) − X (dr↑dr′ ↓ − 
+dr↓dr′ ↑) + H.c ,
+
+= −∞ 2𝑢 (2𝑢)2
+( ) (
+ω) − iω − p
+
+〈rr′〉ₓ
+
+〈rr′〉y
+
+(A13)
+
+where convergence is ensured by the subtraction of a pole p located on the positive real axis, if 
+tr s = 0. The expression (A11) is mainly used in this work to compute the electronic (hole) density 
+on Cu and O sites in the unit cell of the model illustrated in Fig. 1.
+In this work, we also probe the superconducting state. In that case the impurity model (A2) needs 
+to be upgraded by adding pairing between cluster and bath:
+with rr′ ₓ and rr′ y nearest neighbor copper orbitals in the x and y directions, respectively.
+Finally, let us point out that the use of an impurity solver based on exact diagonalization (ED), 
+even though limited to small systems sizes, and in particular a discrete bath, has the advantage 
+over quantum Monte Carlo methods that it is not plagued by the fermion sign problem. The latter 
+only gets worse while studying covalent (low values of εp ) com-pounds compared to ionic compounds. 
+Since cuprates are
+
+H   X s  c b
+
+
+
+c b  H.c
+
+.   (A12)
+definitey covalent [15], the use of an ED solver is of great
+
+
+
+
+
+[1] F. C. Zhang and T. M. Rice, Effective Hamiltonian for the su-perconducting Cu oxides, Phys. 
+Rev. B 37, 3759 (1988).
+[2] E. Gull and A. J. Millis, Numerical models come of age, Na-ture Physics 11, 808 (2015).
+[3] E. Pavarini and I. for Advanced Simulation, eds., Emergent phenomena in correlated matter: 
+lecture notes of the Au-tumn School on Correlated Electrons 2013 at Forschungszen-trum Jülich, 23 – 
+27 September 2013, Schriften des Forschungszentrums Jülich Reihe Modeling and Simula-tion No. 3 
+(Forschungszentrum Jülich, Jülich, 2013) meet-ing Name: Autumn School Correlated Electrons OCLC: 
+862816584.
+[4] H. Alloul, What is the simplest model that captures the basic experimental facts of the physics 
+of underdoped cuprates?, Comptes Rendus Physique 15, 519–524 (2014).
+[5] D. Sénéchal, P. L. Lavertu, M. a. Marois, and A.M.. Trem-blay, Competition between 
+antiferromagnetism and super-conductivity in high-Tc cuprates, Physical Review Letters 94, 156404 
+(2005).
+[6] A. Foley, S. Verret, A.-M. S. Tremblay, and D. Sénéchal, Coex-istence of superconductivity and 
+antiferromagnetism in the Hubbard model for cuprates, Physical Review B 99, 184510 (2019).
+[7] E. Fradkin, S. A. Kivelson, and J. M. Tranquada, Colloquium: Theory of intertwined orders in 
+high temperature supercon-ductors, Reviews of Modern Physics 87, 457 (2015).
+[8] M. Qin, C.-M. Chung, H. Shi, E. Vitali, C. Hubig, U. Scholl-wöck, S. R. White, and S. S. C. o. 
+t. M.-E. P. Zhang, Absence of superconductivity in the pure two-dimensional Hubbard model, Physical 
+Review X 10, 031016 (2020).
+[9] V. J. Emery, Theory of high-Tc superconductivity in oxides, Phys. Rev. Lett. 58, 2794 (1987).
+[10] C. Varma, S. Schmitt-Rink, and E. Abrahams, Charge transfer excitations and superconductivity 
+in ionic metals, Solid State Communications 62, 681 (1987).
+[11] M. Jurkutat, D. Rybicki, O. P. Sushkov, G. V. M. Williams,
+A. Erb, and J. Haase, Distribution of electrons and holes in cuprate superconductors as determined 
+from ¹⁷O and ⁶³Cu nuclear magnetic resonance, Phys. Rev. B 90, 140504 (2014).
+[12] M. S. Hybertsen, M. Schlüter, and N. E. Christensen, Calcu-lation of Coulomb-interaction 
+parameters for La₂CuO₄ using a constrained-density-functional approach, Phys. Rev. B 39, 9028 
+(1989).
+[13] O. Andersen, A. Liechtenstein, O. Jepsen, and F. Paulsen, LDA energy bands, low-energy 
+Hamiltonians, t′, t′′, t (k), and J , Journal of Physics and Chemistry of Solids 56, 1573 (1995), 
+proceedings of the Conference on Spectroscopies in Novel Superconductors.
+[14] J. Zaanen, G. A. Sawatzky, and J. W. Allen, Band gaps and electronic structure of 
+transition-metal compounds, Phys. Rev. Lett. 55, 418 (1985).
+[15] C. Weber, C. Yee, K. Haule, and G. Kotliar, Scaling of the tran-sition temperature of 
+hole-doped cuprate superconductors with the charge-transfer energy, Europhysics Letters 100, 37001 
+(2012).
+[16] C. Weber, K. Haule, and G. Kotliar, Strength of correlations in electron- and hole-doped 
+cuprates, Nature Physics 6, 574 (2010).
+[17] A. I. Lichtenstein and M. I. Katsnelson, Antiferromagnetism and d-wave superconductivity in 
+cuprates: A cluster dynam-ical mean-field theory, Phys. Rev. B 62, R9283 (2000).
+[18] G. Kotliar, S. Y. Savrasov, G. Pálsson, and G. Biroli, Cellular dynamical mean field approach 
+to strongly correlated sys-
+
+9
+
+
+tems, Physical Review Letters 87, 186401 (2001).
+[19] T. N. Dionne, A. Foley, M. Rousseau, and D. Sénéchal, Pyqcm: An open-source Python library for 
+quantum cluster methods, SciPost Phys. Codebases , 23 (2023).
+[20] N. Kowalski, S. S. Dash, P. Sémon, D. Sénéchal, and A.-M. Tremblay, Oxygen hole content, 
+charge-transfer gap, cova-lency, and cuprate superconductivity, Proceedings of the Na-tional 
+Academy of Sciences 118, e2106476118 (2021).
+[21] J. M. Tranquada,  S. M. Heald, and A. R. Mood-enbaugh, X-ray-absorption near-edge-structure 
+study of La₂ ₓ (Ba, Srₓ )CuO₄ y superconductors, Phys. Rev. B 36, 5263 (1987).
+[22] D. Rybicki, M. Jurkutat, S. Reichardt, C. Kapusta, and
+J. Haase, Perspective on the phase diagram of cuprate high-temperature superconductors, Nature 
+Communications 7, 11413 (2016).
+[23] G. Sordi, G. L. Reaney, N. Kowalski, P. Sémon, and A.-M. S. Tremblay, Ambipolar doping of a 
+charge-transfer insulator in the Emery model, Physical Review B 111, 045117 (2025).
+[24] N. Kowalski, Dopage, température critique et étude du modèle de Hubbard à trois bandes, Ph.D. 
+thesis, Université de Sher-brooke (2021).
+[25] B. Kyung, D. Sénéchal, and A.-M. S. Tremblay, Pairing dy-namics in strongly correlated 
+superconductivity, Physical Re-view B 80, 205109 (2009).
+[26] S. S. Dash and D. Sénéchal, Pseudogap transition within the superconducting phase in the 
+three-band Hubbard model, Physical Review B 100, 214509 (2019).
+[27] B. Bacq-Labreuil, B. Lacasse, A.-M. S. Tremblay, D. Sénéchal, and K. Haule, Towards an ab 
+initio theory of high-temperature superconductors:  a study of multilayer
+cuprates, arXiv preprint arXiv:2410.10019 (2024).
+[28] D. Sénéchal and AM. Tremblay, Hot spots and pseudogaps for hole- and electron-doped 
+high-temperature superconduc-tors, Physical Review Letters 92, 126401 (2004).
+[29] L. Wang, G. He, Z. Yang, M. Garcia-Fernandez, A. Nag,
+K. Zhou, M. Minola, M. L. Tacon, B. Keimer, Y. Peng, et al., Paramagnons and high-temperature 
+superconductivity in a model family of cuprates, Nature Communications 13, 3163 (2022).
+[30] S. M. O’Mahony, W. Ren, W. Chen, Y. X. Chong, X. Liu,
+H. Eisaki, S.-i. Uchida, M. Hamidian, and J. S. Davis, On the electron pairing mechanism of 
+copper-oxide high tempera-ture superconductivity, Proceedings of the National Academy of Sciences 
+119, e2207449119 (2022).
+[31] W. Ruan, C. Hu, J. Zhao, P. Cai, Y. Peng, C. Ye, R. Yu,
+X. Li, Z. Hao, C. Jin, et al., Relationship between the parent charge transfer gap and maximum 
+transition temperature in cuprates, Science bulletin 61, 1826 (2016).
+[32] A. I. Lichtenstein and M. I. Katsnelson, Antiferromagnetism and d-wave superconductivity in 
+cuprates: A cluster dynam-ical mean-field theory, Phys. Rev. B 62, R9283 (2000).
+[33] G. Kotliar, S. Y. Savrasov, G. Pálsson, and G. Biroli, Cellular Dynamical Mean Field Approach 
+to Strongly Correlated Sys-tems, Phys. Rev. Lett. 87, 186401 (2001).
+[34] D. Sénéchal, Quantum cluster methods: CPT and CDMFT, in Many-Body Physics: From Kondo to 
+Hubbard, Vol. 5, edited by E. Pavarini, E. Koch, and P. Coleman (Forschungszentrum Jülich, 2015) 
+pp. 13.1–13.22.
+[35] J. A. Nelder and R. Mead, A Simplex Method for Function Minimization, The Computer Journal 7, 
+308 (1965).
