@@ -1,0 +1,1176 @@
+Coexistence of Superconductivity and Antiferromagnetism in the Hubbard model for cuprates
+A. Foley,¹, ∗ S. Verret,¹ A.-M. S. Tremblay,¹, ² and D. Sénéchal¹
+¹Département de physique and Institut quantique, Université de Sherbrooke, Sherbrooke, Québec, 
+Canada J1K 2R1
+²Canadian Institute for Advanced Research, Toronto, Ontario, Canada, M5G 1Z8
+(Dated: June 20, 2019)
+Antiferromagnetism and d-wave superconductivity are the most important competing ground-state 
+phases of cuprate superconductors. Using cellular dynamical mean-field theory (CDMFT) for the 
+Hubbard model, we revisit the question of the coexistence and competition of these phases in the 
+one-band Hubbard model with realistic band parameters and interaction strengths. With an exact 
+diagonalization solver, we improve on previous works with a more complete bath parametrization 
+which is carefully chosen to grant the maximal possible freedom to the hybridization function for a 
+given number of bath orbitals. Com-pared with previous incomplete parametrizations, this general 
+bath parametrization shows that the range of microscopic coexistence of superconductivity and 
+antiferromagnetism is reduced for band parameters for Nd₂−ₓ Ceₓ CuO₄, and confined to 
+electron-doping with parameters relevant for YBa₂Cu₃O₇−X.
+
+
+I. INTRODUCTION
+
+The proximity of antiferromagnetism (AF) with super-conductivity (SC) is common in unconventional 
+supercon-ductors: Bechgaard salts, heavy-fermion superconductors, high-temperature superconductors 
+(cuprates), iron pnic-tides and selenides, can all go from antiferromagnetic to su-perconducting 
+upon varying some parameter (doping, pres-sure, etc.). Microscopic, i.e., spatially homogeneous, 
+coex-istence of superconductivity with antiferromagnetism is a definite possibility in iron 
+pnictides [1] and selenides [2], in the heavy-fermion compound CeRhIn₅ [3, 4] and in electron-doped 
+cuprate superconductors [5].  In this re-spect, hole-doped cuprates are quite different: the only 
+magnetic phase with which superconductivity coexists is an incommensurate spin-density wave [6–9]. 
+A clear dif-ficulty is to distinguish microscopic coexistence (a pure phase) from macroscopic 
+coexistence resulting from inho-mogeneities in the sample or from thermodynamic separa-tion of 
+competing phases.
+The antiferromagnetic phase breaks rotation symmetry (SO(3)) and can be characterized by an order 
+parameter M, the staggered magnetization. Superconductivity, on the other hand, breaks the U (1) 
+symmetry associated with elec-tron number conservation and the associated order param-eter is the 
+pairing amplitude ∆.  A signature of the mi-croscopic coexistence of these two phases would be the 
+presence of the so-called 𝑢-triplet order parameter[10–12], which is necessarily nonzero if both M 
+and the d-wave or-der parameter ∆ are nonzero. Note that the 𝑢-triplet is a kind of pair-density 
+wave [13–15]. However, it is differ-ent from the pair-density wave observed experimentally in 
+scanning tunnelling microscopy [16].  A unified descrip-tion of the two broken symmetries can be 
+formulated in the language of SO(5) symmetry [10]. A phenomenological Landau-Ginzburg theory of the 
+interplay and coexistence of the two phases can also be formulated without reference to the SO(5) 
+description [11].
+
+
+∗ Corresponding author: Alexandre.Foley@usherbrooke.ca
+The issue of a possible AF-SC coexistence in high-Tc su-perconductors has been addressed 
+theoretically using the one-band Hubbard model and its strong-coupling limit, the t-J model.  Inui 
+et al. found microscopic AF-SC co-existence in a slave-boson (mean field) treatment of the Hubbard 
+model [17].  Himeda et al. found it in a vari-ational Monte Carlo study of the t-J model [12].  The 
+presence of the 𝑢-triplet order parameter was studied in the mean-field approximation by Kyung 
+[18], also in the t-J model. Beyond the mean-field approximation, micro-scopic AF-SC coexistence 
+was predicted to occur within the Hubbard model with the Variational Cluster Approxima-tion (VCA) 
+[19] and Cluster Dynamical Mean Field Theory (CDMFT) [20, 21]. In Ref. [20], microscopic 
+coexistence for the nearest-neighbor hopping model was found only for small interaction strength (U 
+ 8t). Functional Renormal-ization Group (FRG) methods, although more relevant to weak and moderate 
+coupling, also predict the occurrence of such a microscopic coexistence phase [22, 23].
+The lack of microscopic coexistence of superconductiv-
+ity with commensurate antiferromagnetism in hole doped cuprates casts some doubt on the prediction 
+of quantum cluster methods or on the relevance of the one-band Hub-bard model to these materials. 
+In this paper, we show that a more careful application of CDMFT to the one-band Hub-bard model 
+makes this AF-SC microscopic coexistence dis-appear in models relevant to hole-doped cuprates, 
+while reducing its range in a model of electron-doped cuprates. We use a CDMFT impurity solver 
+based on exact diag-onalization at zero temperature, like in Refs [20, 21], and compare the simple 
+parametrization that they used with the most general parametrization of the bath orbitals, as used 
+in Ref. [24–26].  Quantum Monte Carlo (QMC) solvers, especially state of the art continuous-time 
+(CT-QMC) solvers [27] are free of bath parametrization ambi-guities. Up to now, CT-QMC solvers have 
+been used to study only the superconducting [28–42] and the antiferromag-netic phases [28, 43, 44] 
+separately. In principle, the ques-tion of coexistence can be addressed with these approaches, but 
+this has yet to be done.
+A QMC cluster size scaling study [45] has demonstrated that 2 × 2 plaquettes give reasonably well 
+converged results
+
+2
+
+
+and exponential convergence of local observables with clus-ter size has been observed [46–48]. 
+Because of this and since a 2  2 cluster is already very close to the limit of what is feasible 
+with ED-CDMFT¹ given the computational resources available to us, we only consider that one size of 
+cluster.
+This paper is organized as follows: In Section II we present the model and explain the method used 
+(ED-CDMFT), with a particular attention towards the bath parametrization. In Section III we present 
+and discuss our results, before concluding.
+
+
+II. MODEL AND METHOD
+
+Although high-temperature superconductors are charge-transfer insulators [49], they are often 
+modelled by the one-band Hubbard model on a square lattice:
+bath orbital labelled 𝑐 (𝑐 stands for both orbital and spin indices and so does α for cluster 
+orbitals). The matrix θαµ defines the hybridization between bath and cluster, and εµ𝑐 defines the 
+dynamics of the bath. The bath parameters θαµ and εµ𝑐 are determined by an iterative procedure, as 
+ex-plained below.
+The one-electron Green function G’ takes the following form as a function of complex frequency g:
+G’−¹(g) = g − t − Γ (g) − Σ(g)     (3)
+where the hybridization matrix Γ (g) is defined as
+Γ (g) = θ (g − ε)−¹θ †        (4)
+in terms of the matrices θαµ and εαß . In practice, the cluster Green function is computed from an 
+exact diagonalization technique and the self-energy is extracted from Eq. (3).
+The Green function G(k˜, g) for the original lattice Hub-bard model is then computed from the 
+cluster’s self-energy
+H = − X tr,r’ c† cr’ ,σ + U X nr↑nr↓ − µ X nrσ.  (1)   as
+
+r,r’ ,σ
+r       r,σ
+G−¹(k˜, g) = G0−1(k˜, g) − Σ(g) .     (5)
+
+The hopping amplitudes tr,r’ depend on the particular com-pound and are restricted to 
+nearest-neighbor (t), second-neighbor (t’) and third neighbour (t’’). We use two sets of 
+parameters: one for YBa₂Cu₃O₇ X ( YBCO: t’/t =  0.3, t’’/t = 0.2) [50], a hole-doped compound, and 
+one for Nd₂ ₓ Ceₓ CuO₄ ( NCCO: t’/t =  0.17, t’’/t = 0.03) [51],
+an electron-doped compound. The first neighbour hopping, t, defines the energy scale and is set to 
+unity (t = 1). The NCCO hoppings can also be considered representative of a
+
+Here k˜ denotes the wave vectors belonging to the Brillouin zone associated with the superlattice 
+of plaquettes, and G₀ is the non-interacting lattice Green function.  All Green function-related 
+quantities are 2Nc  2Nc matrices, Nc = 4 being the number of sites in the plaquette.
+The bath parameters are ideally determined by the self-consistency condition G’(g) = G¯ (g), where
+
+class of hole-doped cuprates to which La₂ ₓSrₓCuO₂ belongs (see Fig. 5 of Ref.52).
+G¯ (g) ≡
+d²˜k
+(2𝑢)²
+G(k˜, g)
+(6)
+
+
+A. Cluster Dynamical Mean Field Theory
+
+In CDMFT, for the purpose of computing the electron self-energy Σ, the above model is replaced by a 
+cluster model (in this paper, a four-site plaquette) immersed in an effec-tive medium.  With an 
+exact diagonalization solver, this medium is represented by a finite set of uncorrelated bath 
+orbitals hybridized with the cluster sites. This discretization of the medium is an additional 
+approximation that must be made to accommodate an ED solver, and as such can lead
+and where the integral is carried over the reduced Brillouin zone (the domain of k˜). In other 
+words, the local Green function G’(g) should coincide with the Fourier transform G¯ (g) of the full 
+Green function at the origin of the super-
+lattice. This condition should hold at all frequencies, which is impossible in ED-CDMFT because of 
+the finite number of bath parameters ε and θ at our disposal. Thus, the self-consistency condition 
+is replaced by a minimization of the so-called distance function:
+d  X W i   Tr G’−¹ i   − G¯ −1 i   ,   (7)
+
+to additional finite size effects [24]. These bath orbitals, together with the cluster, are 
+described by an Anderson im-
+=   ( gn)
+gn
+( gn)
+( gn) 
+purity model (AIM):                       with respect to the bath parameters for a given value of
+Σ. The weight function W (x ) is meant to give more im-
+H   H   X  c† a  H.c.  X  a† a   (2)
+
+imp = clus +
+α,ξ
+θαµ α µ +
++
+µ,𝑐
+εµ𝑐 µ 𝑐
+portance to small frequencies and a fictitious temperature is used to define the grid of Matsubara 
+frequencies over which the above merit function is evaluated. Details can
+
+where Hclus is the restriction of the Hubbard Hamilto-
+nian (1) to the cluster. a𝑐 annihilates an electron on the
+
+
+
+1 The bath structure being simpler in one dimension, computations with more than four correlated 
+orbitals are possible with an ED solver. [24]
+be found, for instance, in Refs [21, 53–55]. In this work, we use a fictitious temperature ß = 50/t 
+and set W (ign) to 1 if gn < gc , with gc = 2t; W (ign) is set to zero for higher Matsubara 
+frequencies.
+To summarize, the ED-CDMFT procedure runs as follows:
+1. An initial, trial set of bath parameters is chosen.
+
+
+
+2. The ED solver is applied to Hamiltonian (2) and pro-vides a numerical representation of G’ that 
+allows for
+3
+
+ε1           ε1
+3      ∆₁     4
+
+a quick computation of G’(g), and hence of Σ(g), at any complex frequency.
+7    θ             8
+2          ∆2           2
+θ2            θ2
+
+3. The Fourier transform G¯ (g) is computed for the set of Matsubara frequencies appearing in (7).
+4. A new set of bath parameters θαµ, εµ𝑐  is obtained by minimizing the distance function (7).
+5. We go back to step 2 with the new set of bath param-eters until convergence is achieved.
+Note that superconductivity is allowed in the procedure through the use of the Nambu formalism, by 
+which a particle-hole transformation is performed on the spin-down
+†
+
+
+−∆2
+
+
+ε2
+5
+
+
+−∆1
+
+
+θ2
+θ1
+
+1
+ε1
+
+
+
+AF
+3    4
+
+
+
+1    2
+
+∆2
+
+∆1
+
+(a)
+
+
+−∆1
+
+
+θ2
+θ1
+
+2
+ε1
+
+
+
+AF
+
+
+−∆2
+
+
+ε2
+6
+orbitals (e.g. cα,↓ → cα,↓). This does not require a doubling           −ε1           ε1
+
+of the degrees of freedom in the Green function if no spin-flip terms are present in the model, 
+which is the case here. With 8 bath orbitals, we introduce two Nambu spinors, one for the cluster 
+and one for the bath:
+3
+AF 7    AF
+−ε2    AF 1
+𝑢1
+
+𝑢2
+
+3    4
+4
+AF   8
+1      AF
+AF   2
+2
+
+C = (c₁↑ . . . c₄↑, c†
+A = (a₁↑ . . . a₈↑, a†
+. . . c† )       (8)
+4↓
+. . . a† ) .      (9)
+𝑢2
+𝑢1
+𝑢1
+𝑢2
+1↓   8↓                             1      2
+
+The noninteracting part of Hamiltonian (2) then takes the general form
+
+εAF
+AF
+² AF   𝑢2
+AF
+AF   −ε
+
+H  = (C †, A†)  T θ  C     (10)
+² 5   θ1
+1
+ 
+
+𝑢1
+θ1    6  ²
+2
+
+
+
+where the matrices θ and ε can now contain anomalous terms.
+Two different bath parametrizations are used in this pa-per, as described in the next section. They 
+parametrize the same number of bath orbitals, but they differ in the num-ber of free parameters 
+that are set by the CDMFT procedure. The first bath parametrization is essentially the same as the 
+one used in Ref. [21]; the second, inspired by Ref. [24, 25], contains many more independent 
+parameters.  One may naturally expect that increasing the number of bath parame-ters brings the 
+system closer to perfect self-consistency. Us-ing the second parametrization gives us the best 
+possible self-consistency for a given number of orbitals; this is where this paper improves upon 
+previous studies. On the other hand, the CDMFT procedure itself becomes more time con-suming, in 
+particular optimizing the merit function Eq. (7).
+
+
+B. Simple bath parametrization
+
+A simple and intuitive way to configure the bath orbitals for a 4-site plaquette is illustrated on 
+Fig. 1. Time and mem-ory constraints limit the number of bath orbitals to 8, for a
+(b)
+
+Figure 1. Schematic description of the simple bath parametriza-tion. The blue circles represent the 
+cluster sites and red squares the bath orbitals. Intra bath terms are shown in red and 
+hybridiza-tion terms in blue. Cluster and bath orbitals are numbered sepa-rately. (a): terms that 
+are used when not probing antiferromag-netism, with C₂v symmetry. (b): additional terms needed when 
+probing antiferromagnetism and breaking C₂v down to C₂. See text for details.
+
+
+the bath through a hopping amplitude θi . The presence of superconductivity in the effective medium 
+is characterized by a singlet pairing amplitude ∆i with opposite signs along the x and y 
+directions, in accordance with d-wave sym-metry. This makes a total of 6 independent parameters, as 
+summarized on Fig. 1a. If only superconductivity is probed, the AIM has a C₂v symmetry (horizontal 
+and vertical reflex-ions) and only those 6 bath parameters are used.
+If antiferromagnetism is considered as well, then the sym-metry is reduced to C₂ (a 𝑢 rotation). 
+Six additional param-eters are introduced, as illustrated on Fig. 1b: Spin antisym-metric bath 
+energies εAF and hybridizations θ AF that alter-
+i              i
+
+total of 12 orbitals in the AIM Eq. (2). The 8 bath orbitals are separated into two sets, numbered 
+1 and 2, each with four orbitals. Each set can be thought of as a “ghost” of the plaquette, with a 
+site energy εi (i = 1, 2), hybridized with
+nate in sign between sites, and triplet-pairing amplitudes
+𝑢i whose signs are defined on the figure (via arrows). This makes a total of 12 independent bath 
+parameters.
+Let us specify the matrices introduced in Eq. (10). We
+
+
+
+order the bath orbitals so the two sets of 4 spin-up orbitals are consecutive and followed by the 
+two sets of spin down orbitals, in the same order. Overall, the 16  16 matrix ε associated with 
+this bath model has the following structure, in terms of 4 × 4 blocks:
+
+
+
+
+E₁
+
+Θ1  Θ1
+Θ1  3   4
+4
+E₂
+−Θ2 −Θ2
+Θ2  3   4
+
+E₁ + EAF   0     D₁     0   
+Θ1  1   2
+Θ2  1   2
+
+ε =   D
+2  2
+0  −E
+2
+EAF
+(11)        E₃           E₄
+
+0    D₂     0   −E₂ + EAF
+where Ei = εi 1₄×₄, EAF = εAF diag(1, −1, −1, 1) and
+Θ3 −Θ3
+Θ3  3   4
+−Θ4 Θ4
+Θ4  3   4
+
+  0   −∆i + 𝑢i  ∆i − 𝑢i    0   
+−Θ3  1   2
+−Θ4  1   2
+
+−∆i − 𝑢i    0     0    ∆i + 𝑢i
+∆i + 𝑢i    0     0   −∆i − 𝑢i
+0    ∆i − 𝑢i  −∆i + 𝑢i    0
+The minus signs in the bottom half of the ε matrix comes from the Nambu representation of spin down 
+orbitals. On the other hand, the 8 × 16 matrix θ has the following struc-
+
+
+E  ±Θi
+
+
+E₁
+
+
+j ≡ ±(θi ai cj + ∆i ai(iσy )cj + H.c.)
+(a) C₂v
+
+E₂
+
+ture:
+ΘB  ΘA
+−ΘB −ΘA
+
+Θ + ΘAF
+θ =
+Θ2 + ΘAF
+0     0
+AF      AF
+ (13)
+1  1
+ΘA  2B  2A
+2  2
+ΘA  2B  2A
+
+0     0   −Θ1 + Θ1  −Θ2 + Θ2
+where Θi = θi 1₄×₄, ΘAF = θ AF diag(1, −1, −1, 1).
+1
+
+
+ΘB  1A  1B
+2
+
+
+ΘB  1A  1B
+
+
+C. General bath parametrization
+E  ±Θi
+jX ≡ ±(θiX ai cjX + ∆iX ai(iσy )cjX
++θˢ a†σzcjX + TiX aiσx cjX + H.c.)
+
+The bath parametrization defined above is not the most general one. In order to construct the most 
+general bath ap-propriate to each point group (C₂v and C₂), one must first realize that any unitary 
+transformation of the bath orbitals is possible, and that this gauge freedom must be fixed 
+some-how. We do this by requiring (1) that the matrix ε be diag-onal and (2) that it falls into 
+irreducible representations of the symmetry group of the AIM.
+If only superconductivity is probed, we can impose C₂v symmetry (horizontal and vertical 
+reflexions) on the AIM. In addition to C₂v symmetry, we also assume spin symme-
+iX i
+(b) C₂
+Figure 2.   Top (a):  Schematic description of the general parametrization of the bath when probing 
+superconductivity with C₂v symmetry.  Blue circles represent the cluster sites and red squares the 
+bath orbitals. The 4 subfigures correspond to the first four bath orbitals, each associated with a 
+different irreducible rep-resentation of C₂v. The blue dashed lines and accompanying sym-bols 
+represent a hybridization operator as defined below the fig-ure. The four diagrams correspond to 
+the first 4 columns (or the last 4 columns) of the expressions (15) and (16) in the text. Bot-tom 
+(b): the same, for C₂ symmetry, used when probing antifer-
+
+try, which reduces the number of independent parameters.
+C₂v has four distinct irreducible representations to each of which we associate two bath orbitals 
+orbitals, for a total of 8, the same number as in the simple parametrization of the previous 
+section. We label these orbitals from 1 to 8, in two consecutive series of four, each series 
+corresponding to the four irreducible representations: 1 and 5 in the first repre-sentation, 2 and 
+6 in the second, 3 and 7 in the third, and 4 and 8 in the fourth. Fig. 2a illustrates the 
+hybridization of the first four orbitals. The coefficients θi and ∆i are the parameters present in 
+the hybridization between the cluster and the ith bath orbital: θi is the amplitude of the simple 
+hoppings and ∆i is the amplitude of the singlet pairing op-erators.
+In this bath parametrization, the matrix ε is diagonal:
+romagnetism and superconductivity. The operators symbolized by the dashed line are once again 
+defined below the figure. The su-perscripts A and B correspond to the two sublattices when AF order 
+is present. In the equations of (a) and (b), spinor notation is used: the Pauli matrices define the 
+spin part of each term.
+
+
+
+
+
+
+The hybridization matrix θ , on the other hand, is a dense 8 × 16 matrix:
+
+diag(εi ) diag( εi ), with i = 1, . . . , 8. Again, the last 8 com-ponents correspond to the 
+spin-down orbitals in the Nambu representation (hence the minus sign).
+θ = 
+
+Θ −D
+−
+
+(14)
+
+
+
+where the 4 × 8 blocks Θ and D are defined as
+θ1  θ2   θ3   θ4  θ5  θ6   θ7   θ8 θ1  θ2  −θ3 −θ4 θ5  θ6  −θ7 −θ8 θ1 −θ2  θ3  −θ4 θ5 −θ6  θ7  −θ8
+5
+
+D. Order parameters
+
+Once a CDMFT solution is found, various order param-eters may be computed. The quantities of 
+interest are the averages of the following operators defined on the lattice:
+
+θ1 −θ2 −θ3  θ4  θ5 −θ6 −θ7  θ8
+∆1  ∆2  ∆3  ∆4  ∆5  ∆6  ∆7  ∆8
+Mˆ = X eⁱQ·ʳ c† c  − c c    Q = (𝑢, 𝑢)      (19)
+
+∆1  ∆2  −∆3 −∆4 ∆5  ∆6  −∆7 −∆8
+∆1 −∆2  ∆3  −∆4 ∆5 −∆6  ∆7  −∆8
+
+Dˆ  X c c
+r↑ r↑
+
+− c
+r↓ r↓
+
+c  − c c   c c
+
+H.c
+
+∆1 −∆2 −∆3  ∆4  ∆5 −∆6 −∆7  ∆8
+The number of independent bath parameters is 8 in ε and 2 × 8 = 16 in θ , for a total of 24.
+=   r↑ r+x↓  r↓ r+x↑
+
+𝑢ˆ = X eⁱQ·ʳ c c  + c c
+r↑ r+y↓ + r↓ r+y↑ +
+
+
+
+− c c  − c c
+
+(20)
+ + H.c .
+
+If antiferromagnetism is probed as well, the symmetry reduces to C₂, which has only two irreducible 
+representa-tions. Since we can afford 8 bath orbitals, we associate 4
+r↑ r+x↓
+
+
+r↓ r+x↑  r↑ r+y↓
+r↓ r+y↑
+
+(21)
+
+bath orbitals to each irreducible representation, with the same pattern as the C₂v bath. Namely, 
+all the odd labelled bath orbitals have the same structure as the first orbital, and all the even 
+bath orbitals have the same structure as the second orbital. The cluster-bath couplings of the 
+first and second bath orbitals are illustrated in Fig. 2b. The su-perscripts A and B refer to the 
+two sublattices induced by antiferromagnetic order. The parameters associated with different 
+sublattices may differ.
+The energy Ei (i = 1, . . . , 8) has a component εi even in spin and a component εˢ odd in spin, 
+which makes 2
+8 = 16 parameters. Thus, the diagonal matrix ε has the structure
+(ε1 + εˢ , . . . , ε8 + εˢ , −ε1 + εˢ , . . . , −ε8 + εˢ )   (17)
+The first is just the spin-density operator with the antifer-romagnetic wavevector Q. The second 
+defines the d-wave pairing operator:  singlet pairing on nearest-neighbour bonds x and y with 
+opposite signs. The third is the 𝑢-triplet operator: triplet pairing on nearest-neighbour bonds 
+with opposite signs along x and y and a spatial modulation de-fined by the antiferromagnetic 
+wavevector Q.
+In ED-CDMFT, there are two ways to estimate the aver-age of one-body operators. The first, and also 
+the simplest, consists in computing the expectation value of the restric-tion of these operators to 
+the cluster in the ground state of the impurity model. The averages obtained in this way will be 
+called cluster averages.
+The second method involves the lattice model Green
+
+The operators ΘA in Fig. 2b contain four parameters each:
+erator of the form Oˆ = O  c† c can be computed from the
+
+i
+A  sA  A           A
+αß α ß
+
+θi , θi , ∆i , and TA, where θi is a spin-symmetric hopping
+operator, θ ˢA a spin antisymmetric hopping, ∆A a singlet
+Green function as
+i  A                    B  i                     I dG
+
+pairing and Ti a triplet pairing; likewise for Θi . This makes 8 parameters for each bath index i, 
+therefore 8  8 = 64 hybridization parameters in total. The hybridization matrix θ has the following 
+form:
+Θ + Θˢ −D + T 
+〈Oˆ〉 =  2𝑢 tr [OG(G)] .      (22)
+The frequency integral is taken along a contour that sur-rounds the negative real axis. In 
+practice, this is done in the mixed basis of superlattice wavevectors k˜ and cluster
+
+θ = D + T −Θ + Θˢ
+(18)
+orbitals indices, knowing that both O and G are diagonal in
+
+where the 4 × 8 block Θ is defined as
+k˜:
+
+θ A
+A   A   A
+2   3   4
+A   A   A
+5   6   7
+θ A 
+ˆ  I dG , d²˜k    ˜  ˜
+
+B  B
+1  2
+θ  −θ
+
+B  B
+3  4
+θ  −θ
+
+B  B
+5  6
+θ  −θ
+
+B  B
+7  8
+θ  −θ 
+	
+〈O〉 =
+2𝑢
+2 tr [O(k)G(k, G)]  (23)
+(2𝑢)
+and likewise for Θˢ (with components θ ˢA, θ ˢB), D (with    An operator Oˆ that is defined on 
+sites only, not on bonds,
+
+components  A  B
+ⁱ  ⁱ   A   B    like Mˆ above, or the electron density nˆ, will be called a local
+
+∆i , ∆i ) and T (with components Ti , Ti ). The total number of independent bath parameters in this 
+parametrization is 16 + 64 = 80.  Note that any hy-bridization function that can be produced with 
+the sim-ple parametrization can also be produced by the general parametrization we described.  By 
+applying an unitary transformation on the simple parametrization, we could obtain a bath 
+Hamiltonian with the same structure as the general parametrization, except for a large number of 
+ad-ditional constraints between bath parameters.
+operator. For such an operator O(k˜) does not depend on k˜ and the above formula simplifies to
+〈Oˆ〉 = I dG tr [OG¯ (G)]     (24)
+
+where the local Green function G¯ is defined in Eq. (6). For a local operator, the cluster average, 
+instead of being com-puted from the impurity ground state, could alternatively
+
+6
+
+
+
+
+
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+
+U = 6
+simple parametrization
+
+
+U = 6
+general parametrization
+
+
+hMˆ i (pure) 2hDˆi (pure) 10h𝑢ˆi
+hMˆ i
+2hDˆi
+
+
+0.0
+0.8
+
+
+U = 8
+
+
+U = 8
+
+0.6
+
+0.4
+
+0.2
+
+
+0.0
+0.8
+
+
+U = 12
+
+
+U = 12
+
+0.6
+
+0.4
+
+0.2
+
+
+0.0
+0.8   0.9   1.0   1.1   1.2   1.3
+electron density
+0.8   0.9   1.0   1.1   1.2   1.3
+electron density
+Figure 3. Phase diagrams (order parameter as a function of electron density) obtained with the 
+simple (left) and general (right) bath parametrizations, with YBCO-like band parameters (t’/t =  
+0.3, t’’/t = 0.2) and three values of onsite repulsion U . Blue symbols represent the AF order 
+parameter Mˆ , red symbols the dSC order parameter Dˆ  (times 2) and the orange symbols the 
+𝑢-triplet order (times 10). Dark symbols are obtained when allowing microscopic coexistence of the 
+two orders. Pale symbols are obtained when probing pure solutions. Deep in the superconducting 
+regime, the dark symbols can be from pure SC simulations; allowing for AFM there would have 
+significantly increased computational time with no benefits.
+
+be computed from Eq. (24), but with the impurity Green function G’ substituted for G¯ , which 
+yields the cluster aver-age mentioned before.
+Cluster and lattice averages are not equal for two reasons. First, operators that live on bonds, 
+like Dˆ and 𝑢ˆ, differ from their restrictions to the cluster: inter-cluster bonds are ig-nored. 
+Lattice averages take these inter-cluster bonds into account, cluster averages do not. Second, in 
+ED-CDMFT the self-consistency is only approximate; therefore the lo-cal Green function G¯ is not 
+exactly the same as the impurity Green function G’. Thus even for a local operator, for which Eq. 
+(24) applies, the lattice average will be only approxi-mately the same as the cluster average.
+III. RESULTS
+In this section we present zero-temperature phase dia-grams: the order parameters as a function of 
+density, for two sets of band parameters and five values of U . We dis-play cluster averages for 
+local operators (electron density nˆ and staggered magnetization Mˆ ) and lattice averages for bond 
+operators (Dˆ and 𝑢ˆ). See the supplementary mate-rial for other combinations and for comments on 
+the dif-ferences between them [56]. The lowest value of U for each set (YBCO- and NCCO-like) lies 
+below the Mott transi-tion; hence superconductivity, when probed alone, extends all the way to 
+half-filling. The other values of U are above the Mott transition and hence superconductivity 
+vanishes
+
+
+
+
+
+
+
+
+
+0.6
+
+
+0.4
+
+
+0.2
+
+
+0.0
+
+
+0.6
+
+0.4
+
+0.2
+
+0.0
+
+
+
+〈Mˆ 〉 (pure) 2〈Dˆ〉 (pure)
+
+
+
+7〈𝑢ˆ〉
+〈Mˆ 〉
+
+
+
+2〈Dˆ〉
+
+
+U = 5
+
+
+
+
+
+
+
+
+
+
+
+U = 6.55
+7
+
+pressing superconductivity is done by setting to zero all bath pairing operators (∆1,2 and 𝑢1,2). 
+Even when both orders are allowed, microscopic coexistence does not nec-essarily happen: one of the 
+two orders (AF or dSC) may dominate, in which case the variational parameters of the other order 
+(dSC or AF) reach zero by the end of the self-consistency loop. To construct our phase diagrams, we 
+let the self-consistency procedure choose which phase is the right one, rather than comparing 
+ground-state energy. We proceed this way because thermodynamic potentials are un-reliable with a 
+small finite bath.
+In Figs. 3 and 4, dark symbols indicate the order param-eter, blue for AF and red for dSC, in the 
+microscopically coexistent or dominant solution. Pale symbols indicate sub-dominant solutions, 
+i.e., solutions obtained by suppressing one order in the coexisting regime. Orange circles denote 
+the average of the 𝑢-triplet operator of Eq. (21), which is nonzero in regions of microscopic 
+AF-dSC coexistence.
+One notices the following features:
+1. Microscopic coexistence does not occur at U = 6, in both simple and general bath 
+parametrizations. It oc-
+
+0.7    0.8    0.9    1.0    1.1    1.2
+electron density
+
+
+Figure 4. Phase diagrams (order parameter as a function of elec-tron density) obtained with the 
+general bath representations, with NCCO-like band parameters (t’/t =  0.17, t’’/t = 0.03) and two 
+values of onsite repulsion U . Symbols have the same meaning as on Fig. 3. Note that the dSC order 
+parameter is multiplied by 2
+and the 𝑢-triplet order parameter by 7, for clarity.
+
+
+exactly at half-filling in the underdoped regime. In larger clusters, both in dynamical cluster 
+approximation with a Quantum Monte Carlo solver[33] and in exact diagonal-ization with the 
+variational cluster approximation [57], it is found that d-wave superconductivity (dSC) starts away 
+from half-filling.
+
+
+A. YBCO-like parameters
+
+Fig. 3 shows the AF and dSC order parameters obtained in CDMFT for a one-band dispersion 
+appropriate to YBCO and three values of U (6, 8 and 12), as a function of electron density n 
+(half-filling corresponds to n = 1). The left panels show the solutions obtained using the simple 
+parametriza-tion of Sect. II B and the right panels the solutions obtained using the general 
+parametrization of Sect. II C. Even though YBCO is a hole-doped compound, we have obtained 
+solu-tions on both hole- and electron-doped sides of the phase diagram.
+Solutions were obtained either by allowing both orders to emerge simultaneously in microscopic 
+coexistence, or by allowing only one order at a time, suppressing the other. For instance, in the 
+simple parametrization, antiferromag-netism is suppressed by forcing the bath parameters 
+illus-trated in the lower panel of Fig. 1 to zero. Similarly, sup-
+curs only at U = 8 and, in a wider range of doping, at U = 12.
+2. In the general parametrization, microscopic coexis-tence only occurs on the electron-doped side, 
+whereas it also occurs on the hole-doped (i.e. physical) side in the simple parametrization.
+3. The pure antiferromagnetic solutions show many dis-continuities, especially on the hole-doped 
+side and at stronger coupling, and especially in the more general parametrization.
+4. Where microscopic coexistence occurs with the gen-eral parametrization, the transitions from a 
+pure phase to microscopic coexistence are of second order.
+5. A small superconducting region can be seen around n = 1.01 at U = 12 with the general 
+parametrization. This is a finite size effect due to a change in the num-ber of particles in the 
+AIM. On either side of this small dome, the AIM has a well defined number of particles. The small 
+superconducting order parameter breaks particle number conservation and allows the change in the 
+number of particles to happen smoothly over a finite range of doping, instead of abruptly as it 
+would were particle number conservation enforced.
+6. On the hole-doped side, the transition from supercon-ductivity to antiferromagnetism is of first 
+order, and the two solutions are separated in density. In princi-ple, this leads to a macroscopic 
+phase coexistence.
+
+
+B. NCCO-like parameters
+
+Fig. 4 shows the same quantities for band parameters ad-equate for NCCO and two values of U . One 
+can make the following observations:
+
+8
+
+
+1. Microscopic coexistence occurs on both sides of the phase diagram, for both values of U 
+considered.
+2. On the hole-doped side, the transition from micro-scopic coexistence to pure SC (upon decreasing 
+n) is discontinuous for U = 5; the two solutions (pure SC and microscopic coexistence) are 
+separated in den-sity, which leads in principle to macroscopic phase coexistence. Macroscopic 
+coexistence between a pure SC phase and a microscopic SC-AF coexistence phase has been seen before 
+in VCA for different band pa-rameters [58].
+3. On the hole-doped side, the transition from micro-scopic coexistence to pure AFM (upon 
+increasing n) is discontinuous at U = 6.55 and continuous at U = 5.
+4. On the electron doped (i.e. physical) side, the transi-tion to microscopic coexistence is 
+continuous for both values of U .
+
+
+IV. DISCUSSION
+
+On general grounds, the phase diagrams of Fig. 3 ob-tained with the general parametrization should 
+be more representative of the result obtained with an infinite bath; in other words, closer to an 
+accurate solution of the Hub-bard model. Since we find that the results for this general 
+parametrization are closer to the experimental phase dia-gram of cuprates, the appropriateness of 
+the one-band Hub-bard model for cuprate superconductors is reinforced.
+On physical grounds, we can argue that the phase dia-grams obtained with the general 
+parametrization are more accurate. Consider U slightly below the critical value for the Mott 
+transition, in our case at U = 6: the simple parametrization leads to a superconducting ground 
+state at half-filling, whereas the general parametrization favor anti-ferromagnetism. The latter 
+result is more sensible consider-ing antiferromagnetism at half-filling can be obtained at the 
+Hartree-Fock level while d-wave superconductivity is a dy-namical effect. Another example is the 
+reentrant behavior of superconductivity upon underdoping obtained with the simple parametrization 
+at U = 12, between half-filling and 4% electron doping: it is inexplicable on physical grounds. 
+This reentrant behavior is suppressed when using the gen-eral parametrization: there is a slight 
+reduction in ampli-tude and it appears at lower electron doping, before 3%. It also becomes well 
+separated from the superconducting dome. This distance from the dome allows for a meaning-ful 
+analysis of the particle number of the AIM on each side of this reentrant feature and leads us to 
+believe that it is a finite-size effect, as pointed out in section III A.
+One can observe in Fig. 3 that, as U increases, the differ-ence between the phase diagrams of the 
+two parametriza-tions becomes more subtle, especially on the hole doped side. At U = 12, the 
+results are qualitatively equivalent on the hole-doped side. We can only speculate on why this 
+hap-pens. As the general parametrization can reproduce any hy-
+bridization function the simple one can generate, it is possi-ble the converged hybridization 
+functions produced by the two parametrizations are more similar at higher U values. This would mean 
+that the additional constraints of the sim-ple parametrization become less of an issue as the 
+states become more localized. In other words, it could mean that some of the constraints of the 
+simple parametrization are physically meaningful at strong coupling.
+Let us note that even our “simple parametrization” has more variational parameters than what was 
+used in previ-ous ED-CDMFT studies [20, 21]. In these previous studies, the 𝑢-triplet had no 
+associated variational parameter in the AIM Hamiltonian, even if its expectation value does not 
+van-ish in the microscopic coexistence phase. These additional degrees of freedom allow for 
+slightly stronger d-wave su-perconductivity, although the overall qualitative shape of the phase 
+diagram is unchanged. One should also note that Ref. 20 considers a particle-hole symmetric 
+lattice, leading to notably different phase diagrams.
+At intermediate coupling,  the regime relevant for cuprates, details of the band structure, the 
+value of t’ in par-ticular, are just as important as the interaction strength to determine the 
+phase diagram, as noted in Ref. 21. Indeed, Figure 3, with band parameters relevant to YBCO, shows 
+that electron-hole symmetry is strongly violated.  In the general parametrization, microscopic 
+coexistence between d-wave superconductivity and antiferromagnetism is con-fined to the 
+electron-doped region. On the hole-doped side, the transition between antiferromagnetism and d-wave 
+su-perconductivity is of first order for U = 8 and U = 12, for both parametrizations. Note that the 
+wider range of dop-ing for antiferromagnetism on the electron-doped side sim-ply reflects the 
+better nesting at the antiferromagnetic wave vector [19].
+It is quite remarkable that the electron-doped side real-izes a proposal by Sachdev [59] that the 
+presence of d-wave superconductivity leads to a large displacement of the dop-ing at which 
+antiferromagnetism ends. This can be seen by comparing the end of the pale blue dots for U = 8 or 
+12 with the end of the dark blue dots in Fig. 3. However, Sachdev’s conjecture concerned the 
+hole-doped compound where we do not observe this effect.
+A continuous time QMC computation [44] of the antifer-romagnetic phase with t’ =  0.1 shows that it 
+extends to 15% hole doping, like what we can see in Fig. 4. This sug-gests that, with these band 
+parameters and coupling, the presence of superconductivity has very little effect on the 
+antiferromagnetic phase. An FRG study of microscopic co-existence [22] at weaker coupling but 
+similar band param-eters finds a hole doped phase diagram strikingly similar to Fig. 4 at U = 5. 
+This shows that those results are ro-bust when long wavelengths and incommensurate orders are 
+suppressed.
+Our small clusters cannot sustain waves with periods longer than two unit cells, like the charge 
+order seen in experiments [60] or the incommensurate spin-waves seen in both experiments [6–9, 61] 
+and infinite lattice weak-coupling calculations [23, 62–64]. We expect that if we
+
+9
+
+
+could probe such orders, parts of our phase diagram would be different. Indeed, a VCA study [65] 
+has found a charge density wave with a four-unit-cell period coexisting micro-scopically with 
+superconductivity on the hole-doped side. Although magnetism disappears at small doping on the 
+hole-doped side even when superconductivity is absent, we cannot exclude that spiral order could 
+persist to large hole dopings. This is one of the explanations offered [62] for the abrupt change 
+in the Hall effect when one enters the pseu-dogap regime at low temperature and in magnetic fields 
+sufficiently strong to destroy superconductivity. Collinear incommensurate magnetism, however, 
+cannot explain this Hall data [66]. It has been proposed that Seebeck measure-ments can tell apart 
+the various phenomenological theories for this Hall data [67].
+
+
+
+
+
+
+Comparing the two sets of band parameters, we observe that increasing second- and third-neighbour 
+hopping re-duces the regions of microscopic coexistence. This is un-derstandable from the bare band 
+structure that shows re-duced nesting in that case [52], weakening antiferromag-netism. This effect 
+is especially pronounced on the hole-doped side. The effect of U on the amplitude of the triplet 
+order hints that microscopic coexistence is more stable the closer the system is to the Mott 
+transition, as the triplet or-der is stronger there. Increasing U also increases the do-main of 
+filling that supports microscopic coexistence on the electron-doped side. The phase transitions are 
+generally second order, except on the hole-doped side where the tran-sition between 
+antiferromagnetism and superconductivity is often first order. This reflects the weakness of 
+antiferro-magnetism away from half-filling on the hole-doped side.
+V. CONCLUSION
+
+Following the lead of Ref. [24–26], we used symme-try and gauge-invariance considerations to 
+propose the most general parametrization of the bath for an exact-diagonalization CDMFT solution of 
+the Hubbard model with a 4-site cluster hybridized with 8 bath orbitals. The parametrization must 
+be chosen according to the phases that are put in competition, here antiferromagnetism and d-wave 
+superconductivity. A simpler parametrization gives qualitatively correct results only when 
+antiferromagnetism and d-wave superconductivity do not coexist. We found phase diagrams that are 
+much closer to observations than previous results found with simpler parametrizations.
+In particular, microscopic coexistence between antiferro-magnetism and d-wave superconductivity is 
+more robust for electron-doped compounds. For large U and t’ , the filling where antiferromagnetism 
+ends in the absence of su-perconductivity is much larger than in the presence of 
+su-perconductivity.
+Given the generality of the bath parametrization, our re-sults are the most accurate that can be 
+obtained with a finite bath and an exact diagonalization solver. They will be a use-ful guide for 
+calculations that include an infinite bath but are performed with more resource-hungry 
+continuous-time quantum Monte Carlo solvers.
+
+
+ACKNOWLEDGMENTS
+
+This work has been supported by the Natural Sciences and Engineering Research Council of Canada 
+(NSERC) un-der grants RGPIN-2014-04584 and RGPIN-2015-05598, the Canada First Research Excellence 
+Fund, by the Research Chair in the Theory of Quantum Materials and by the Fonds de recherche du 
+Québec. Computing resources were pro-vided by Compute Canada and Calcul Québec.
+
+
+
+
+[1] D. K. Pratt, W. Tian, A. Kreyssig, J. L. Zarestky, S. Nandi,
+N. Ni, S. L. Bud’ko, P. C. Canfield, A. I. Goldman, and
+R. J. McQueeney, “Coexistence of Competing Antiferromag-netic and Superconducting Phases in the 
+Underdoped Ba ( Fe 0.953 Co 0.047 ) 2 As 2 Compound Using X-ray and Neutron Scattering Techniques,” 
+Physical Review Letters 103 (2009), 10.1103/PhysRevLett.103.087001.
+[2] R. H. Liu, X. G. Luo, M. Zhang, A. F. Wang, J. J. Ying, X. F.
+Wang, Y. J. Yan, Z. J. Xiang, P. Cheng, G. J. Ye, Z. Y. Li, and
+X. H. Chen, “Coexistence of superconductivity and antiferro-magnetism in single crystals A ₀.₈ Fe 
+₂₋y Se ₂ (A=K, Rb, Cs, Tl/K and Tl/Rb): Evidence from magnetization and resistiv-ity,” EPL 
+(Europhysics Letters) 94, 27008 (2011).
+[3] G. Knebel, D. Aoki, D. Braithwaite, B. Salce, and J. Flouquet, “Coexistence of 
+antiferromagnetism and superconductivity in Ce Rh In 5 under high pressure and magnetic field,” 
+Phys-ical Review B 74 (2006), 10.1103/PhysRevB.74.020501.
+[4] S. Kawasaki, T. Mito, Y. Kawasaki, G.-q. Zheng, Y. Kitaoka,
+D. Aoki, Y. Haga, and Y. O¯ nuki, “Gapless Magnetic and
+Quasiparticle Excitations due to the Coexistence of Antifer-romagnetism and Superconductivity in C 
+e R h I n 5 : A Study of I n 115 NQR under Pressure,” Physical Review Letters 91 (2003), 
+10.1103/PhysRevLett.91.137001.
+[5] N. P. Armitage, P. Fournier, and R. L. Greene, “Progress and perspectives on electron-doped 
+cuprates,” Reviews of Mod-ern Physics 82, 2421–2487 (2010).
+[6] K. Yamada, C. H. Lee, K. Kurahashi, J. Wada, S. Wakimoto,
+S. Ueki, H. Kimura, Y. Endoh, S. Hosoya, G. Shirane, R. J. Birgeneau, M. Greven, M. A. Kastner, and 
+Y. J. Kim, “Doping dependence of the spatially modulated dynamical spin corre-lations and the 
+superconducting-transition temperature in La 2 - x Sr x CuO 4,” Physical Review B 57, 6165–6172 
+(1998).
+[7] S. Wakimoto, R. J. Birgeneau, M. A. Kastner, Y. S. Lee, R. Er-win, P. M. Gehring, S. H. Lee, M. 
+Fujita, K. Yamada, Y. En-doh, K. Hirota, and G. Shirane, “Direct observation of a one-dimensional 
+static spin modulation in insulating La 1.95 Sr
+0.05 CuO 4,” Physical Review B 61, 3699–3706 (2000).
+[8] S. Wakimoto, G. Shirane, Y. Endoh, K. Hirota, S. Ueki, K. Ya-
+
+10
+
+
+mada, R. J. Birgeneau, M. A. Kastner, Y. S. Lee, P. M. Gehring, and S. H. Lee, “Observation of 
+incommensurate magnetic correlations at the lower critical concentration for supercon-ductivity in 
+La 2 - x Sr x CuO 4 ( x = 0.05 ),” Physical Review B 60, R769–R772 (1999).
+[9] M. Fujita, K. Yamada, H. Hiraka, P. Gehring, S. Lee,
+S. Wakimoto, and G. Shirane, “Static magnetic correlations near the insulating-superconducting 
+phase boundary in La2-xSrxCuO4,” Physical Review B 65 (2002), 10.1103/Phys-RevB.65.064505.
+[10] Eugene Demler, Werner Hanke, and Shou-Cheng Zhang, “SO ( 5 ) theory of antiferromagnetism and 
+superconductivity,” Reviews of Modern Physics 76, 909–974 (2004).
+[11] D. E. Almeida, R. M. Fernandes,  and E. Miranda, “In-duced spin-triplet pairing in the 
+coexistence state of an-tiferromagnetism and singlet superconductivity: Collective modes and 
+microscopic properties,” Physical Review B 96 (2017), 10.1103/PhysRevB.96.014514.
+[12] A. Himeda and M. Ogata, “Coexistence of d x 2 - y 2 super-conductivity and antiferromagnetism 
+in the two-dimensional t - J model and numerical estimation of Gutzwiller factors,” Physical Review 
+B 60, R9935–R9938 (1999).
+[13] S. Verret, M. Charlebois, D. Sénéchal, and A.-M. S. Tremblay, “Subgap structures and pseudogap 
+in cuprate superconduc-tors: Role of density waves,” Physical Review B 95 (2017), 
+10.1103/PhysRevB.95.054518.
+[14] Patrick A. Lee, “Amperean Pairing and the Pseudogap Phase of Cuprate Superconductors,” 
+Physical Review X 4, 031017 (2014).
+[15] M. R. Norman and J. C. Séamus Davis, “Quantum oscilla-tions in a biaxial pair density wave 
+state,” Proceedings of the National Academy of Sciences 115, 5389–5391 (2018).
+[16] M. H. Hamidian, S. D. Edkins, Sang Hyun Joo, A. Kostin,
+H. Eisaki, S. Uchida, M. J. Lawler, E.-A. Kim, A. P. Mackenzie,
+K. Fujita, Jinho Lee, and J. C. Séamus Davis, “Detection of a Cooper-pair density wave in 
+Bi2sr2cacu2o8+x,” Nature 532, 343–347 (2016).
+[17] Masahiko Inui, Sebastian Doniach, Peter Hirschfeld, and An-drei Ruckenstein, “Coexistence of 
+antiferromagnetism and superconductivity in a mean-field theory of high-T_{c} su-perconductors,” 
+Physical Review B 37, 2320–2323 (1988).
+[18] Bumsoo Kyung, “Mean-field study of the interplay between antiferromagnetism and d -wave 
+superconductivity,” Phys-ical Review B 62, 9083–9088 (2000).
+[19] David Sénéchal, P.-L. Lavertu, M.-A. Marois, and A.-M. S. Tremblay, “Competition between 
+Antiferromagnetism and Superconductivity in High- T c Cuprates,” Physical Review Letters 94 (2005), 
+10.1103/PhysRevLett.94.156404.
+[20] M. Capone and G. Kotliar, “Competition between d - wave superconductivity and 
+antiferromagnetism in the two-dimensional Hubbard model,” Physical Review B 74 (2006), 
+10.1103/PhysRevB.74.054513.
+[21] S. S. Kancharla, B. Kyung, D. Sénéchal, M. Civelli,
+M. Capone, G. Kotliar, and A.-M. S. Tremblay, “Anoma-lous superconductivity and its competition 
+with antiferro-magnetism in doped Mott insulators,” Physical Review B 77 (2008), 
+10.1103/PhysRevB.77.184516.
+[22] J. Reiss, D. Rohe, and W. Metzner, “Renormalized mean-field analysis of antiferromagnetism and 
+d -wave superconductiv-ity in the two-dimensional Hubbard model,” Physical Review B 75 (2007), 
+10.1103/PhysRevB.75.075110.
+[23] Hiroyuki Yamase, Andreas Eberlein, and Walter Metzner, “Coexistence of Incommensurate 
+Magnetism and Super-conductivity in the Two-Dimensional Hubbard Model,”
+Physical Review Letters 116 (2016), 10.1103/Phys-RevLett.116.096402.
+[24] Erik Koch, Giorgio Sangiovanni,  and Olle Gunnarsson, “Sum rules and bath parametrization for 
+quantum clus-ter theories,” Physical Review B 78 (2008), 10.1103/Phys-RevB.78.115102.
+[25] Ansgar Liebsch and Ning-Hua Tong, “Finite-temperature ex-act diagonalization cluster dynamical 
+mean-field study of the two-dimensional Hubbard model: Pseudogap, non-Fermi-liquid behavior, and 
+particle-hole asymmetry,” Physical Re-view B 80 (2009), 10.1103/PhysRevB.80.165126.
+[26] Ansgar Liebsch and Hiroshi Ishida, “Temperature and bath size in exact diagonalization 
+dynamical mean field theory,” Journal of Physics: Condensed Matter 24, 053201 (2012).
+[27] Emanuel Gull, Andrew J. Millis, Alexander I. Lichtenstein, Alexey N. Rubtsov, Matthias Troyer, 
+and Philipp Werner, “Continuous-time Monte Carlo methods for quantum im-purity models,” Reviews of 
+Modern Physics 83, 349–404 (2011).
+[28] M. Jarrell, Th Maier, M. H. Hettler, and A. N. Tahvildarzadeh, “Phase diagram of the Hubbard 
+model: Beyond the dynam-ical mean field,” EPL (Europhysics Letters) 56, 563 (2001).
+[29] Th. A. Maier, M. Jarrell, A. Macridin, and C. Slezak, “Kinetic Energy Driven Pairing in 
+Cuprate Superconductors,” Physical Review Letters 92 (2004), 10.1103/PhysRevLett.92.027005.
+[30] T. A. Maier, M. Jarrell, T. C. Schulthess, P. R. C. Kent, and
+J. B. White, “Systematic Study of d -Wave Superconductivity in the 2d Repulsive Hubbard Model,” 
+Physical Review Letters 95 (2005), 10.1103/PhysRevLett.95.237001.
+[31] G. Sordi, P. Sémon, K. Haule, and A.-M. S. Tremblay, “Strong Coupling Superconductivity, 
+Pseudogap, and Mott Transi-tion,” Physical Review Letters 108 (2012), 
+10.1103/Phys-RevLett.108.216401.
+[32] Nan Lin, Emanuel Gull, and Andrew J. Millis, “Two-Particle Response in Cluster Dynamical 
+Mean-Field Theory: For-malism and Application to the Raman Response of High-Temperature 
+Superconductors,” Physical Review Letters 109 (2012), 10.1103/PhysRevLett.109.106401.
+[33] Emanuel Gull, Olivier Parcollet, and Andrew J. Millis, “Su-perconductivity and the Pseudogap 
+in the Two-Dimensional Hubbard Model,” Physical Review Letters 110 (2013), 
+10.1103/PhysRevLett.110.216405.
+[34] E. Gull and A. J. Millis, “Energetics of superconductivity in the two-dimensional Hubbard 
+model,” Physical Review B 86 (2012), 10.1103/PhysRevB.86.241106.
+[35] G. Sordi, P. Sémon, K. Haule, and A.-M. S. Tremblay, “c
+-axis resistivity, pseudogap, superconductivity, and Widom line in doped Mott insulators,” Physical 
+Review B 87 (2013), 10.1103/PhysRevB.87.041101.
+[36] E. Gull and A. J. Millis, “Superconducting and pseudogap ef-fects on the interplane 
+conductivity and Raman scattering cross section in the two-dimensional Hubbard model,” Phys-ical 
+Review B 88 (2013), 10.1103/PhysRevB.88.075127.
+[37] Peter Staar, Thomas A. Maier, Michael S. Summers, Gilles Fourestey, Raffaele Solca, and Thomas 
+C. Schulthess, “Tak-ing a quantum leap in time to solution for simulations of high-Tc 
+superconductors,” in Proceedings of the Interna-tional Conference for High Performance Computing, 
+Network-ing, Storage and Analysis on - SC ’13 (ACM Press, Denver, Colorado, 2013) pp. 1–11.
+[38] P. Sémon, G. Sordi,  and A.-M. S. Tremblay, “Ergodicity of the hybridization-expansion Monte 
+Carlo algorithm for broken-symmetry states,” Physical Review B 89 (2014), 
+10.1103/PhysRevB.89.165113.
+
+11
+
+
+[39] E. Gull and A. J. Millis, “Pairing glue in the two-dimensional Hubbard model,” Physical Review 
+B 90 (2014), 10.1103/PhysRevB.90.041110.
+[40] E. Gull and A. J. Millis, “Quasiparticle properties of the superconducting state of the 
+two-dimensional Hub-bard model,” Physical Review B 91 (2015), 10.1103/Phys-RevB.91.085116.
+[41] L. Fratino, P. Sémon, G. Sordi, and A.-M. S. Tremblay, “An organizing principle for 
+two-dimensional strongly correlated superconductivity,” Scientific Reports 6, 22715 (2016).
+[42] A. Reymbaut, M. Charlebois, M. Fellous Asiani, L. Fratino,
+P. Sémon, G. Sordi, and A.-M. S. Tremblay, “Antagonistic ef-fects of nearest-neighbor repulsion on 
+the superconducting pairing dynamics in the doped Mott insulator regime,” Phys-ical Review B 94 
+(2016), 10.1103/PhysRevB.94.155146.
+[43] L. Fratino, P. Sémon, M. Charlebois, G. Sordi,  and A.-
+M. S. Tremblay, “Signatures of the Mott transition in the antiferromagnetic state of the 
+two-dimensional Hub-bard model,” Physical Review B 95 (2017), 10.1103/Phys-RevB.95.235109.
+[44] L. Fratino, M. Charlebois, P. Sémon, G. Sordi,  and A.-
+M. S. Tremblay, “Effects of interaction strength, doping, and frustration on the antiferromagnetic 
+phase of the two-dimensional Hubbard model,” Physical Review B 96 (2017), 
+10.1103/PhysRevB.96.241109.
+[45] Shiro Sakai, Giorgio Sangiovanni, Marcello Civelli, Yukitoshi Motome, Karsten Held, and 
+Masatoshi Imada, “Cluster-size dependence in cellular dynamical mean-field theory,” Physi-cal 
+Review B 85 (2012), 10.1103/PhysRevB.85.035102.
+[46] Giulio Biroli and Gabriel Kotliar, “Cluster methods for strongly correlated electron systems,” 
+Physical Review B 65 (2002), 10.1103/PhysRevB.65.155112.
+[47] K. Aryanpour, Th. A. Maier,  and M. Jarrell, “Com-ment on “Cluster methods for strongly 
+correlated electron systems”,” Physical Review B 71 (2005), 10.1103/Phys-RevB.71.037101.
+[48] G. Biroli and G. Kotliar, “Reply to “Comment on ‘Cluster methods for strongly correlated 
+electron systems’ ”,” Phys-ical Review B 71 (2005), 10.1103/PhysRevB.71.037102.
+[49] J. Zaanen, G. A. Sawatzky, and J. W. Allen, “Band gaps and electronic structure of 
+transition-metal compounds,” Physi-cal Review Letters 55, 418–421 (1985).
+[50] O.K. Andersen, A.I. Liechtenstein, O. Jepsen, and F. Paulsen, “LDA energy bands, low-energy 
+hamiltonians, t’, t”, t  (k), and J  ,” Journal of Physics and Chemistry of Solids 56, 1573–1591 
+(1995).
+[51] B. Kyung, V. Hankevych, A.-M. Daré, and A.-M. S. Trem-blay, “Pseudogap and Spin Fluctuations 
+in the Normal State of the Electron-Doped Cuprates,” Physical Review Letters 93 (2004), 
+10.1103/PhysRevLett.93.147004.
+[52] R. S. Markiewicz, I. G. Buda, P. Mistark, and A. Bansil, “En-tropic Origin of Pseudogap 
+Physics and a Mott-Slater Transi-tion in Cuprates,” Scientific Reports 7, 44008 (2017).
+[53] Michel Caffarel and Werner Krauth, “Exact diagonalization approach to correlated fermions in 
+infinite dimensions: Mott transition and superconductivity,” Physical Review Letters 72, 1545–1548 
+(1994).
+[54] David Sénéchal, “Bath optimization in the cellular dy-namical mean-field theory,” Physical 
+Review B 81 (2010), 10.1103/PhysRevB.81.235125.
+[55] David Sénéchal, “Cluster Dynamical Mean Field Theory,” in Strongly Correlated Systems, 
+Springer Series in Solid-State Sciences, Vol. 171, edited by Adolfo Avella and Ferdinando Mancini 
+(Springer Berlin Heidelberg, Berlin, Heidelberg, 2012) pp. 341–371.
+[56] “See supplemental material at [url will be inserted by pub-lisher] for phase diagrams made 
+with other combinations of lattice and cluster averages and for comments on the differ-ences 
+between them,”.
+[57] Mathieu Guillot, Compétition entre l’antiferromagnétisme et la supraconductivité dans le 
+modèle et Hubbard appliqué aux cuprates., Thèses de l’Université de Sherbrooke - Sciences - 
+Physique (2007).
+[58] M. Aichhorn, E. Arrigoni, M. Potthoff,  and W. Hanke, “Antiferromagnetic to superconducting 
+phase transition in the hole- and electron-doped Hubbard model at zero tem-perature,” Physical 
+Review B 74 (2006), 10.1103/Phys-RevB.74.024508.
+[59] Subir Sachdev, “Quantum criticality and the phase diagram of the cuprates,” Physica C: 
+Superconductivity and its Appli-cations Proceedings of the 9th International Conference on 
+Materials and Mechanisms of Superconductivity, 470, S4–S6 (2010).
+[60] Riccardo Comin and Andrea Damascelli, “Resonant X-Ray Scattering Studies of Charge Order in 
+Cuprates,” Annual Re-view of Condensed Matter Physics 7, 369–405 (2016).
+[61] D Haug, V Hinkov, Y Sidis, P Bourges, N B Christensen, A Ivanov, T Keller, C T Lin, and B 
+Keimer, “Neutron scatter-ing study of the magnetic phase diagram of underdoped YBa
+₂ Cu ₃ O ₆₊ ₓ ,” New Journal of Physics 12, 105006 (2010).
+[62] Andreas Eberlein, Walter Metzner, Subir Sachdev, and Hi-royuki Yamase, “Fermi Surface 
+Reconstruction and Drop in the Hall Number due to Spiral Antiferromagnetism in High- T c Cuprates,” 
+Physical Review Letters 117 (2016), 10.1103/PhysRevLett.117.187001.
+[63] Y. M. Vilk and A.-M. S. Tremblay, “Non-Perturbative Many-Body Approach to the Hubbard Model 
+and Single-Particle Pseudogap,” Journal de Physique I 7, 1309–1368 (1997).
+[64] H. J. Schulz, “Incommensurate antiferromagnetism in the two-dimensional Hubbard model,” 
+Physical Review Letters 64, 1445–1448 (1990).
+[65] J. P. L. Faye and D. Sénéchal, “Interplay between d - wave superconductivity and a 
+bond-density wave in the one-band Hubbard model,” Physical Review B 95 (2017), 
+10.1103/PhysRevB.95.115127.
+[66] M. Charlebois, S. Verret, A. Foley, O. Simard, D. Sénéchal, and A.-M. S. Tremblay, “Hall 
+effect in cuprates with an in-commensurate collinear spin-density wave,” Physical Review B 96 
+(2017), 10.1103/PhysRevB.96.205132.
+[67] S. Verret, O. Simard, M. Charlebois, D. Sénéchal,  and A.-M. S. Tremblay, “Phenomenological 
+theories of the low-temperature pseudogap: Hall number, specific heat, and Seebeck coefficient,” 
+Physical Review B 96 (2017), 10.1103/PhysRevB.96.125139.

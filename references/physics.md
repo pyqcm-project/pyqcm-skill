@@ -88,6 +88,18 @@ disagree noticeably away from particle-hole symmetry, and traditional interpolat
 frequency-dependent quantity can violate causality or wash out fine Fermi-surface structure (e.g.
 hole pockets).
 
+**Precursor — compact tiling:** Verret, Foley, Sénéchal, Tremblay & Charlebois,
+`references/research/2107.01344v1.txt`, introduce a "compact tiling" periodization scheme for a
+two-band cellular model, alongside the traditional G/M schemes, specifically to settle whether the
+low-doping cuprate Fermi surface is hole pockets or disconnected Fermi arcs. Compact tiling
+reconstructs a k-dependent quantity by tiling short-ranged real-space hoppings/anomalous terms
+directly rather than periodizing G, Σ, or M in the traditional sense — it works best when hoppings
+are short-ranged and degrades if used to try to rebuild longer-ranged structure. This is the direct
+conceptual precursor to the Liouvillian interpolation scheme below (same underlying goal: resolving
+Fermi arcs vs. hole pockets by getting periodization right), so read it first for context on why this
+is a long-standing open question in the field before jumping to the 2026 paper's L-interpolation
+proposal.
+
 **Emerging alternative — Liouvillian interpolation (L-interpolation):** a February 2026 paper (Pelz,
 von Delft & Gleis, `references/research/2602.16351v1.txt`) proposes interpolating the
 frequency-*independent* matrix elements of the self-energy's continued-fraction expansion (Liouvillian
@@ -122,3 +134,17 @@ pyqcm implement X" questions that are about the method rather than the code. For
 physics specifically (chemical-potential-driven filling changes, the Mott gap), both the subbath paper
 (`2509.07931v2.txt`, Fig. 7 and around) and the SciPost Codebase paper's 1D Hubbard example discuss it
 directly — check these before reasoning about Mott transition behavior from generic intuition.
+
+For **AFM/SC coexistence and competition** specifically (the two dominant, competing symmetry-broken
+phases in the cuprate Hubbard model — AFM breaks SO(3) with order parameter M, d-wave SC breaks U(1)
+with order parameter Delta), see Foley, Verret, Tremblay & Sénéchal, `references/research/
+1811.12363v2.txt`. Key points worth knowing before reasoning about a coexistence result from this
+group's models: microscopic (spatially homogeneous) coexistence is distinct from macroscopic
+coexistence arising from inhomogeneity or thermodynamic phase separation, and its clean signature is
+a nonzero "u-triplet" order parameter (nonzero only if both M and Delta are nonzero — itself a kind of
+pair-density wave, though a different one from the PDW seen in STM experiments). The paper also shows
+the bath parametrization used matters quantitatively for this result: a more complete/general
+parametrization (maximal freedom in the hybridization function per bath orbital) shrinks the
+coexistence region found by earlier, more restrictive parametrizations. Don't treat a coexistence
+region as parametrization-independent — check what bath parametrization was used before comparing
+results across scripts or papers.

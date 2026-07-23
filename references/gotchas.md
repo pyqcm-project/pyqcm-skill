@@ -110,8 +110,8 @@ script so the physics interpretation doesn't get scrambled.
 ## Bath parameter naming, starting values, and solver choices
 
 **Status: this whole entry is current best practice as of 2026-07-22, not settled fact.** The group is
-still actively benchmarking some of these choices (especially the imaginary-frequency grid), so treat
-it as "what's worked so far" and check with Antoine if it's been a while.
+still actively benchmarking some of these choices, so treat it as "what's worked so far" and check
+with Antoine if it's been a while.
 
 What: A cluster of related conventions around bath parametrization and CDMFT convergence:
 - Bath parameter names: `ebi` (bath energy) and `tbi` (cluster-bath hopping), `i` indexing bath sites.
@@ -125,11 +125,24 @@ What: A cluster of related conventions around bath parametrization and CDMFT con
   `'bobyqa'` with very tight tolerances (`accur_bath=1e-6, accur_dist=1e-12` or
   `accur_bath=1e-5, accur_dist=1e-10`).
 - The imaginary-frequency grid used for the CDMFT distance function (`src_qcm/CPT.cpp` around line
-  519) is still being benchmarked — no option currently stands out as clearly better.
+  519): Sénéchal's bath-optimization paper (`references/research/1005.1685v1.txt`) is the detailed
+  study behind this choice, benchmarking several weight functions `W(omega)` against Potthoff's
+  self-energy functional approach (treated as the reference "best possible" bath). Its findings: a
+  weight proportional to `Tr Sigma^2` is the most successful overall, especially for tracking a
+  U-driven Mott transition; a weight that over-emphasizes low frequencies (`W = 1/omega`) does badly
+  in metallic/weak-gap phases where the self-energy is already small at low frequency; a sharp
+  frequency cutoff is more adequate specifically in the overdoped/small-gap region. It also gives a
+  concrete rule of thumb for the fictitious inverse temperature setting the frequency spacing:
+  `beta = 100/t` was sufficient in that paper's benchmarks (20-200/t was the range actually tried).
+  Treat this as the strongest existing guidance on the grid/weight question, not a closed case — it's
+  a 2010 paper on a narrower set of models than this group now runs, so if the choice matters for a
+  specific result, still confirm current practice with Antoine rather than assuming it's
+  unconditionally settled.
 Why it happens: these are empirical choices refined through this group's usage, not documented
 defaults elsewhere.
 What to do instead: start from the above as sensible defaults, but don't treat them as immutable —
-especially the frequency-grid choice, which is explicitly unresolved.
+the frequency-grid/weight-function choice in particular has real physics behind it (see paper above),
+not just trial and error, but it's still worth a sanity check against current group practice.
 
 ## Operator naming: no underscores
 

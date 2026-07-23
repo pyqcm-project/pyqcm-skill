@@ -1,0 +1,835 @@
+Fermi arcs vs hole pockets: periodization of a cellular two-band model
+S. Verret,¹ A. Foley,¹ D. Se´ne´chal,¹ A.-M. S. Tremblay,¹ and M. Charlebois¹, ², ∗
+1De´partement de physique & Institut Quantique, Universite´ de Sherbrooke, Que´bec, Canada J1K 2R1
+2De´partement de Chimie, Biochimie et Physique, Institut de Recherche sur l’Hydroge`ne, Universite´ 
+du Que´bec a Trois-Rivie`res, Trois-Rivie`res, Que´bec G9A 5H7, Canada (Dated: July 6, 2021)
+It is still debated whether the low-doping Fermi surface of cuprates is composed of hole pockets or 
+of discon-nected Fermi arcs. Results from cellular dynamical mean field theory (c-DMFT) support the 
+Fermi arcs hypothe-sis by predicting corresponding Fermi arcs for the Hubbard model. Here, we 
+introduce a simple parametrization of the self-energy, in the spirit of Yang-Rice-Zhang theory, and 
+show that state of the art c-CDMFT calculations cannot give a definitive answer to the question of 
+Fermi arcs vs holes pockets, and this, independently of the periodization (cumulant or Green’s 
+function) used to display spectral weights of the infinite lattice. Indeed, when our model is 
+restricted to a cluster and periodized like in c-DMFT, only two adjustable parameters suffice to 
+reproduce the qualitative details of the frequency and momentum dependence of the low energy c-DMFT 
+spectral weight for both periodizations. In other words, even though our starting model has a Fermi 
+surface composed of hole and electron pockets, it leads to Fermi arcs when restricted to a cluster 
+and periodized like in c-DMFT. We provide a new “compact tiling” scheme to recover the hole and 
+electron pockets of our starting non-interacting lattice model, suggesting that better 
+periodization schemes might exist.
+
+
+An ongoing debate about the pseudogap state of high tem-perature superconductors (cuprates) is 
+whether the Fermi sur-face is composed of small hole-like pockets, as often sug-gested by transport 
+experiments, or disconnected Fermi arcs, as observed by angle-resolved photoemission spectroscopy 
+(ARPES) experiments [1]. Variants of the cluster perturba-tion theory [2, 3], and more specifically 
+cellular dynamical mean field theory (c-DMFT) [4, 5] provide important theo-retical support for the 
+existence of the experimental Fermi arcs: they have found corresponding Fermi arcs in the ground 
+state of the Hubbard model [6–12].  However, one impor-tant step leading to these theoretical Fermi 
+arcs has long been debated: an operation known as periodization [6, 9, 13–17]. The main purpose of 
+periodization is to recover a translation-invariant lattice Green’s function G(k, ω) from the 
+cluster self-energy Σc(ω) produced by c-DMFT. This step is necessary only to access the lattice 
+spectral weight and the Fermi sur-face. Despite periodization being debated [15], it is usually 
+accepted that c-DMFT leads to Fermi arcs for the Fermi sur-face of the pseudogap in the Hubbard 
+model, because the two most widely used periodization schemes: the cumulant peri-odization 
+(M-scheme) [9] and the Green’s function periodiza-tion (G-scheme) [6] lead to Fermi arcs, as 
+respectively repro-duced in Fig. 1(a) and 1(b). However, one question has not been adressed: if the 
+pseudogap of the Hubbard model had a Fermi surface consisting of hole pockets, would c-DMFT 
+cor-rectly capture these hole pockets, given known periodization scheme?
+In this letter, we explain how the Fermi arcs obtained with c-DMFT are a consequence of neglecting 
+the self-energy be-tween clusters and using the M- and G-periodization schemes. To do so, we start 
+from a non-interacting lattice model leading to a Fermi surface of hole and electron pockets, but 
+here we restrict it to a 2 × 2 cluster. We call this the cellular two-band
+
+
+
+∗ maxime.charlebois@uqtr.ca
+(c-2B) model. When periodized with the same schemes as in c-DMFT, this minimal model reproduces the 
+spectral weight and associated density of states of the pseudogap state of c-DMFT for the Hubbard 
+model. This agreement is not limited to the Fermi surface. Our model reproduces the k-dependence of 
+the entire low-energy one-particle spectrum obtained in c-DMFT for both the M- and G-schemes. We 
+thus identify mul-tiple k-dependent structures which are produced by the peri-odization schemes 
+themselves rather than by many-body cor-relations. These results bring important clarifications 
+regard-ing the limitations of current periodization schemes used with cluster methods. We 
+demonstrate that, contrary to previous claims [9–12], c-DMFT cannot discriminate between Fermi arcs 
+and hole-pockets.
+Although our conclusions highlight fundamental limita-tions of the periodization step within 
+c-DMFT, let us stress that most predictions from c-DMFT regarding the Hubbard model do not rely on 
+this step.  Notably, c-DMFT allows to study the competition between d-wave superconductivity and 
+antiferromagnetism [18–20], the Mott insulating regime and its interplay with superconductivity 
+[11, 21, 22], the finite temperature transition of the pseudogap [23–25], pairing dy-namics [26], 
+etc. all of which do not require periodization¹. These results are out-of-scope for the c-2B model 
+presented here, since the latter cannot self-consistently determine the amplitude of the Mott gap, 
+the chemical potential, the renor-malization of enegy scales, the electronic compressibility, the 
+double occupation, etc. The purpose of our c-2B model is to explain the single-particle spectral 
+weight of c-DMFT results, not to capture strongly correlated effects. In that respect, this work is 
+similar to previous work using density waves models to explain sub-gap structures in the 
+superconducting state of
+
+
+1 Note also that many of these studies are consistent with the Dynamical Cluster Approximation 
+(DCA), an alternative cluster extension of DMFT. DCA does not require periodization, but does not 
+provide sufficient k res-olution to obtain the Fermi arcs discussed here.
+
+
+
+c-DMFT [16], except here we address the normal state pseu-dogap of c-DMFT.
+Lattice model  We start from the folowing two-band Hamiltonian on a square lattice (lattice-2B), 
+omitting spin for simplicity,
+
+
+π (a)
+
+π
+2
+M-scheme c-DMFT
+
+
+2  (b)
+1
+0
+G-scheme c-DMFT
+2
+1  (c)     2
+0        0
+lattice 2B
+
+H = X.ξkc†kck
++ ξᵈ d†d
++ (∆kc†kdk
++ h.c.).   (1)     0
+1  (e)
+.5  (f)     2
+
+Here, c†k and ck are creation and annihilation operators of elec-trons with momentum k and dk† and 
+dk are creation and annihi-lation operators associated to a fermionic auxiliary field. Both
+π
+2
+M-scheme c-2B
+0
+G-scheme c-2B
+0        0
+Compact c-2B
+
+ck and dk are coupled through ∆k. We do not specify the origin
+of the auxiliary field in this work. The electronic dispersion ξk = zk – µ is given relative to 
+chemical potential µ with
+0    π    π 0    π
+kx         kx
+π 0   π    π
+kₓ
+
+zk = –2t(cos kₓ + cos ky) – 4tJ cos kₓ cos ky
+– 2tJJ(cos 2kₓ + cos 2ky),         (2)
+where t, tJ, tJJ are respectively first- second- and third-neighbor hoppings. The auxiliary field 
+dispersion ξᵈ = zᵈ – µᵈ
+FIG. 1.  Typical Fermi surface obtained from c-DMFT on hole-doped Hubbard model with (a) the 
+cumulant periodization (M-scheme) [9, 10], and (b) the Green’s function periodization (G-scheme) 
+[8, 19].  (c) Fermi surface resulting from lattice self-energy (3), equivalent to an 
+antiferromagnet without broken sym-
+k   k     metry. (d) Fermi arc obtained from the c-2B self-energy (4) using
+
+is defined equivalently with td, tdJ , tdJJ. For the c†k band, the above lattice model leads to a 
+single-particle Green’s function G(k, ω) = [ω + iη – ξk – Σ(k, ω)]–¹ with real frequency ω, 
+vanishing η → 0, and an effective k-dependent self-energy
+|∆ |2
+the M-scheme (6), (e) the G-scheme (7), and (f) the compact tiling scheme (proposed at the end of 
+this work). The band parameters are t = 1, tJ =  0.3, tJJ = 0.2 and η = 0.1 in all cases. The c-2B 
+parame-ters µ =  0.3 and ∆ = 0.4 were chosen to match the c-DMFT Fermi surfaces obtained at 
+interaction U = 8 and doping p = 0.06 in the
+
+Σ(k, ω) =
+k
+ω – ξᵈ
+.         (3)
+normal state pseudogap (without broken symmetry).
+
+This self-energy is actually a hybridization function with the dk† band. From the Green’s function, 
+the spectral weight is obtained as A(k, ω) =  2Im G(k, ω) , with Fermi surface A(k, ω = 0).
+Special cases of the above model include antiferromag-
+netism (AFM) and the Yang-Rice-Zhang (YRZ) theory, often
+
+where the coupling ∆ and hopping tc are now matrices in the cluster sites positions R and RJ (see 
+Appendix A).
+Here we consider the case of a 2 2 square cluster in order to compare to 2  2 c-DMFT results. With 
+positions enumerated anti-clockwise, we use hopping and coupling matrices
+
+used to simulate a Fermi surface of hole-pockets and explain
+–µ t –tJ t 
+∆ 0 0 0
+
+
+transport experiments on cuprates [27–33].
+td =  t  –µ  t  –tJ ,   ∆ = 0 ∆ 0 0 .  (5)
+
+All results presented in this paper are for a specific case parametrized with ∆k = ∆ and ξᵈ = ξk₊Q 
+with Q = (π, π). We choose the values of ∆ and µ so that this parametrization leads
+c   –tJ t  –µ  t t  –tJ t  –µ
+0 0 ∆ 0
+0 0 0 ∆
+
+to the same Fermi-surface as an antiferromagnet, with the hole and electron pockets shown in Fig. 
+1(c). However, unlike an actual antiferromagnet, Hamiltonian (1) does not break sym-metry. This 
+nuance is important since we compare our results to the c-DMFT pseudogap, which does not break 
+symmetry.² In the antiferromagnetic phase, 2x2 c-DMFT correctly pro-duces hole pockets.
+Cluster model  We now introduce our cellular two-band (c-2B) model, which is the same model as 
+above, but limited to a small cluster with open boundary condition instead of a lattice. The 
+effective cluster self-energy is then
+1
+This model (c-2B) is equivalent to the two-band lattice model
+(lattice-2B, Eq. (1)) leading to the hole and electron pockets of Fig. 1(c), but restricted to a 2  
+2 cluster.³
+c-DMFT  We compare the above model with standard re-sults from c-DMFT [8–12, 15, 18, 19, 22].  Our 
+imple-mentation uses an exact diagonalization impurity solver of a 2  2 cluster with local 
+interactions (U = 8) and 8 non-interacting baths. Details of our implementation are described
+
+
+
+3 The cellular version of YRZ theory (c-YRZ) is obtained with
+
+Σᶜ⁻²B(ω) = ∆†
+ω – td ∆c,        (4)
+0 t 0 t
+d  t 0 t 0
+
+ 0  ∆  0 –∆
+ ∆  0 –∆ 0 
+t 0 t 0    –∆ 0  ∆  0 
+
+
+2 We also verified that YRZ parametrization ξᵈ = 2t(cos kₓ  cos ky) with
+∆k = ∆(cos kₓ + cos ky) yields equivalent results (not shown).
+Note that YRZ theory usually includes Gutzwiller factors that modify the band structure as a 
+function of doping, but using (t, tJ, tJJ) = (1, 0.35, 0) approximate these effects reasonably well 
+for the dopings studied here.
+
+
+
+
+0
+π (a)
+
+
+kx Cumulant periodization (M-scheme)
+η = .5
+
+
+
+0
+.3   π (f)
+.2
+.1
+3
+
+kGˣreen’s function periodization (G-scheme)
+η = .5                       .3
+.2
+.1
+
+0 ×2                             0
+0 ×2    ×2
+c-2B            0
+
+π (b) η = .005
+
+
+0
+c-2B
+2    π(g) η = .005                        2
+1                               1
+0    0                           0
+
+–1.55     –0.18 0.25 0.44   1.15
+–1.46  –0.84    0  0.17    1.1
+
+(c)
+cc--A2BF c-DMFT
+(h)
+cc--A2BF c-DMFT
+
+
+
+
+
+
+–0.26     –0.04 0  0.06     0.28
+
+
+
+
+
+–0.26  –0.15    0  0.03     0.25
+
+π (d)
+0
+η = .1
+c-DMFT
+1
+0.5
+0
+π (i)
+
+
+0
+η = .1
+
+
+
+c-DMFT
+1
+0.5
+0
+
+π (e) η = .001
+2    π (j) η = .001                        2
+1                               1
+
+0                           0
+0  kx  π
+0                           0
+0  kx  π
+FIG. 2. Spectral weight of the c-2B model with µ = 0.85 and ∆ = 1.1 (blue) obtained with (a) the 
+M-scheme periodization for η = 0.5 and
+(b) η = 0.005. The frequencies shown are indicated along (c) the corresponding density of states 
+(DOS) for η = 0.005. The latter is juxtaposed to the c-DMFT DOS obtained from the M-scheme 
+periodization (red) for η = 0.001. The corresponding c-DMFT spectral weight is shown at other 
+indicated frequencies for (d) η = 0.1 and (e) η = 0.001. A factor of 0.18 between two energy axis 
+justifies using different η. (f-j) shows the same comparison between c-2B results and c-DMFT 
+results, but for the G-scheme periodization.
+
+in Ref. [20], under the name “simple bath parametrization”, and leads to state-of-the-art results 
+[19, 20, 34–42]. The band-structure used for our c-DMFT calculations (t, tJ, tJJ) = (1, 0.3, 0.2) 
+is the same as in our c-2B model, and hole-doping is chosen at p = 0.06; in the pseudogap regime. 
+We do not allow for broken symmetries such as antiferromag-netism and superconductivity, in order 
+to study the normal state pseudogap. In the end, c-DMFT yields a cluster self-
+where Nc  = 4 is the size of the cluster.  From there, the M-scheme Green’s function is obtained as 
+GM(k, ω) = [M(k, ω)–¹  z(k)]–¹. Fig. 1(a) and 1(d) show the correspond-ing Fermi surfaces which 
+consist of Fermi arcs, both for c-DMFT (Σc  Σᶜ⁻DMFT) and for our c-2B model (Σc  Σᶜ⁻²B). G-scheme  
+The Green’s function periodization [6, 44] is:
+GG(k, ω) =  1  X e–ik(R–RJ) "      1      #  .
+
+energy Σᶜ⁻DMFT(ω) expressed in the same basis as Σᶜ⁻²B(ω).
+Periodization  Recovering a translation-invariant lattice Green’s function G(k, ω) from a cluster 
+self-energy Σc(ω) is a task known as periodization. The two most widely used periodization schemes 
+for c-DMFT are the M-scheme, or cu-mulant periodization and the G-scheme, or Green’s function 
+periodization.
+M-scheme With the cumulant defined as Mc(ω) = [ω +
+iη + µ – Σc(ω)]–¹, the cumulant periodization [9, 43] is:
+N        ω + iη – t(k) – Σ (ω) R R
+(7)
+This is equivalent to building a super-lattice of clusters con-nected by the inter-cluster hoppings 
+contained in the lattice dispersion ξk [3, 6]. The hopping matrix t(k) is the clus-ter 
+representation of ξk, with elements given by tR,RJ (k) = ₐ e–ⁱᵏ·ᵃtₐ₊R,RJ and a spanning all 
+super-lattice vectors (see Appendix A). Fig. 1(b) and 1(e) show the G-scheme Fermi surfaces, which 
+also consist of Fermi arcs, both for c-DMFT
+
+X     "         #
+(Σc → Σᶜ⁻DMFT) and for our c-2B model (Σc → Σᶜ⁻²B).
+
+Nc R,RJ
+ω + iη + µ – Σc(ω)
+
+R,RJ
+Finite frequency  The correspondence between the spec-tral weights of c-2B and c-DMFT for both 
+periodization
+
+
+
+schemes is striking and not limited to the Fermi level; it ex-tends in the low-energy regime.  By 
+fixing µ and ∆, and with slight adjustments of frequencies, we get a c-2B spec-tral weight for 
+which the momentum dependence maps almost perfectly to that of c-DMFT. This mapping can be seen in 
+Fig. 2 for both periodization schemes. For the M-scheme, the c-2B and c-DMFT spectral weights are 
+compared at large η in Fig. 2(a) and 2(d) and at small η in Fig. 2(b) and 2(e). For the G-scheme, 
+they are compared at large η in Fig. 2(f) and 2(i), and at small η in Fig. 2(g) and 2(j). Although 
+such small η is rarely used in the litterature, it unveils the subtle structures contained in the 
+c-DMFT spectral weight. We observe that these structures are correctly reproduced by our c-2B 
+model. The frequencies at which matching spectral weights are found are indicated in Fig. 2(c) and 
+2(h) along their respective den-sity of states, N(ω) =  d²kA(k, ω). Comparing the density of states 
+further reveals that the sequence of k-dependent struc-tures observed as a function of ω is the 
+same in c-DMFT
+
+
+
+(a)
+
+
+
+
+
+
+
+
+
+(b)
+
+
+Before Compact tiling
+
+
+
+
+
+
+
+
+Before Compact tiling
+4
+
+After Compact tiling
+
+
+
+
+
+
+
+
+After Compact tiling
+
+and c-2B. As expected from a comparison between a non-interacting model (c-AF) and a 
+strongly-correlated method (c-DMFT), this qualitative agreement is not perfect; notably, the energy 
+scales are renormalized by a factor of approxi-mately 0.18 between the two models. Note that the 
+frequen-cies shown in Fig. 2 were chosen because of the complexity of the k-structures they present 
+at very low η, but equally good fits can be found for all frequencies. Note also that the 
+pa-rameters µ and M in Figs. 1 and 2 are different. Fig. 1 high-lights that Fermi arcs can be 
+obtained from a system which should have hole and electron pockets, whereas Fig. 2 focuses on the 
+agreement of the periodized spectral features between c-DMFT and c-2B.
+The full mathematical details of the c-2B model are de-scribed in Appendix A and the source code of 
+the program used to produce the c-2B results of Figs. 1 and 1 can be found in supplemental matrial.
+Discussion  It is remarkable that identical sequences of structures are obtained with c-DMFT and 
+the c-2B model with both periodization schemes, especially considering that the c-2B model has only 
+two adjustable parameters µ and ∆. This indicates that neglecting the self-energy between clusters 
+and periodizing with the M- and G-schemes is what causes these complex structures, not the strongly 
+correlated physics. Moreover, it is these complex structures at small η, that blur with those of 
+neigboring frequencies to form the Fermi arcs at large η.
+Despite these caveats, the Fermi arcs of these methods might have a physical interpretation. They 
+are obtained at larger values of η, which can be interpreted as a large elec-tronic scattering 
+rate, and although the G-scheme does not re-store the spectral weight of our starting model, it 
+does produce the correct spectral weight for a super-lattice of disconnected cluster self-energies 
+(see section II D of Ref. 16). Therefore, high scattering rate (high η) and broken translation 
+invariance (disconnected self-energies) seem to be key ingredients lead-ing to Fermi arcs in c-DMFT 
+and our c-2B model. Yet, for these arcs to manifest, a primordial pseudogap mechanism
+FIG. 3. Example of compact tiling for the components of td and ∆c.
+(a) The k-dependence of matrix components with R  RJ = (1, 0) is obtained as [td (k)]R,RJ  (1 + 
+e²ⁱᵏx )[td ]R,RJ , (b) that of components with R  RJ = (1, 1) is obtained as [td (k)]R,RJ  (1 + 
+e²ⁱᵏx + e²ⁱᵏy + e²ⁱ⁽ᵏx +ky ))[td ]R,RJ , and so on for all components of td and with identical 
+expressions for the components of ∆c. This operation results in new matrices td (k) and ∆c(k) that 
+are invariant under translation.
+
+
+our starting lattice model is the same as that of an antifer-romagnet, our results do not imply 
+that the c-DMFT pseu-dogap is a cellularized antiferromagnet. Other parametriza-tion give very 
+similar results. For example, we verified that a YRZ parametrization yields qualitatively 
+equivalent results (not shown) to those presented here. Moreover, multiple lat-tice models could 
+match the c-DMFT results, as it seems that only a few poles (the eigenvalues of td ) in the cluster 
+self-energy are necessary to get this agreement. This is why our starting lattice model was left 
+general.
+The one thing we can conclude from our results is that with the current periodization schemes, 2  2 
+c-DMFT is not equipped to discriminate between a Fermi surface consisting of Fermi arcs and one 
+consisting of hole and electron pockets. Indeed, the question that guided our work is: “if the 
+pseu-dogap of the Hubbard model had a Fermi surface consisting of hole pockets, would c-DMFT 
+correctly capture these hole pockets, given known periodization schemes?” and the an-swer is no. As 
+we showed, the M- and G-schemes, arguably the most reliable periodizations [15], both produce Fermi 
+arcs (Fig. 1(d) and 1(e)) even when hole-pockets are built in the lat-tice model from which the 
+cluster model is derived (Fig. 1(c)). Finally, although the correct periodization for c-DMFT is an 
+open question, the right periodization to recover our start-ing lattice model is quite obvious. 
+What is lacking from clus-
+ter self-energy (4) to recover the lattice self-energy (3) are the inter-cluster coupling δ∆(k) = 
+∆(k) – ∆c and inter-cluster hoppings δtd (k) = td (k) – td (see Appendix A). These inter-
+to acess td and ∆c separately. In such case, we can “tile” each
+c
+must already be in place, as embodied by ∆ in our c-2B model.        d
+
+It is important to stress that, although the Fermi-surface of
+element of tc and ∆c to fill the space between clusters as de-scribed in Fig. 3. We call this 
+operation compact tiling. Note
+
+5
+
+that we cannot recover δtd (k˜) perfectly, because tJJ is absent  from which we can write a matrix 
+Green’s function from td . The results of compact tiling are new k-dependent
+
+c
+td (k) and ∆ (k) that allow to define a k-dependent
+ z – ξk –∆k !–1
+
+self-energy matrix Σᶜ⁻²B(k) = ∆c(k)†[ω – td (k)]–¹∆c(k). This
+–∆k  z – ξk
+
+self-energy can then be used in the M- and G-periodization schemes (setting Σc → Σᶜ⁻²B(k) in (6) 
+and (7)). Interestingly,
+    1    ∆k    
+           (z – ξ )(z – ξᵈ) – |∆ |2 
+
+periodization formulae amount to simple unitary transforma-tions, and both the M- and G-schemes 
+lead to the same spec-tral weight. The corresponding Fermi surface, illustrated in
+      ∗ z – ξk          1      
+ (z – ξk)(z – ξᵈ) – |∆k|2   z    |∆k|2   
+
+Fig. 1(f), presents hole and electron pockets similar to those of the starting lattice model in 
+Fig. 1(c). The only differences are due to tJJ being absent from the compactly tiled self-energy.
+k  z – ξk
+
+(A6)
+
+Note, however, that although this approach is simple when applied to our c-2B model, it is not 
+clear yet how it could be generalized to c-DMFT. Nevertheless, it suggests that better solutions 
+than the M- and G-schemes might exist to perform
+where z is used as a shorthand for ω + iη with η  0. The
+first element of this matrix is the lattice Green’s function as-sociated with the ck operator,
+       1    
+
+periodization.
+G(k, ω) =
+
+ω + iη – ξk –
+|∆k|2
+ω – ξᵈ
+,    (A7)
+
+ACKNOWLEDGMENTS
+
+This research was undertaken thanks in part to funding from the Canada First Research Excellence 
+Fund, the Nat-ural Sciences and Engineering Research Council (Canada) under Grant Nos. 
+RGPIN-2014-04584, RGPIN-2015-05598
+and RGPIN-2019-05312, the Research Chair in the The-ory of Quantum Materials and postdoctoral 
+research schol-arship (B3X) of Fonds de recherche du Que´bec. Comput-ing resources were provided by 
+Compute Canada and Calcul Que´bec.
+which is the time Fourier transform of GR(k, t)  =
+i ck(t), c†k θ(t). The last term in the denominator can be interpreted as a k-dependent 
+self-energy:
+|∆k|2
+k
+Superlattice  In quantum cluster methods [35, 44, 45], an-other way to write Hamiltonian (1) is to 
+represent it on a su-perlattice of clusters, using the Fourier transform
+cr = cr˜ R = , Nc Xeⁱᵏ˜·ʳ˜cR(k˜)    (A9)
++    N
+k˜
+Appendix A: Complete derivation
+
+
+Lattice We consider a lattice of N sites with the following definition for the Fourier transforms
+cr =  1  Xeⁱᵏ·ʳck,  ck =  1  Xe–ⁱᵏ·ʳcr.   (A1)
+
+
+Here, Nc is the number of sites in each cluster, and the posi-tion r of a lattice site is expressed 
+as r = r˜ + R, where r˜ is the position of the cluster (vector of the superlattice) and R is the 
+position of the site within the cluster. The corresponding sep-aration in momentum space is k = k˜ 
++K, defined to satisfy the condition eK·ʳ˜ = 1. In this basis, Hamiltonian (A2) becomes
+H = XX c† (k˜) d† (k˜) tRRJ (k˜) ∆RRJ (k˜)! cRJ (k˜)!
+
+With spin omitted, the Hamiltonian (1) can thus be written in position space or in momentum space 
+as
+R
+k˜ RRJ
+R   ∆∗RRJ (k˜) tᵈ
+J (k˜)
+dRJ
+(k˜)
+
+H = X.t
+
+c†c
+
++ tᵈ J d†d
+
++ (∆
+
+c†d
++ H.c.). (A2)
+
+!  !
+(A10)
+
+r,rJ
+X.
+r,rJ r rJ
+
+†
+r,r r rJ
+
+d †
+r,rJ r rJ
+†   .
+≡ X c†(k˜) d†(k˜) 
+t(k˜) ∆(k˜)
+∆†(k˜) td (k˜)
+c(k˜)
+d(k˜)
+.   (A11)
+
+k k k
+k
+k k k
+k k k
+x ≡˛Hz(k˜)  x
+The hoppings tr,rJ , t rJ and coupling ∆r,rJ are the Fourier trans-  where the sum on k˜ spans the 
+Brillouin zone associated with
+d   r,                          the super-lattice. Note that c(k˜) and d(k˜) define spinors of
+
+forms of ξk, ξk , and ∆k, respectively. The Hamiltonian can also be written as
+H = X c† d†  ξk ∆k! ck ! ,     (A4)
+	
+length Nc. Thus, the 2 × 2 Hamiltonian matrix above is in fact of dimension 2Nc × 2Nc,
+˜  t(k˜) ∆(k˜)!
+
+
+
+The elements of the hopping blocks t(k˜), td (k˜) and gap block
+∆(k˜) can be obtained as
+6
+
+This is one of the fundamental reasons why the standard peri-odization schemes cannot recover the 
+original lattice Green’s
+
+tR,RJ (k˜) =
+e–ik˜·r˜
+˜
+
+tr˜+R,RJ     (A13)
+function (A16), as explained in what follows.
+Compact tiling Periodization tries to reverse the “cluster-ization” or “coarse-graining” realized 
+in (A18). Since the lat-
+
+d
+R,R
+˜    ik˜ r˜ d
+r˜+R,RJ
+r˜
+(A14)
+ter is applied to the Hamiltonian, it is the Hamiltonian which should be reconstructed, not the 
+Green’s function, self-energy,
+
+∆R,RJ (k˜) =  e–ik˜·r˜∆r˜+R,RJ    (A15)
+r˜
+with the sum over r˜ spanning all vectors of the super-lattice. In this basis, the lattice Green’s 
+function G(k˜, ω) associated with the c(k˜) spinor (the Fourier transform of GR(k˜, t) = –i({c(k˜, 
+t), c†(k˜)})θ(t)) is obtained by taking the Schur com-plement of the block [z – td (k˜)] from the 
+matrix [z – H(k˜)]:
+or cumulant. Furthermore, to reverse (A18), one cannot sim-ply Fourier transform back from 
+representation (A9) as done in the M- and G-schemes. One must also rebuild the lost inter-cluster 
+elements
+δt(k˜) = t(k˜) – tc,       (A26)
+δtᵈ(k˜) = tᵈ(k˜) – tᵈ,       (A27)
+
+G(k˜, ω) =
+           1       
+ω + iη – t(k˜) – ∆†(k˜)   1   ∆(k˜)
+
+.  (A16)
+δ∆(k˜) = ∆(k˜) – ∆c.       (A28)
+To do so, we propose the compact tiling procedure illustrated at Fig. (3) for the 2 × 2 case. Let 
+us now justify this procedure.
+
+This yields a matrix representation of the lattice self-energy
+Σ(k˜, ω) = ∆†(k˜)   1   ∆(k˜).    (A17)
+ω – td (k˜)
+Single cluster  When restricting the above Hamiltonian to a single cluster, all matrices loose 
+their dependence on k˜. For-mally, this corresponds to taking only the cluster at r˜ = 0,
+In general, reversing a sum like (A18) is a fundamentally ill-defined task.  However, with the 
+hypothesis of transla-tion invariance, the sum in (A18) removes information in a very structured 
+way, as we can see, for example, by subtitut-ing (A14) in (A22)
+[tᵈ]R RJ = Nc Xtᵈ  (k˜)        (A29)
+
+which is equivalent to
+c ,   N
+k˜
+R,RJ
+
+H  Nc X H(k˜)
+
+(A18)
+= Nc XXe–ik˜·r˜td
+(A30)
+
+c = N     .
+k˜
+N k˜  r˜
+r˜+R,RJ
+
+Starting from that cluster Hamiltonian Hc, the same steps as above lead to the cluster Green’s 
+function
+=   Nc
+ N
+e–ⁱᵏ˜·ʳ˜ tᵈ    (A31)
+
+Gc(ω) =       1       ,    (A19)
+= X δr˜₌₀tᵈ  J        (A32)
+
+ω + iη – tc – ∆c†
+z – td ∆c
+r˜
+= tᵈ
+J .             (A33)
+
+with cluster self-energy
+Σ (ω) = ∆†   1   ∆ .       (A20)
+R,R
+The above equations relate the components of the cluster oper-ator td to the lattice tᵈ J . Our 
+procedure of compact tiling can
+
+c     c   d  c
+c        r,r
+
+ω – tc
+which is equation (4) in the main text. Note that although tc,
+be seen as rewinding this sequence, starting from the cluster operator (A33), and adding back the 
+phase factors to rebuild
+
+td , and ∆ can all be obtained as
+the lattice operator tᵈ J (k˜) under the sum in (A29). Compo-
+
+c    c
+tc = Nc X t(k˜),       (A21)
+R,R
+nents not contained within one cluster cannot be reconstructed (e.g. tJJ is lost in the 2 × 2 
+case). Note that since the equiva-
+
+N k˜
+lent of (A29)-(A33) also relates ∆c to the lattice ∆r,rJ , we can
+use compact tiling to reconstruct ∆R,RJ (k˜) as well. Clearly,
+td = Nc X td (k˜),       (A22)  compact tiling works best when hoppings are short-ranged.
+ᶜ  N                   However, if we used compact tiling in an attempt to rebuild
+
+∆c = Nc X ∆(k˜),       (A23)
+δG(k˜, ω) = G(k˜) – Gc(ω),     (A34)
+
+N k˜
+this is not the case for Gc(ω) and Σc(ω),
+G (ω) ≠ Nc   G(k˜, ω),      (A24)
+N
+k˜
+Σ (ω) ≠ Nc X Σ(k˜, ω).     (A25)
+δΣ(k˜, ω) = Σ(k˜) – Σc(ω),     (A35)
+it would fail because of (A24) and (A25). We suspect that similar procedures suggested in earlier 
+works for the self-energy and the cumulant [14, 43] also failed because of (A24) and (A25).
+c     N                   2 × 2 case  The specific example considered in the main
+k˜                  text is the 2×2 cluster, a geometry often studied with c-DMFT.
+
+7
+
+
+In this case, the spinor reprepresentation is:
+local coupling only,
+
+
+∆ 0 0 0
+
+
+
+
+c†˜ = c†R1 (k˜) c†R2 (k˜) c†R3 (k˜) c†R4 (k˜) ,   (A36)
+∆(k˜) = ∆ = 0 ∆ 0 0 ,      (A37)
+0 0 0 ∆
+The dispersion t(k˜) can be written as t(k˜) = tc + δt(k˜) with intra-cluster hoppings:
+
+
+
+
+
+where the Ri are the four positions of the cluster, enumerated from 1 to 4, counter-clockwise. In 
+our example, we used a
+µ t tJ t
+t = – t  µ  t  tJ ,       (A38)
+t tJ t µ
+and inter-cluster hoppings:
+
+
+2tJJ(cos(2k˜x) + cos(2k˜y))     te–²ⁱᵏ˜x      tJ(e–²ⁱᵏ˜x + e–²ⁱᵏ˜y + e–²ⁱ⁽ᵏ˜x +k˜y ))    te–²ⁱᵏ˜y 
+    
+˜       te²ⁱᵏ˜x        2tJJ(cos(2k˜x) + cos(2k˜y))      te–²ⁱᵏ˜y       tJ(e²ⁱᵏ˜x + e–²ⁱᵏ˜y + 
+e²ⁱ⁽ᵏ˜x –k˜y ))
+δt(k) = – tJ(e²ⁱᵏ˜x + e²ⁱᵏ˜y + e²ⁱ⁽ᵏ˜x +k˜y ))      te²ⁱᵏ˜y         2tJJ(cos(2k˜ ) + cos(2k˜ ))     
+  te²ⁱᵏ˜x        .
+                                x      y 
+te2ik˜y       tJ(e–2ik˜x + e2ik˜y + e2i(–k˜x +k˜y ))      te–2ik˜x        2tJJ(cos(2k˜x) + 
+cos(2k˜y))
+(A39)
+
+
+
+The auxiliary dispersion ξᵈ = ξk₊Q with Q = (π, π) leads to matrices td and δtd (k˜) identical to 
+the above with t replaced
+and (A39) we see that δt(k˜) can be rebuilt from tc, except for the term with tJJ, as discussed in 
+the main text. This ”re-
+
+by –t
+c
+, as seen for
+td at equation (5). By observation of (A38)
+construction by observation” correspond to the compact tiling scheme suggested at Fig. 3.
+
+
+
+
+[1] A. Damascelli, Z. Hussain, and Z.-X. Shen, Reviews of Mod-ern Physics 75, 473 (2003).
+[2] C. Gros and R. Valent´ı, Physical Review B 48, 418 (1993).
+[3] D. Se´ne´chal, D. Perez, and M. Pioro-Ladrie`re, Physical Review Letters 84, 522 (2000).
+[4] A. I. Lichtenstein and M. I. Katsnelson, Physical Review B 62, R9283 (2000).
+[5] G. Kotliar, S. Y. Savrasov, G. Pa´lsson, and G. Biroli, Physical Review Letters 87, 186401 
+(2001).
+[6] D. Se´ne´chal, D. Perez, and D. Plouffe, Physical Review B 66, 075129 (2002).
+[7] D. Se´ne´chal and A.-M. S. Tremblay, Physical Review Letters 92, 126401 (2004).
+[8] B. Kyung, S. S. Kancharla, D. Se´ne´chal, A.-M. S. Tremblay,
+M. Civelli, and G. Kotliar, Physical Review B 73, 165114 (2006).
+[9] T. D. Stanescu and G. Kotliar, Physical Review B 74, 125110 (2006).
+[10] T. D. Stanescu, M. Civelli, K. Haule, and G. Kotliar, Annals of Physics July 2006 Special 
+Issue, 321, 1682 (2006).
+[11] S. Sakai, Y. Motome, and M. Imada, Physical Review Letters 102, 056404 (2009).
+[12] S. Sakai, Y. Motome, and M. Imada, Physical Review B 82, 134505 (2010).
+[13] G. Biroli and G. Kotliar, Physical Review B 65, 155112 (2002).
+[14] G. Biroli, O. Parcollet, and G. Kotliar, Physical Review B 69, 205108 (2004).
+[15] S. Sakai, G. Sangiovanni, M. Civelli, Y. Motome, K. Held, and
+M. Imada, Physical Review B 85, 035102 (2012).
+[16] S. Verret, J. Roy, A. Foley, M. Charlebois, D. Se´ne´chal, and A.-M. S. Tremblay, Phys. Rev. B 
+100, 224520 (2019).
+[17] M. Klett, N. Wentzell, T. Scha¨fer, F. Simkovic, O. Parcollet,
+S. Andergassen, and P. Hansmann, Phys. Rev. Research 2, 033476 (2020).
+[18] M. Capone and G. Kotliar, Physical Review B 74, 054513 (2006).
+[19] S. Kancharla, B. Kyung, D. Se´ne´chal, M. Civelli, M. Capone,
+G. Kotliar, and A.-M. Tremblay, Physical Review B 77, 184516 (2008).
+[20] A. Foley, S. Verret, A.-M. S. Tremblay, and D. Se´ne´chal, Phys. Rev. B 99, 184510 (2019).
+[21] O. Parcollet, G. Biroli, and G. Kotliar, Physical Review Letters 92, 226402 (2004).
+[22] M. Civelli, M. Capone, A. Georges, K. Haule, O. Parcollet,
+T. D. Stanescu, and G. Kotliar, Physical Review Letters 100, 046402 (2008).
+[23] G. Sordi, K. Haule, and A.-M. S. Tremblay, Physical Review Letters 104, 226402 (2010).
+[24] L. Fratino, P. Se´mon, G. Sordi, and A.-M. S. Tremblay, Scien-tific Reports 6, 22715 (2016).
+
+8
+
+
+[25] L. Fratino, P. Se´mon, G. Sordi, and A.-M. S. Tremblay, Physi-cal Review B 93, 245147 (2016).
+[26] A. Reymbaut, M. Charlebois, M. F. Asiani, L. Fratino,
+P. Se´mon, G. Sordi, and A.-M. S. Tremblay, Phys. Rev. B 94, 155146 (2016).
+[27] K.-Y. Yang, T. M. Rice, and F.-C. Zhang, Physical Review B 73, 174501 (2006).
+[28] J. P. F. LeBlanc, E. J. Nicol, and J. P. Carbotte, Physical Review B 80, 060505(R) (2009).
+[29] J. G. Storey, J. L. Tallon, and G. V. M. Williams, EPL (Euro-physics Letters) 102, 37006 
+(2013).
+[30] J. P. F. LeBlanc, New Journal of Physics 16, 113034 (2014).
+[31] J. G. Storey, EPL (Europhysics Letters) 113, 27003 (2016).
+[32] S. Verret, O. Simard, M. Charlebois, D. Se´ne´chal, and A.-M. S. Tremblay, Physical Review B 
+96, 125139 (2017).
+[33] Y. Fang, G. Grissonnanche, A. Legros, S. Verret, F. Laliberte,
+C. Collignon, A. Ataei, M. Dion, J. Zhou, D. Graf, M. J. Lawler,
+P. Goddard, L. Taillefer, and B. J. Ramshaw, “Fermi surface transformation at the pseudogap 
+critical point of a cuprate su-perconductor,” (2020), arXiv:2004.01725 [cond-mat.str-el].
+[34] D. Se´ne´chal, Physical Review B 81, 235125 (2010).
+[35] D. Se´ne´chal, arXiv preprint arXiv:0806.2690 (2008).
+[36] B. Kyung, D. Se´ne´chal, and A.-M. S. Tremblay, Phys. Rev. B 80, 205109 (2009).
+[37] S. Okamoto, D. Se´ne´chal, M. Civelli, and A.-M. S. Tremblay, Phys. Rev. B 82, 180511 (2010).
+[38] D. Se´ne´chal, A. G. R. Day, V. Bouliane, and A.-M. S. Trem-blay, Physical Review B 87, 
+075123(R) (2013).
+[39] O. Simard, C.-D. He´bert, A. Foley, D. Se´ne´chal, and A.-M. S. Tremblay, Phys. Rev. B 100, 
+094506 (2019).
+[40] J. P. L. Faye and D. Se´ne´chal, Physical Review B 96, 195114 (2017).
+[41] X. Lu and D. Se´ne´chal, Physical Review B 101 (2020), 10.1103/physrevb.101.054512.
+[42] X. Lu and D. Se´ne´chal, “Spin texture in a bilayer high-temperature  cuprate  
+superconductor,”    (2021), arXiv:2102.12015 [cond-mat.str-el].
+[43] T. D. Stanescu and G. Kotliar, Physical Review B 70, 205112 (2004).
+[44] D. Se´ne´chal, in Many-body physics: from Kondo to Hub-bard: lecture notes of the Autumn 
+School on Correlated Elec-trons 2015 : at Forschungszentrum Ju¨lich, 21-25 Septem-ber 2015, edited 
+by Autumn School on Correlated Electrons,
+E. Pavarini, E. Koch, P. Coleman, Institute for Advanced Sim-ulation, and German Research School 
+for Simulation Sciences (2015) oCLC: 974567302.
+[45] T. Maier, M. Jarrell, T. Pruschke, and M. H. Hettler, Reviews of Modern Physics 77, 1027 
+(2005).
