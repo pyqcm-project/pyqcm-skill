@@ -60,8 +60,9 @@ explanations of physics, where standard Greek notation is correct and expected):
   superconductivity, CDW, Rashba coupling, graphene Mott transition, etc.) — the best source of
   idiomatic usage patterns.
 - `pyqcm/tests/` — `test_all.py` runs everything; individual tests live in `tests/test_files/`.
-- `references/research/` — papers on the underlying theory (CPT foundations, cuprate applications,
-  the pyqcm SciPost Codebase paper) — ground physics explanations in these, not just intuition.
+- `references/research/` — papers on the underlying theory, sorted by topic into
+  `quantum_cluster_methods/`, `periodization/`, and `cuprates/` — ground physics explanations in
+  these, not just intuition.
 
 ## Build state
 

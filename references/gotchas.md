@@ -88,14 +88,19 @@ imports from a `utils.point_groups` path that doesn't match its own layout).
 
 What: Lattice models require specifying both superlattice vectors and lattice vectors — usually
 identical, but not always (e.g. non-trivial superlattice choices, or ordered/broken-symmetry phases
-where the physical unit cell is larger than the cluster tiling would suggest).
-Why it happens: pyqcm doesn't infer one from the other; getting this wrong, or forgetting the
-matching `model.set_basis()` call when the superlattice choice is non-trivial, doesn't raise an
-error.
-What to do instead: **there is no crash or exception if these are wrong — you get silently incorrect
-physics.** Whenever the superlattice vectors aren't the trivial/obvious choice, explicitly call
-`model.set_basis()` to change basis accordingly, and double check the lattice vs. superlattice vectors
-match intent before trusting any output.
+where the physical unit cell is larger than the cluster tiling would suggest). **Whenever lattice
+vectors are specified explicitly** (as a separate call after the superlattice vectors), **even if
+their values end up equal to the superlattice vectors**, a matching `model.set_basis()` call is
+needed too.
+Why it happens: pyqcm doesn't infer one from the other, and doesn't infer the plotting basis from
+either. Skipping `set_basis()` in this situation doesn't raise an error or break the physics/
+self-consistency itself — the calculation still runs and converges correctly. What breaks silently is
+**plotting**: k-space plots (spectral function, Fermi surface, etc.) come out in the wrong units/basis
+because the plotting code has no other way to know which basis to render in.
+What to do instead: **there is no crash or exception if this is skipped — you get silently wrong plot
+units, not wrong physics.** Whenever lattice vectors are specified explicitly, call
+`model.set_basis()` right after, even if the lattice and superlattice vectors happen to be identical,
+and double check plot axes match intent before trusting a k-space figure.
 
 ## `hopping_operators` amplitude convention
 
@@ -125,7 +130,7 @@ What: A cluster of related conventions around bath parametrization and CDMFT con
   `'bobyqa'` with very tight tolerances (`accur_bath=1e-6, accur_dist=1e-12` or
   `accur_bath=1e-5, accur_dist=1e-10`).
 - The imaginary-frequency grid used for the CDMFT distance function (`src_qcm/CPT.cpp` around line
-  519): Sénéchal's bath-optimization paper (`references/research/1005.1685v1.txt`) is the detailed
+  519): Sénéchal's bath-optimization paper (`references/research/quantum_cluster_methods/1005.1685v1.txt`) is the detailed
   study behind this choice, benchmarking several weight functions `W(omega)` against Potthoff's
   self-energy functional approach (treated as the reference "best possible" bath). Its findings: a
   weight proportional to `Tr Sigma^2` is the most successful overall, especially for tracking a
@@ -158,7 +163,7 @@ naming quirk.
 
 What: When sweeping a parameter like chemical potential specifically to probe a Mott transition (as
 opposed to studying a single fixed filling), the ground-state particle number `N` is expected to
-change across the sweep — e.g. Fig. 7 of the subbath paper (`references/research/2509.07931v2.txt`)
+change across the sweep — e.g. Fig. 7 of the subbath paper (`references/research/quantum_cluster_methods/2509.07931v2.txt`)
 tracks density `n` vs. `μ` exactly this way, with `n` moving continuously except for a jump/plateau at
 the Mott transition itself. A `model.set_target_sectors(...)` call listing only a single `N` will not
 track this: the solver only ever searches the sector(s) you declare, so fixing `N` throughout the
@@ -175,8 +180,8 @@ What to do instead:
   `R0:N3:S-1/R0:N3:S1`, rather than `R0:N3:S0` (which is not a valid target and would either error or
   silently mean something other than intended).
 - Mott transitions specifically are discussed in the subbath paper (`references/research/
-  2509.07931v2.txt`, Fig. 7) and in the SciPost pyqcm codebase paper (`references/research/
-  SciPostPhysCodeb_23.txt`, around the 1D Hubbard Mott gap example) — check those before reasoning
+  quantum_cluster_methods/2509.07931v2.txt`, Fig. 7) and in the SciPost pyqcm codebase paper
+  (`references/research/quantum_cluster_methods/SciPostPhysCodeb_23.txt`, around the 1D Hubbard Mott gap example) — check those before reasoning
   about expected sector/filling behavior from general Hubbard-model intuition alone.
 
 ## GS consistency test visibility in CDMFT

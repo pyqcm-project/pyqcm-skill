@@ -17,13 +17,13 @@ intuition about Hubbard models, since the specifics of CPT/VCA/CDMFT matter.
   parameters are saddle-point vs. minimum) signals the true value of that variational parameter;
   its magnitude away from zero is the order parameter. See `pyqcm/docs/source/vca.rst` and
   Sénéchal et al. 2002 ("Cluster perturbation theory for Hubbard models", `references/research/
-  0205044v1.txt`) for the CPT/VCA foundations.
+  quantum_cluster_methods/0205044v1.txt`) for the CPT/VCA foundations.
 - **CDMFT** (Cellular/Cluster DMFT) — clusters are coupled to a bath of uncorrelated orbitals whose
   parameters are tuned so the cluster's hybridization function best reproduces the lattice
   self-consistency condition, iterated to convergence. This captures local dynamical correlations
   (unlike VCA/CPT) at the cost of the bath-fitting approximation. See `pyqcm/docs/source/cdmft.rst`.
 - **Subbath CDMFT** — a variant, published this year by this group (de Lagrave, Sénéchal &
-  Charlebois; `references/research/2509.07931v2.txt`), where a cluster is associated with *more than
+  Charlebois; `references/research/quantum_cluster_methods/2509.07931v2.txt`), where a cluster is associated with *more than
   one* independent bath system instead of one. In pyqcm this is not a special mode or class — it's
   implemented simply by passing a **list** of `cluster_model` objects (instead of a single one) to
   `pyqcm.cluster()`, each with its own bath. Each such "system" gets its own self-energy Σᵢ and
@@ -89,7 +89,7 @@ frequency-dependent quantity can violate causality or wash out fine Fermi-surfac
 hole pockets).
 
 **Precursor — compact tiling:** Verret, Foley, Sénéchal, Tremblay & Charlebois,
-`references/research/2107.01344v1.txt`, introduce a "compact tiling" periodization scheme for a
+`references/research/periodization/2107.01344v1.txt`, introduce a "compact tiling" periodization scheme for a
 two-band cellular model, alongside the traditional G/M schemes, specifically to settle whether the
 low-doping cuprate Fermi surface is hole pockets or disconnected Fermi arcs. Compact tiling
 reconstructs a k-dependent quantity by tiling short-ranged real-space hoppings/anomalous terms
@@ -101,7 +101,7 @@ is a long-standing open question in the field before jumping to the 2026 paper's
 proposal.
 
 **Emerging alternative — Liouvillian interpolation (L-interpolation):** a February 2026 paper (Pelz,
-von Delft & Gleis, `references/research/2602.16351v1.txt`) proposes interpolating the
+von Delft & Gleis, `references/research/periodization/2602.16351v1.txt`) proposes interpolating the
 frequency-*independent* matrix elements of the self-energy's continued-fraction expansion (Liouvillian
 matrix elements) instead of interpolating G, Σ, or M directly — this is argued to have a more local
 Fourier expansion than traditional Q-space interpolation and to inherently conserve causality, with
@@ -117,28 +117,31 @@ this as already-existing functionality.
 ## Grounding claims in the literature
 
 `references/research/` holds papers spanning the method's foundations to applications this group
-cares about (multilayer cuprates, oxygen level/charge distribution effects on superconductivity,
+cares about, sorted into three topic subfolders: `quantum_cluster_methods/` (CPT/VCA/CDMFT
+foundations and pyqcm itself), `periodization/` (periodization/interpolation schemes), and
+`cuprates/` (multilayer cuprates, oxygen level/charge distribution effects on superconductivity,
 twisted bilayer cuprates, topological superconductivity). For general quantum-cluster-theory
 questions not specific to any one application — comparing CPT/CDMFT/DCA on general grounds,
 causality/conservation properties of cluster methods, broken-symmetry phases, susceptibilities — start
 from Maier, Jarrell, Pruschke & Hettler's "Quantum Cluster Theories" review (`references/research/
-0404055v1.txt`) rather than the more narrowly-scoped papers below;
+quantum_cluster_methods/0404055v1.txt`) rather than the more narrowly-scoped papers below;
 it's the field's standard reference review, not this group's own work. When a result plausibly
 connects to one of
 these — e.g. the physics of a cuprate-like multi-orbital model, or anything involving oxygen
 p-orbitals and charge transfer — check the relevant paper rather than reasoning purely from the
 generic single-band Hubbard intuition; cuprates specifically require the charge-transfer-insulator
-picture, not the plain Mott picture. The SciPost Codebase paper (`SciPostPhysCodeb_23.txt`) is the
+picture, not the plain Mott picture. The SciPost Codebase paper
+(`references/research/quantum_cluster_methods/SciPostPhysCodeb_23.txt`) is the
 canonical description of pyqcm itself (v2.1) and is the right citation/reference point for "how does
 pyqcm implement X" questions that are about the method rather than the code. For Mott transition
 physics specifically (chemical-potential-driven filling changes, the Mott gap), both the subbath paper
-(`2509.07931v2.txt`, Fig. 7 and around) and the SciPost Codebase paper's 1D Hubbard example discuss it
+(`references/research/quantum_cluster_methods/2509.07931v2.txt`, Fig. 7 and around) and the SciPost Codebase paper's 1D Hubbard example discuss it
 directly — check these before reasoning about Mott transition behavior from generic intuition.
 
 For **AFM/SC coexistence and competition** specifically (the two dominant, competing symmetry-broken
 phases in the cuprate Hubbard model — AFM breaks SO(3) with order parameter M, d-wave SC breaks U(1)
 with order parameter Delta), see Foley, Verret, Tremblay & Sénéchal, `references/research/
-1811.12363v2.txt`. Key points worth knowing before reasoning about a coexistence result from this
+cuprates/1811.12363v2.txt`. Key points worth knowing before reasoning about a coexistence result from this
 group's models: microscopic (spatially homogeneous) coexistence is distinct from macroscopic
 coexistence arising from inhomogeneity or thermodynamic phase separation, and its clean signature is
 a nonzero "u-triplet" order parameter (nonzero only if both M and Delta are nonzero — itself a kind of
