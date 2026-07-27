@@ -1,3 +1,7 @@
 [submodule "pyqcm"]
 	path = pyqcm
 	url = https://github.com/pyqcm-project/pyqcm.git
+
+[submodule "bath-parametrizer"]
+	path = reference/pyqcm-bath-parametrizer
+	url = https://github.com/antoinedelagrave/pyqcm-bath-parametrizer.git
