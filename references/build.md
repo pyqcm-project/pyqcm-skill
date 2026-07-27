@@ -77,7 +77,6 @@ only need to check one solver path.
 cd pyqcm/docs && ./makedoc
 ```
 
-produces HTML under `docs/html/`. A pre-built copy already lives at
-`references/pyqcm_doc_build/singlehtml/index.html` (a single-page build — use your editor/browser's
-in-page search rather than trying to read the whole 3.9MB file at once) if you just need to look
-something up without rebuilding.
+produces HTML under `docs/html/`. There's no pre-built copy checked into this repo (the docs are
+fully contained in the `pyqcm` submodule itself, so mirroring a build here was redundant) — rebuild
+locally when you need to browse them.

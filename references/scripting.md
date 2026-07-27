@@ -61,9 +61,9 @@ before assuming it isn't demonstrated anywhere in the codebase.
 | Parallelism (multi-core ED, integrals) | `pyqcm/docs/source/parallel.rst` |
 | Everything else (misc functions) | `pyqcm/docs/source/other_functions.rst` |
 
-If searching the rendered docs is easier than grepping `.rst` files, use
-`references/pyqcm_doc_build/singlehtml/index.html` — it's the same content as one searchable page,
-plus the C++ API reference (`cpp_api/`) which isn't mirrored as `.rst`.
+If searching rendered docs is easier than grepping `.rst` files, build them locally with
+`cd pyqcm/docs && ./makedoc` (see `references/build.md`) — the output includes the C++ API reference
+(`cpp_api/`) which isn't mirrored as `.rst`.
 
 ## Debugging checklist
 

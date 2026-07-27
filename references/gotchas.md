@@ -78,11 +78,12 @@ What to do instead: use the **bath-parametrizer** package to generate the genera
 automatically from a point group. If the cluster has no bath, set `bath_irrep=False`; if it does, the
 same package can also symmetry-parametrize the bath couplings. It also works combined with the
 subbaths method.
-Status: this package is **not yet public** — it will eventually be released on GitHub, at which point
-this note should be updated to link there instead. In the meantime, an incomplete/in-progress version
-lives in this skill repo at `/bath-parametrizer/` (`bath_parametrization.py`, `point_groups.py`) —
-treat it as a reference for the approach, not necessarily a drop-in working import (it currently
-imports from a `utils.point_groups` path that doesn't match its own layout).
+Status: it's a proper submodule of this skill repo now, at
+`references/pyqcm-bath-parametrizer/` (source in `bath_parametrizer/bath_parametrization.py` and
+`bath_parametrizer/point_groups.py`), pulled from
+https://github.com/antoinedelagrave/pyqcm-bath-parametrizer. Import as
+`from bath_parametrizer.bath_parametrization import BathParametrizer`. Supported point groups: `Cs`,
+`C2`, `C2v`, `C3`, `C3v`, `C4`, `C4v`, `C6`, `C6v`.
 
 ## Lattice vs. superlattice vectors
 

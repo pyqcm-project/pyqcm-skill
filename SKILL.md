@@ -54,12 +54,15 @@ explanations of physics, where standard Greek notation is correct and expected):
 - `pyqcm/src_qcm/` — the C++ lattice/CPT-VCA-CDMFT engine (periodization, Green's functions on the
   lattice, parameter sets).
 - `pyqcm/src_python/` — nanobind bindings gluing the C++ core into the `pyqcm.qcm` extension module.
-- `pyqcm/docs/source/*.rst` — the authoritative API/workflow documentation (also mirrored fully
-  rendered at `references/pyqcm_doc_build/singlehtml/index.html`).
+- `pyqcm/docs/source/*.rst` — the authoritative API/workflow documentation. Build it locally (see
+  `references/build.md`) if you need the rendered HTML; there's no pre-built copy in this repo.
 - `pyqcm/notebooks/*.py` / `*.ipynb` — worked examples (1D Hubbard chains, antiferromagnetism,
   superconductivity, CDW, Rashba coupling, graphene Mott transition, etc.) — the best source of
   idiomatic usage patterns.
 - `pyqcm/tests/` — `test_all.py` runs everything; individual tests live in `tests/test_files/`.
+- `references/pyqcm-bath-parametrizer/` — submodule providing symmetry-constrained bath
+  parametrization for CDMFT (point-group generators, SALC-based hybridization). See
+  `references/gotchas.md` for usage notes.
 - `references/research/` — papers on the underlying theory, sorted by topic into
   `quantum_cluster_methods/`, `periodization/`, and `cuprates/` — ground physics explanations in
   these, not just intuition.
