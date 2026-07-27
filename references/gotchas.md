@@ -57,7 +57,9 @@ Why it happens: two distinct causes, depending on where you're running.
   of `n` — see `references/hpc-iq/software/pyqcm.rst.txt` for the official writeup. This is a much
   worse slowdown than ordinary oversubscription and is easy to misdiagnose as "the cluster is busy."
 What to do instead:
-- Personal computer: set `OMP_NUM_THREADS` to roughly half your total thread count (typically 2-4).
+- Personal computer: the automatic default (usually the full thread count) works fine in practice.
+  There's no general need to halve it — just be mindful of not overloading the machine if you want
+  to keep using it for other things while a calculation runs.
 - Alliance/SLURM clusters generally: set `OMP_NUM_THREADS` to half the requested `--cpus-per-task`.
   Empirically verified, not yet fixed in the code.
 - Grappe IQ specifically: the double-OpenMP problem is avoided by compiling pyqcm against the
