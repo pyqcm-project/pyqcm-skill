@@ -27,6 +27,15 @@ mistakes, build quirks — that aren't written down anywhere else. If you learn 
 session (a mistake you made, a surprising API behavior, a fix that wasn't obvious from the docs),
 add it there before finishing, so the next session benefits too.
 
+**Also check `references/physics.md`'s "Grounding claims in the literature" section whenever the work
+targets a specific named material or system** (a real compound, not a generic toy Hubbard model),
+even if the job otherwise classifies as pure scripting. Setting model parameters, choosing a
+cluster/bath decomposition, or reasoning about expected order-parameter behavior are
+physics-grounding decisions regardless of whether the file being edited is a Python script — the job
+table above picks *one* reference file per session, which is not enough by itself when a real,
+previously-studied material is involved. See "Grounding a named material/system in the literature" in
+`references/gotchas.md`.
+
 ## Coding conventions (always follow these)
 
 These apply whenever this skill is used to write or modify code, scripts, or commits (not to prose

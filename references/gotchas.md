@@ -187,6 +187,38 @@ What to do instead:
   (`references/research/quantum_cluster_methods/SciPostPhysCodeb_23.txt`, around the 1D Hubbard Mott gap example) — check those before reasoning
   about expected sector/filling behavior from general Hubbard-model intuition alone.
 
+## Target sectors when point-group generators are declared
+
+What: Declaring `generators=...` on a `cluster_model` (see "Symmetries via `bath-parametrizer`" above)
+splits the cluster's Hilbert space into one sector per irrep of the point group (`R0`, `R1`, ... —
+pyqcm's `R` label), on top of whatever `N`/`S` sectors already existed. The ground state can land in
+*any* of these irrep sectors, not just `R0`.
+Why it happens: same root cause as the `N`-sector gotcha above — sector search is not automatic, it
+only considers what's declared. A point group with `k` one-dimensional irreps (e.g. `C2v`, abelian,
+`k=4`: `A1,A2,B1,B2`) gives `k` irrep sectors, and nothing about the physics guarantees the trivial
+irrep (`R0`) holds the ground state — e.g. a d-wave anomalous bath coupling can favor a
+non-trivial irrep.
+What to do instead: target all irrep sectors the declared point group produces (e.g.
+`["R0:S0/R1:S0/R2:S0/R3:S0", ...]` for a `C2v`-generated cluster with 4 irreps), not just `R0:S0`, the
+same way the `N`-sector gotcha requires spanning the filling range rather than fixing one value.
+
+## Grounding a named material/system in the literature (not just "physics" tasks)
+
+What: A session can be entirely "script work" by the SKILL.md job classification (bath symmetry,
+CDMFT mechanics, sweep logic) while quietly also making physics-grounding decisions — model
+parameters, cluster/bath geometry, expected order-parameter behavior — without ever opening
+`references/physics.md`, because that file is only gated in for the "interpret physics results" job.
+Why it happens: `SKILL.md`'s routing table is a single-job classification ("figure out which one the
+user needs, read the matching file") rather than a set of independently-triggered checks — a script
+task never trips the physics-file read even when it involves a real material with existing literature
+under `references/research/`.
+What to do instead: whenever a script targets a specific named physical system (a real material or
+compound, not a generic toy Hubbard model), check `references/physics.md`'s "Grounding claims in the
+literature" section and the relevant `references/research/<topic>/` papers for that system
+*regardless* of whether the session otherwise reads as pure script/mechanics work — parameter choices
+and expected qualitative behavior (order-parameter shape, competing orders, known discontinuities) are
+physics claims even when the actual edit is a Python script.
+
 ## GS consistency test visibility in CDMFT
 
 What: The ground-state consistency check that pyqcm runs at each CDMFT iteration used to print to the
@@ -204,3 +236,40 @@ declared sectors, and the physics is not trustworthy even though the run "succee
 live visibility in the terminal, set `pyqcm.warnings=True` in your script. Since this is a fairly
 recent behavior change (and Antoine considers the silent default a footgun), double check this is
 still accurate for whatever pyqcm version you're on — it may get revisited upstream.
+
+## Encoding / model-construction landmines (from the SC-capable W90 re-encoding, 2026-07)
+
+Hit while building `pyqcm-w90-builder`'s physical encoding; all verified against pyqcm source.
+
+- **`segment_dispersion()` returns `None`.** It is a plotting function (calls `plt.show()`). To get
+  the eigenvalue array, replicate its internals: `k,_,_ = pyqcm.wavevector_path(nk, path)` then
+  `e = instance.dispersion(k)` (returns `ndarray(nk, dimGF_red)`). `wavevector_path`'s `shape` arg
+  accepts a `.tsv` k-path filename.
+- **One `lattice_model` per process (hard singleton).** `lattice_model.__init__` raises
+  "Only one lattice model can be defined at a time!" To build several models in one process (e.g.
+  pytest), call `pyqcm.reset_model()` between them — it does a full C++ (`qcm.great_reset()`) +
+  Python reset (clears `lattice_model.defined` and `cluster_model_names`). Module-level models
+  (built at import) need `importlib.reload(module)` *after* a reset to rebuild cleanly, else you get
+  a "cluster model name already used" collision.
+- **`set_basis` enters the k-phase, so dispersion eigenvalues depend on it.** Two encodings that
+  differ only by `set_basis` give *different* bands at the same reduced input-k (the input k maps to
+  different physical k). They are the *same* band structure reparametrized. To check band
+  equivalence of two encodings, evaluate both in a *common* `set_basis` frame. Orbital *labels*,
+  by contrast, are pure integer combinatorics (position cosets mod the integer lattice,
+  `src_qcm/lattice_model.cpp:93-102`) and are `set_basis`-independent.
+- **Orbital label = coset-appearance order = site listing order** (when all cosets are distinct). So
+  listing cluster sites in the intended orbital order keeps pyqcm indices 1..N aligned with your
+  `labels`/interaction operators even after changing positions.
+- **`cluster_averages()` returns only cluster-model operators**, as `{name: (avg, var)}` per system
+  (`sys=` arg). Lattice operators (density-wave-style `n*` readouts, `Vdc`, `U`, `J`) are not in it.
+  `<epsX>` (the on-site number operator) *is* the orbital occupation. The `_1_ave` column in
+  `cdmft.tsv` is the self-consistent-loop cluster average and differs from a single-shot re-solve of
+  the converged parameters — to compare two encodings, re-solve both and compare, don't compare a
+  re-solve to the stored `_ave`.
+- **`set_params_from_file()` needs the parameter set already defined** — call `set_parameters(...)`
+  once first (to declare/instantiate all params), then `set_params_from_file(tsv, n=-1)` overwrites
+  with the converged row.
+- **`.win` parsing is not uniform across materials.** `unit_cell_cart` may carry a leading units
+  line (`ang`/`bohr`); atoms may be `atoms_cart` or `atoms_frac` (fractional → convert with the
+  cell); structural atoms without a `projections` entry (Ba/Y in YBCO) must be filtered. Wannier
+  centres count can exceed the pyqcm subspace size (YBCO: 49 centres, 36-orbital model).

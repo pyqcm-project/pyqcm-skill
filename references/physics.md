@@ -151,3 +151,22 @@ parametrization (maximal freedom in the hybridization function per bath orbital)
 coexistence region found by earlier, more restrictive parametrizations. Don't treat a coexistence
 region as parametrization-independent — check what bath parametrization was used before comparing
 results across scripts or papers.
+
+For **the Emery (three-band) model specifically** — any script decomposing a cuprate lattice into a
+correlated Cu cluster plus an uncorrelated O cluster — St-Cyr & Sénéchal,
+`references/research/cuprates/St-Cyr and Sénéchal - 2025 - Effect of the Coulomb repulsion and oxygen
+level on charge distribution and superconductivity in the.txt`, is this group's own primary reference
+and normally the first thing to check, not just background: it's the source of the 4-correlated-Cu +
+8-uncorrelated-O + 8-orbital-bath CDMFT decomposition this group's Emery scripts use, Table I's
+hopping ratios `tpd/tpp`, `t'pp/tpp`, `(εp − εd)/tpp` for BSCCO/LSCO/YBCO/NCCO (derived from DFT,
+Refs [15,16] therein), and NMR-constrained `U − εp` estimates per material (YBCO ≈ 6, LSCO ≈ 10).
+`Up` (oxygen on-site U) is deliberately neglected throughout (DFT-justified: oxygens near-filled, Up
+small) — a zero/unset `Up` in a script matching this decomposition is normally intentional, not a bug.
+Two results from this paper matter for interpreting a doping/mu sweep of the SC order parameter: (1)
+the computed d-wave dome is not a single smooth curve — Fig. 3 shows a *discontinuity within the SC
+region itself* at "optimal doping," the boundary between SC-with-pseudogap and SC-without, so a
+solver failure or a sudden jump there is not necessarily the dome edge; (2) those dome calculations
+explicitly ignore antiferromagnetism near half-filling (no AFM order parameter in that part of the
+paper), so an SC value found close to half-filling by a similarly AFM-free script may be a
+sector-restricted result rather than the true ground state — cross-check against the AFM/SC
+coexistence paper above if that matters for the result being reported.
