@@ -70,7 +70,9 @@ explanations of physics, where standard Greek notation is correct and expected):
   idiomatic usage patterns.
 - `pyqcm/tests/` — `test_all.py` runs everything; individual tests live in `tests/test_files/`.
 - `references/pyqcm-bath-parametrizer/` — submodule providing symmetry-constrained bath
-  parametrization for CDMFT (point-group generators, SALC-based hybridization). See
+  parametrization for CDMFT (point-group generators, SALC-based hybridization).
+  `BathParametrizer.get_pyqcm_generators()` is the one-call path to
+  `cluster_model(generators=..., bath_irrep=True)`, with or without subbaths. See
   `references/gotchas.md` for usage notes.
 - `references/research/` — papers on the underlying theory, sorted by topic into
   `quantum_cluster_methods/`, `periodization/`, and `cuprates/` — ground physics explanations in

@@ -80,12 +80,45 @@ What to do instead: use the **bath-parametrizer** package to generate the genera
 automatically from a point group. If the cluster has no bath, set `bath_irrep=False`; if it does, the
 same package can also symmetry-parametrize the bath couplings. It also works combined with the
 subbaths method.
+
+```python
+from bath_parametrizer.bath_parametrization import BathParametrizer
+
+sites = [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]]   # list or ndarray both fine
+p = BathParametrizer(sites, "C2v")
+
+# Vanilla (non-SB-CDMFT) mixed bath: 8 bath orbitals, 2 per C2v irrep.
+generators = p.get_pyqcm_generators(8, "C2v")           # flat list, ready to pass
+pyqcm.cluster_model(4, 8, generators=generators, bath_irrep=True)
+
+# Subbath (SB-CDMFT) variant: one generators list per subbath.
+gens = p.get_pyqcm_generators(8, "C2v", subbath={"nsb": 3, "irreps": "replica"})  # {1: [...], 2: [...], 3: [...]}
+```
+
+Key API points:
+- `get_pyqcm_generators(n_baths, abelian_pg, subbath=None, linked_sites=None)` is the one-call path to
+  `cluster_model(generators=..., bath_irrep=True)`. It returns a **flat list** when `subbath["nsb"]`
+  is 1 (the default) and a **dict keyed by 1-based subbath index** when `nsb > 1` — check which you
+  got before passing it along.
+- It returns an **empty dict** if the point group has no defined generators (non-abelian/unsupported),
+  which is the signal that `bath_irrep` symmetry can't be used at all — fall back to `bath_irrep=False`.
+- Bath-phase blocks follow the SALC label order from `get_hybridization_links` (character-table order,
+  or `irrep_1`, `irrep_2`, ... when an irrep has multiplicity > 1). **Declare `eb{i}`/`tb{i}` bath
+  parameters in that same order** — a mismatch here silently couples the wrong bath orbitals.
+- `subbath["irreps"]` accepts `"replica"` (default) and `"unique"`; `"custom"`/`"mixed"` raise
+  `NotImplementedError`. `linked_sites` must be a union of point-group orbits or you get a `ValueError`.
+- Site positions are coerced with `np.asarray(..., dtype=float)`, so plain nested lists work (this was
+  a bug until Aug 2026 — older checkouts require an explicit `np.ndarray`).
+
 Status: it's a proper submodule of this skill repo now, at
 `references/pyqcm-bath-parametrizer/` (source in `bath_parametrizer/bath_parametrization.py` and
 `bath_parametrizer/point_groups.py`), pulled from
 https://github.com/antoinedelagrave/pyqcm-bath-parametrizer. Import as
 `from bath_parametrizer.bath_parametrization import BathParametrizer`. Supported point groups: `Cs`,
-`C2`, `C2v`, `C3`, `C3v`, `C4`, `C4v`, `C6`, `C6v`.
+`C2`, `C2v`, `C3`, `C3v`, `C4`, `C4v`, `C6`, `C6v`. Note the submodule's own `README.md` is stale — it
+shows a `src/bath_parametrization/` layout and a `from bath_parametrization import ...` import that
+don't match the actual package; trust the paths above (and `tests/test_bath_parametrization.py` for
+worked examples), not the README.
 
 ## Lattice vs. superlattice vectors
 
