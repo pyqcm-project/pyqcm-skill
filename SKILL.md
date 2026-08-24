@@ -75,8 +75,9 @@ explanations of physics, where standard Greek notation is correct and expected):
   `cluster_model(generators=..., bath_irrep=True)`, with or without subbaths. See
   `references/gotchas.md` for usage notes.
 - `references/research/` — papers on the underlying theory, sorted by topic into
-  `quantum_cluster_methods/`, `periodization/`, and `cuprates/` — ground physics explanations in
-  these, not just intuition.
+  `quantum_cluster_methods/`, `periodization/`, `cuprates/`, and `double_counting/` (DFT+DMFT `V_DC`
+  schemes, and the separate problem of double-counting the local self-energy when nesting cluster
+  DMFT in a charge-self-consistent loop) — ground physics explanations in these, not just intuition.
 
 ## Build state
 

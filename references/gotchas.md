@@ -9,6 +9,11 @@ Sourced from Antoine de Lagrave's own notes (2026-07-22). Some of this reflects 
 code owner (David Sénéchal) that could change in a future pyqcm release — where that's the case, it's
 flagged below so a future reader knows to double-check rather than trust it blindly.
 
+Entries whose behavior depends on the pyqcm version name the versions explicitly (e.g. "up to
+v2.26.x" / "as of v2.29.x"). The `pyqcm/` submodule here is pinned, so check what it actually points
+at (`git submodule status`) before trusting a version-qualified claim against the pyqcm you have
+installed — they are not necessarily the same.
+
 ## Format for new entries
 
 ```
@@ -166,7 +171,11 @@ What: A cluster of related conventions around bath parametrization and CDMFT con
   `'bobyqa'` with very tight tolerances (`accur_bath=1e-6, accur_dist=1e-12` or
   `accur_bath=1e-5, accur_dist=1e-10`).
 - The imaginary-frequency grid used for the CDMFT distance function (`src_qcm/CPT.cpp` around line
-  519): Sénéchal's bath-optimization paper (`references/research/quantum_cluster_methods/1005.1685v1.txt`) is the detailed
+  519). **The default changed upstream:** `frequency_grid` in `pyqcm/cdmft.py` was
+  `grid_type="legendre", specs=(1, 10, 5, 10, 5)` up to v2.26.x and is
+  `grid_type="regular", specs=(10, 50, 10)` as of v2.29.x (commit `6813034`). A run that relied on the
+  old default silently changes grid on upgrade, so pin `grid_type` explicitly rather than inheriting
+  it if you are comparing against older numbers. Sénéchal's bath-optimization paper (`references/research/quantum_cluster_methods/1005.1685v1.txt`) is the detailed
   study behind this choice, benchmarking several weight functions `W(omega)` against Potthoff's
   self-energy functional approach (treated as the reference "best possible" bath). Its findings: a
   weight proportional to `Tr Sigma^2` is the most successful overall, especially for tracking a
@@ -255,9 +264,9 @@ physics claims even when the actual edit is a Python script.
 ## GS consistency test visibility in CDMFT
 
 What: The ground-state consistency check that pyqcm runs at each CDMFT iteration used to print to the
-terminal; it was recently made silent by the code owner (David Sénéchal), and now only shows up in
-`cdmft_iter.tsv` / `cdmft.tsv`, not in live terminal output — even though the simulation will still
-happily converge if this check fails.
+terminal; it was made silent by the code owner (David Sénéchal), and now only shows up as the
+`ConsistencyCheck_{n}` column of the CDMFT output files, not in live terminal output — even though the
+simulation will still happily converge if this check fails.
 Why it happens: a recent upstream change, made silent by design (the code owner appears to prefer
 checking the output files after the fact rather than watching it live). Antoine's own habit is to
 watch the terminal for the first several iterations of a launched script as a sanity check, and this
@@ -265,14 +274,29 @@ change makes it very easy to forget the check exists at all — since nothing on
 it's missing.
 What to do instead: **this test is essential — it verifies the ground state search is happening in
 the right symmetry sector.** If it fails, it means the solver converged to a state outside your
-declared sectors, and the physics is not trustworthy even though the run "succeeded." To restore
-live visibility in the terminal, set `pyqcm.warnings=True` in your script. Since this is a fairly
-recent behavior change (and Antoine considers the silent default a footgun), double check this is
-still accurate for whatever pyqcm version you're on — it may get revisited upstream.
+declared sectors, and the physics is not trustworthy even though the run "succeeded." Two independent
+switches control it (`model_instance.GS_consistency`, `pyqcm/__init__.py`), and you usually want both:
 
-## Encoding / model-construction landmines (from the SC-capable W90 re-encoding, 2026-07)
+- `pyqcm.warnings = True` restores the banner in the terminal. **The run still continues.**
+- `cdmft(..., check_ground_state=True)` makes a failure `raise ValueError` instead of being logged.
+  Default is `False`, so by default nothing stops a run whose ground state is inconsistent. This
+  argument is not new — it has been there since at least v2.26.x and is simply easy to miss.
 
-Hit while building `pyqcm-w90-builder`'s physical encoding; all verified against pyqcm source.
+The comparison is the wavefunction density against the Green-function density, with a `threshold` of
+`1e-4`; the signed difference is always written to `props["ConsistencyCheck_{n}"]` (one per system)
+regardless of either switch, which is what reaches the output files.
+
+Note on those files: **the CDMFT/VCA output naming changed upstream.** Up to v2.26.x, `cdmft()` took
+two separate arguments, `file="cdmft.tsv"` and `iter_file="cdmft_iter.tsv"`. As of v2.29.x there is a
+single `file="cdmft"` **prefix** (no extension) and the iteration file is derived as
+`<prefix>_iter.tsv` — `iter_file` is gone as an argument, so passing it is now a `TypeError`. `vca()`
+changed the same way (`file="vca.tsv"` to `file="vca"`). Default output names are unchanged
+(`cdmft.tsv`, `cdmft_iter.tsv`), so only scripts that passed these explicitly are affected.
+
+## Model-construction and encoding landmines
+
+Hit while building `pyqcm-w90-builder`'s SC-capable physical encoding (2026-07); all verified against
+pyqcm source. Only the last bullet is Wannier90-specific — the rest apply to any pyqcm model.
 
 - **`segment_dispersion()` returns `None`.** It is a plotting function (calls `plt.show()`). To get
   the eigenvalue array, replicate its internals: `k,_,_ = pyqcm.wavevector_path(nk, path)` then
@@ -295,10 +319,14 @@ Hit while building `pyqcm-w90-builder`'s physical encoding; all verified against
   `labels`/interaction operators even after changing positions.
 - **`cluster_averages()` returns only cluster-model operators**, as `{name: (avg, var)}` per system
   (`sys=` arg). Lattice operators (density-wave-style `n*` readouts, `Vdc`, `U`, `J`) are not in it.
-  `<epsX>` (the on-site number operator) *is* the orbital occupation. The `_1_ave` column in
-  `cdmft.tsv` is the self-consistent-loop cluster average and differs from a single-shot re-solve of
-  the converged parameters — to compare two encodings, re-solve both and compare, don't compare a
-  re-solve to the stored `_ave`.
+  `<epsX>` (the on-site number operator) *is* the orbital occupation. The `_1_ave` column in the CDMFT
+  solution file (`cdmft.tsv` by default, `<prefix>.tsv` in general — see the naming note in the GS
+  consistency entry) is the self-consistent-loop cluster average and differs from a single-shot
+  re-solve of the converged parameters — to compare two encodings, re-solve both and compare, don't
+  compare a re-solve to the stored `_ave`. Unrelated but adjacent: `instance.averages()` appends to
+  `averages.tsv` unless you pass `file=None`. The signature is unchanged across versions, but pyqcm's
+  own internal callers started passing `file=None` in v2.29.x to cut file clutter, so that file may
+  simply be quieter than you remember.
 - **`set_params_from_file()` needs the parameter set already defined** — call `set_parameters(...)`
   once first (to declare/instantiate all params), then `set_params_from_file(tsv, n=-1)` overwrites
   with the converged row.
@@ -306,3 +334,141 @@ Hit while building `pyqcm-w90-builder`'s physical encoding; all verified against
   line (`ang`/`bohr`); atoms may be `atoms_cart` or `atoms_frac` (fractional → convert with the
   cell); structural atoms without a `projections` entry (Ba/Y in YBCO) must be filtered. Wannier
   centres count can exceed the pyqcm subspace size (YBCO: 49 centres, 36-orbital model).
+
+## One-body / band checks on a model with a bath and a point group
+
+Hit while writing a U=0 validation script for a two-cluster bilayer Emery model. Four traps in a row,
+none of which are in the docs, all of which look like bugs in your own script.
+
+- **`dispersion()` is a `model_instance` method, not a `lattice_model` one.** You still have to build
+  `pyqcm.model_instance(model)` to reach it; `lattice_model` has no `dispersion`/`tk`, so the
+  `AttributeError` reads as if the API changed when it didn't. (Same for `tk()` and `epsilon()`.)
+  **Whether that forces an ED solve is version-dependent.** Up to v2.26.x, `QCM::dispersion` built the
+  cluster Green function first, so target sectors and a full parameter set were mandatory before you
+  could look at `t(k)`. As of v2.29.x it calls `bare_epsilon` and diagonalizes directly — a pure
+  one-body path, no ED (`src_qcm/QCM.cpp`, `dispersion`; upstream commit `6813034`, "functions that
+  compute the dispersion relation without performing ED first"). Source-verified, not yet
+  runtime-verified: if a one-body check still demands solvable clusters on a recent pyqcm, that is
+  worth reporting upstream rather than working around.
+- **`U=0` *exactly* breaks a cluster that declares `generators=...`.** pyqcm routes a fully
+  non-interacting cluster to `one_body_solve()`, which throws
+  `The symmetry group must be trivial when using 'one_body_solve()'` and aborts via `libc++abi`
+  (an uncaught C++ exception, not a Python traceback, so it can't be caught). Use `U=1e-6` instead:
+  it keeps the ED path and leaves the one-body physics untouched.
+- **Irrep sectors with unspecified `N` are only legal while something anomalous is switched on.**
+  A production sector list like `R0:S0/R1:S0/R2:S0/R3:S0` (see the irrep-sector entry above) leaves
+  particle number free, which is correct for a superconducting run. Switch the anomalous bath and
+  pairing field off (`db=0`, `D=0`) for a normal-state or one-body check and pyqcm raises
+  `sector string R0:S0 defines a non conserved particle number, but particle number is conserved in
+  the model`. Pin `N` for the test (`N12:S0`) and keep the free-`N` list for production; don't
+  "fix" the production list.
+- **`set_parameters()` may only be called once per model** (`ValueError: The function
+  set_parameters() can only be called once`). To vary something afterwards use `set_parameter()`
+  (singular) per parameter. This bites when a script wants to reset to a clean baseline between
+  successive tests in one process.
+
+## kz Brillouin period follows the physical basis, not 1
+
+What: For a model with a non-cubic `set_basis` (e.g. a c-axis vector of length `C/(NZ*A)` in units of
+the in-plane lattice constant), the reciprocal-space period along that axis in the reduced k used by
+`dispersion()` is **not** 1. Sampling `kz` over `[0, 1)` silently samples a fraction (or several
+copies) of the true Brillouin zone.
+Why it happens: this is the concrete consequence of "`set_basis` enters the k-phase" in the W90 entry
+above. `dispersion()` takes k in units of `2*pi` in the *physical* basis, so a basis vector of length
+`L` has period `1/L`.
+What to do instead: compute the period explicitly (`period = 1/L`, e.g. `NZ*A/C`) and verify
+numerically that `E(kz=0)` and `E(kz=period)` agree to machine precision before trusting any c-axis
+dispersion plot or any claim about bilayer/interlayer physics.
+
+## Tied (dependent) parameters must stay out of the `varia` list
+
+What: pyqcm's parameter string accepts dependent parameters written as `X = c*Y` (e.g.
+`eb1_3 = 1*eb1_1`). This is the clean way to impose a relation the model should obey but that the
+target sectors and the cluster point group do not already enforce — tying two clusters, sites or bath
+orbitals that symmetry makes equivalent (`1*`), imposing a relative sign or parity such as a pairing
+phase (`-1*`), or locking a ratio fixed by the model definition. The tie tracks the master through the
+whole optimization, not just at seed time.
+Why it happens: a dependent parameter is derived, so listing it in `varia` as well hands the optimizer
+a degree of freedom that the constraint immediately overwrites.
+What to do instead: put only the master names in `varia`. Build the varia list and the tie string from
+the same code path so they cannot drift apart.
+
+**The general trap behind this: a symmetric seed is self-confirming.** Any symmetry imposed by
+*seeding* rather than by *declaring* will appear to hold no matter whether it actually does, because
+the symmetric subspace is an invariant manifold of the map being iterated. If the seed respects a
+symmetry that the lattice model and cluster also respect, the impurity solution respects it, so the
+updated parameters respect it, forever. The gradient out of the manifold is exactly zero. This is not
+specific to bath ties, or to CDMFT:
+
+- Untying a tie and re-running from the symmetric converged solution reproduces the tied answer to
+  machine precision and reads as independent confirmation that the tie was justified. It is a
+  tautology, not evidence.
+- A symmetry-broken order parameter seeded at exactly zero stays exactly zero and the run reports "no
+  order" whether or not the ordered phase is actually the ground state — the usual way an AFM or SC
+  solution gets missed.
+- In VCA the same thing appears as a stationarity artifact rather than a fixed point: an order
+  parameter at zero is *always* a stationary point of the Potthoff functional by symmetry, so a
+  Newton search started there sits still regardless of whether a nontrivial saddle exists nearby.
+
+Round-off can in principle knock a run off the manifold, but slowly and unreliably — never rely on it,
+and never treat a run that happened to drift off as the normal case.
+What to do instead: perturb *off* the manifold deliberately. Jitter the freed parameters by a few
+percent, or start from a deliberately asymmetric converged solution and check the symmetry is
+*restored* rather than merely preserved. Only a run that could have left and didn't is evidence the
+symmetry holds.
+
+## Converged bath parameters are gauge-dependent
+
+What: **Bath parameters are not observables.** The bath parametrization is many-to-one onto physical
+solutions, so two converged runs can print visibly different `eb`/`tb`/`db` tables and still be the
+same solution. Read as physics, a gauge move looks like a discovery: an orbital that "decoupled", a
+hybridization that "changed sign", a level that "crossed" between two points of a sweep. Nothing in
+the CDMFT distance function prefers one gauge branch over another, so a warm start, a reordered bath,
+or a jittered seed can silently move you between them.
+Why it happens: any transformation of the bath operators that leaves the hybridization function
+`Gamma(z)` invariant is a redundancy of the parametrization. Which ones exist depends only on which
+channels the bath declares, not on the model or material:
+
+| Redundancy | Acts on | Sends | Present when |
+|---|---|---|---|
+| Phase / sign | one orbital, `c_b -> -c_b` | `(eb, tb, db) -> (eb, -tb, -db)` | always |
+| Permutation | two orbitals in the same symmetry class | swaps their whole `(eb, tb, db)` triple | whenever ≥2 equivalent orbitals |
+| Particle-hole flip | one orbital, `c_b -> c_b^dag` | `(eb, tb, db) -> (-eb, db, tb)` | only when normal **and** anomalous channels both exist |
+
+The first two are always live. The sign one means **the sign of an individual `tb_i` carries no
+information** — only relative signs within an orbital do. The permutation one is why bath orbitals can
+appear to trade places discontinuously along a continuation sweep.
+
+The particle-hole flip is the one that most often gets misread, because it moves weight *between*
+channels: it turns the normal hybridization `tb c_i^dag c_b` into an anomalous one and vice versa. So a
+converged orbital showing `tb_i` near zero with `db_i` appreciable is usually **not** a decoupled
+orbital carrying optimizer noise in its anomalous amplitude — it is the same orbital in the flipped
+branch, physically identical to one with `tb_i` appreciable and `db_i` near zero. Every bath orbital
+carries its own copy of this Z2. It is exact only because the standard `eb`/`tb`/`db` parametrization
+has no bath-internal pairing term; add one and the degeneracy breaks. (This case needs an anomalous
+channel to exist, so in practice it shows up in superconducting runs — but it is a property of the
+parametrization, not of superconductivity, and the same reasoning applies to any parametrization whose
+channels mix under a transformation that preserves `Gamma(z)`.)
+
+What to do instead: before treating a surprising bath table as physics worth pinning away or reporting,
+test the gauge hypothesis. It is cheap and decisive, and the recipe is the same for all three rows:
+
+- **Do the parameters map onto each other?** For the flip: does `eb_i` have the opposite sign to the
+  same orbital in the neighbouring or previous solution, and does `|db_i|` in one run equal `|tb_i|` in
+  the other to optimizer tolerance? For a permutation: does the *multiset* of triples match even though
+  the per-index table doesn't?
+- **Do the observables match?** `E_kin`, the densities, the order parameters and `min_dist` are
+  invariant under all three. This is the check that settles it — gauge moves cannot move an observable.
+- **Does `E0` move by the predicted amount?** Sign and permutation leave `E0` alone. The flip shifts it
+  by `2 * sum(eb_i)` over the flipped orbitals, taking `eb_i` from the run you are transforming *from*
+  (so the shift correctly reverses sign when you flip back), out of `n_b -> 1 - n_b` for both spins.
+
+If those hold, there is nothing wrong and nothing to fix. Genuine noise in a truly decoupled orbital
+looks different: `eb` does not flip, and no relation ties the two runs' numbers together.
+
+Two corollaries. First, do not compare `E0` across runs without checking the bath gauge first, or a
+pure relabelling reads as a level crossing. Second, pinning `db_i = 0` on a flipped-looking orbital is
+not a no-op even though it usually reproduces the same answer: it forbids the small residual pairing
+left over after the rotation, which restricts the variational space slightly and can cost a nearby
+solution branch in a continuation sweep. If a pinned sweep loses a solution the free sweep had, suspect
+that before concluding the free sweep's solution was spurious.

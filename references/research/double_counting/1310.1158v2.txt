@@ -1,0 +1,1132 @@
+Covalency in transition metal oxides within all-electron Dynamical Mean Field Theory
+Kristjan Haule,∗ Turan Birol, and Gabriel Kotliar
+Department of Physics and Astronomy, Rutgers University, Piscataway, NJ 08854.
+(Dated: August 19, 2014)
+A combination of dynamical mean field theory and density functional theory, as implemented in Phys.
+Rev. B 81, 195107 (2010), is applied to both the early and late transition metal oxides. For a
+fixed value of the local Coulomb repulsion, without fine tuning, we obtain the main features of
+these series, such as the metallic character of SrVO3 and the the insulating gaps of LaVO3, LaTiO3
+and La2CO4 which are in good agreement with experiment. This study highlights the importance of
+local physics and high energy hybridization in the screening of the Hubbard interaction and how
+different low energy behaviors can emerge from the a unified treatment of the transition metal
+series.
+
+
+I. INTRODUCTION
+
+The quantum mechanical description of electrons in solids – the band theory¹–³ –offered a
+straightforward account for distinctions between insulators and metals. Fermi liquid theory⁴ has
+elucidated why interactions be-tween 10²³ cm−³ electrons in simple metals can be read-ily
+neglected, thus validating inferences of free electron models. It came as a considerable surprise
+in late 30s when crystals with incomplete d bands were found in-sulating⁵. The term ”Mott
+insulator” was later coined to identify a class of solids violating the above funda-mental
+expectations of band theory⁶. Peierls and Mott stated⁷ that ”a rather drastic modification of the
+present electron theory of metals would be necessary in order to take these facts into account” and
+proposed that such a modification must include Coulomb interactions between the electrons. Study of
+correlations in solids, which are responsible for such a dramatic increase of resistivity in Mott
+insulators, remains in the forefront of contempo-rary condensed matter physics⁸,⁹, and it was later
+found in many other materials, such as d and f -electron inter-metallic compounds, as well as a
+number of π-electron organic conductors.
+The theory became predictive with the invention of the Density Functional Theory (DFT)¹⁰. Within
+the Kohn-Sham framework, the computation of the density of the solid is reduced to a tractable
+problem of non-interacting electrons moving in an effective potential. The imple-mentation of DFT
+within the local density approximation (LDA) and generalized gradient approximations (GGA) in
+1970s, and the increase in computational power in the past decades made it possible to predict
+materials prop-erties ab initio. In weakly correlated materials the com-puted Kohn-Sham spectra is
+a reasonable description of the electronic spectra. However, materials with strong correlations,
+and in particular Mott insulators, are not properly treated within these approximations.
+It’s long been recognized that electron correlations are mostly local in space – two widely
+separated electrons are unlikely to be significantly correlated. Within LDA, the Kohn-Sham
+potential in each point of space depends solely on the density at the same point, hence LDA is
+local for each point in 3D-space. However, in solids with
+partially filled d-bands, the correlations are very strong between two electrons on the same
+transition metal ion, which is beyond the scope of LDA.
+In  1990s  the  Dynamical  Mean  Field  theory (DMFT)¹¹–¹⁴ was developed.  This theory introduces
+non-locality in time, which is essential for description of paramagnetic Mott insulators. This
+theory is also a local theory, but it is local to a given site rather than a point in space. DMFT
+successfully predicted the Mott-transition in the Hubbard model¹⁵–¹⁷, as well as many other known
+features of correlated systems, such as the dynamical spectral weight transfer¹⁸, the existence of
+a Mott end-point, and the value of the critical exponents at this Mott end-point¹⁹. The
+cluster-DMFT studies²⁰ show that this properties are genuine to the frustrated Hubbard model.
+Within DMFT, the functional that contains all local correlations is known exactly, and can be
+calculated by solving an appropriate quantum impurity model, but the computational cost when
+including many interacting de-grees of freedom on a given site increases exponentially, while the
+hybridization with non-interacting states does not increase the computational cost significantly.
+At present, modern computers allow us to treat interac-tions exactly within a complete d shell of a
+transition metal ion or a complete f shell in an inter-metallic com-pound, while the rest of the
+states must be treated by a mean-field method. The most popular choice of such a mean-field method
+is DFT, hence the combination of the two methods, first proposed in 1997²¹, was named
+LDA+DMFT²²,²³. The method became very successful as it could predict properties of an extraordinary
+number of correlated materials previously resisting detailed mate-rial specific predictions (for a
+review see 22,23). The elec-tronic structure and unusual physical properties of many
+actinides²⁴–²⁶, lanthanides²⁷–³⁰, 3d³¹–³⁵, 4d³⁶,³⁷ and 5d³⁸ transition metal compounds were
+explained using this approach.
+In the early 2000s, the LDA+DMFT method was usu-ally referring to the dynamical mean field
+calculation of a lattice model, namely the Hubbard model, where the hopping parameters were derived
+by a so-called down-folding procedure: The bands near the Fermi level were represented in terms of
+a small number of Wannier states³⁹, and the resulting Hubbard model was solved
+
+2
+
+
+by the DMFT method. The feedback of correlations to the electronic charge distribution, and hence
+the Kohn-Sham potential, was often neglected. Also, usually the minimum number of Wannier states
+were kept in the model, which made such model calculations conceptually simple, but less
+predictive, as the Coulomb repulsion for a low energy model is strongly screened by the degrees of
+freedom eliminated from the model, hence a material specific and model specific calculation of the
+interaction strength U was needed to make this method predictive. The constrained-RPA⁴⁰,⁴¹ was
+invented for that purpose, and was quite successful when the correlations are ap-plied in the
+narrow energy window.
+An alternative route, which avoids construction of the low-energy model, was proposed by Savrasov &
+Kotliar⁴², in which the correction (self-energy) due to the corre-lations is added to the Kohn-Sham
+potential in a very limited region of the real space, such as the muffin-thin (MT) sphere of the
+correlated ion. In this approach, all degrees of freedom local to an ion are treated exactly, while
+the non-local correlations are treated in a mean-field way by DFT. No valence state is eliminated
+from the model! Kohn-Sham potential is computed on the self-consistent electronic charge. We call
+this method-ology the all-electron method. The early implementa-tion of this approach, together
+with electronic charge self-consistency, successfully predicted the phonon spec-tra of elemental
+plutonium²⁵, but the impurity solvers at that time were not adequate to address many other
+chal-lenging problems in correlated solids. The DFT+DMFT method has rapidly matured over the last
+few years, as several charge self-consistent implementations in various electronic structure codes
+appeared⁴³–⁴⁸, some with inte-grated state of the art impurity solvers⁴³,⁴⁸.
+The most significant difference between the earlier and
+more modern implementations of the method is the de-gree of localization of the electronic
+orbitals, which in-teract with strong Coulomb interaction.  In the early days, a set of Wannier
+orbitals spanning a narrow win-dow around the Fermi level was typically treated by the DMFT. Since
+the non-local interactions and the non-local correlations are neglected in the DMFT approach, one
+expects that a more localized choice of orbitals leads to better results within single-site DMFT
+approxima-tion. Hence newer implementations applied correlations to more localized states, and kept
+a larger number of itinerant states in the model. A real space projector to the spherical harmonics
+within a MT-sphere around the correlated ion PR(rr′, lml′m′) = Ylm(ˆr)δR(r − r′)Y ∗ (ˆr′) (where
+δR(r − r′) is nonzero when r < R and r′ < R ) is a good example of extremely localized orbitals,
+which hybridizes with a large number of Kohn-Sham states,
+spanning a large energy window in band representation. Such a set of real-space orbitals is clearly
+more localized than the popular choice of maximally localized Wannier orbitals⁴⁹, which are
+constrained to faithfully represent some set of low energy bands.
+Numerous successful predictions of this all-electron DFT+DMFT were published in the past decade
+nev-ertheless, its predictive power for transition metal ox-ides was questioned recently in Refs.
+50,51. Namely, us-ing Wannier functions for oxygen-p states and transition metal d states, the
+authors of Refs. 50,51 concluded that fine tuning of several parameters, including the
+double-counting and the interaction U is needed to describe the Mott insulating state in early and
+late transiton metal oxides. Moreover, the p − d model requires occupancy of the d orbitals to be
+close to unity for the Mott state, while DFT solution projected to the orbitals of their choice,
+predicts far larger occupancies, hence this dis-crepancy between DFT occupancies and the DMFT
+re-quirements lead them to suggest that the self-consistent DFT+DMFT can not describe the Mott
+insulating state without fine tuning the interaction U to be in the narrow range of 6 ± 1 eV and
+ad-hoc fine tuning of the double-counting to reproduce the experimentally observed p − d
+splittings. This calls for a critical reexamination of the application of the LDA+DMFT to the 3d
+series.
+Our methodology⁴³ was tested in numerous classes of  materials,  such  as
+actinides⁵²–⁵⁶,⁵⁹,⁶¹,⁶³,⁶⁵,  lan-thanides²⁶,⁴³,⁶⁸,⁷⁰, transition metal oxides⁵⁷,⁶⁰,⁶⁴, iron
+su-perconductors⁵⁸,⁶²,⁶⁶,⁶⁹, and other transition metal com-pounds³⁸,⁶⁷. However, results for early
+and late transi-tion metal oxides with our methodology are not avail-able in literature. It is
+therefore important to test our methodology in this class of materials, which have mostly been
+studied using downfolded LDA+DMFT implemen-tations.
+
+
+II. METHOD
+
+In this work we perform DFT+DMFT calculations for a series of early transition metal oxides: SrVO₃,
+LaVO₃, LaTiO₃, and a cuprate parent compound La₂CuO₄; all the test cases which required fine tuning
+in Refs. 50,51. We show that no fine tuning or adjustable parameter is required in DFT+DMFT
+implementation of Ref. 43, and for a fixed value of on-site Coulomb repulsion U = 10 eV Mott gaps
+in all these compounds are in reasonable agreement with experiment.
+The all-electron DFT+DMFT implementation⁴³ ex-tremizes the following functional²²
+
+3
+
+
+Γ[ρ, VKS, Glₒc, Σ, Vdc, nd] = −Tr ln  (iω + µ + ∇² − VKS)δ(r − r′) − Σ P (rr′, τ LL′)(Σ − Vdc)L'L!
+  (1)
+− ∫ [VKS − Vₑₓt]ρd³r − Tr (ΣGlₒc) + Tr(Vdcnd) + ΦH [ρ] + Φₓc[ρ] + ΦDMF T [Glₒc] − Φdc[nd]
+
+
+
+
+of three pairs of conjugate variables.  At the saddle point, ρ, VKS are the electronic charge
+density, the Kohn-Sham potential, Glₒc and Σ are the local Green’s func-tion and DMFT self-energy,
+Vdc is the double-counting potential, and nd is the occupancy of the correlated or-bital. ΦH [ρ]
+and Φₓc[ρ] are the Hartree and the exchange-correlation energy functionals, ΦDMF T [Glₒc] is the
+sum of all skeleton diagrams constructed from Glₒc and lo-cal Coulomb repulsion Uˆ.  This summation
+is carried out by the impurity solver. The local Coulomb repulsion Uˆ is parametrized with the
+Slater parametrization with JHunds = 0.7 eV, and, if not otherwise stated, U = 10 eV. The impurity
+model is solved by the continuous-time quantum Monte Carlo method⁷¹,⁷².
+Vₑₓt is the external potential, containing the material specific information. P (rr′, τ LL′) is the
+projector to the local correlated orbital at atom τ with angular momen-tum indices L,L′.  We use
+projector P ²(rr′, τ LL′) in-troduced in Ref. 43 with an energy window of ≈20 eV around the Fermi
+level. For the maximal locality of cor-related states, this projector is implemented in real space
+and is nonzero only within the MT-sphere of the corre-lated ion. In section IV we test several
+different pro-jectors, ranging from extremely localized to moderately delocalized, to understand
+the controversy in the liter-ature regarding the DFT+DMFT results for the transi-tion metal oxides.
+The vanadium and titanium t₂g states are treated dynamically, while the empty eg states are treated
+by a static mean field. The copper ion with its almost full shell requires dynamic treatment of all
+five 3d orbitals.
+For the double-counting correction, we used two methodologies: a) the fully-localized-limit (FLL)
+formula introduced in Ref. 73 is used in section IV to ensure that the results are robust and that
+the simplification used elsewhere does not change the results appreciably from this standard
+prescription. b) the method explained in Ref. 43 is used in most of this paper, where Φdc[nd] =
+ndVdc and Vdc is also parameterized by the standard fully-localized-limit formula⁷³ Vdc = U (n⁰
+−1/2)−J/2(n⁰ −1),
+are more robust with respect to small changes in pro-jector, linearization energies, etc. Both
+double-countings are equally justifiable on the phenomenological level. The determination of the
+exact double-counting is an open problem, but see recent progress in Ref. 96.
+The double-counting b) ensures that at infinite U one recovers atomic physics at the nominal
+valence. For dis-cussion’s sake, let us set JHunds to zero. In the absence of any double-counting
+correction, the lower Hubbard band in the atomic limit is positioned at εf + U (n⁰ − 1), and the
+upper Hubbard band at εf + Un⁰, where εf is the center of the correlated state at U = 0 (in DFT
+calcu-lation). The center between the Hubbard bands is at εf + U (n⁰ − 1/2). To ensure that in the
+large U limit the center of the correlated states does not move from its DFT position, and that we
+recover the correct nomi-nal occupancy, we must subtract from the dynamic self-energy the
+correction U (n⁰ − 1/2), which brings the cen-ter of the correlated state to its center in DFT.
+Hence a good choice for double counting correction (in the ab-sence of Hunds coupling) is given by
+U (n⁰ − 1/2) with n⁰ the nominal valence. In typical model calculations for the downfolded Hubbard
+model, such nominal valence is automatically enforced.
+The DFT part of our code is based on the WIEN2k package⁷⁴.  The exchange-correlation energy in DFT
+(Φₓc[ρ]) is evaluated using the PBE functional.⁷⁵ The DFT+DMFT calculations are fully
+self-consistent in the electronic charge density, chemical potential, and impu-rity levels. The
+temperature is set to 200K. The exper-imental crystal structures from Refs. 76, 77, 78 79 are used
+for SrVO₃, LaVO₃, LaTiO₃, La₂CuO₄, respectively. To obtain spectra on the real axis, maximum
+entropy method is used for analytical continuation of the self-energy.⁸⁰ Finally, the VESTA
+software is used at various points to visualize and study the crystal structures.⁸¹
+
+III. RESULTS
+d         d
+
+and n⁰ is taken to be the nominal occupancy of the corre-lated ion. We name this method fixed-DC.
+In particular, for SrVO₃ with V⁴⁺ ion we take n⁰ = 1, for LaVO₃ with
+V³⁺ ion n⁰ = 2, for LaTiO₃ with Ti³⁺ ion n⁰ = 1 and for
+Fig. 1 shows the DFT+DMFT total and projected 3d densities of states for the four test compounds.
+The pho-toemission measurements are also shown for comparison.
+Fig. 2 zooms the low energy part of the DOS to display
+d                     d
+
+La₂CuO₄ with Cu²⁺ ion n⁰ = 9. This double-counting scheme has two virtues: i) it is numerically
+much more stable in the charge-self-consistent DFT+DMFT, as the noise from Monte-Carlo does not
+feed-back into impu-rity levels, and into large Hartree shifts. ii) the results
+the gap sizes. SrVO₃ is a mixed-valent (nd = 1.19) metal-lic compound with oxygen states centered
+around -5 eV, a small shoulder corresponding to an incoherent excitation (Hubbard band) around -1.5
+eV of mostly d character, and the quite broad quasiparticle peak at the Fermi level
+
+4
+
+
+10   8   6   4   2   0   2   4   6   8   10
+₃ SrVO3                     Exp
+total
+2                           3d
+
+1
+
+0
+4 LaVO3
+3
+2
+1
+0
+4 LaTiO
+correlated orbital. Notice that the value of U depends on the choice of energy window. Calculations
+with an en-ergy window, which include only the t₂g states, requires a value of U ≈ 5 eV, as used in
+Ref. 31. For large energy window (20 eV used here) somewhat larger value of U is needed, however,
+results are reasonable for an extended range of U values between 6-10 eV.
+LaVO₃ is a Mott-insulator with a gap size of approxi-mately 1 eV (see Fig. 2), in agreement with
+experiment⁸³. The lower Hubbard band at -1.5 eV, has a considerably more admixure of oxygen-p than
+SrVO₃, as noticed in
+
+3                                    Ref. 83. LaTiO₃
+has a very small Mott gap around 0.2
+
+
+2
+1
+0
+₆ La2 CuO4
+4
+
+2
+
+0
+10   8   6   4   2   0   2   4   6   8   10
+ω[eV]
+
+
+
+FIG. 1:  The total DOS and its projection to the 3d ion for selected transition metal oxides.
+Experimental photoemission for SrVO3, LaVO3, LaTiO3, and La2CuO4 is plotted by black dots, and was
+digitized from Refs. 82, 83, 84, 85, respectively.
+
+
+0. 5
+LaTiO3 LaVO3
+eV, similar to the experimental gap⁸⁴.  The Hubbard band is located at ≈ −0.8 eV, and the oxygen-p
+band edge is at −4 eV. Experimentally, the Hubbard band and oxygen band are located at somewhat
+lower energy than theoretically predicted.  Our DFT+DMFT calculation does not shift the oxygen
+states appreciably from its DFT position. Finally, La₂CuO₄ is a wide-gap Mott insulator of
+charge-transfer nature, and has a gap size of the order of 1.5 eV and the position of the oxygen-p
+band around
+-3.5 eV. The oxygen position is well predicted by the the-ory, and also the gap value is in good
+agreement with experiment⁸. Overall agreement with the experiment is very satisfactory, considering
+that no tuning parameter is used in these calculations.
+To show that the fine tuning of local Coulomb repulsion U , which gets screened by the valence
+states included in our DMFT calculations, is not needed to get reasonable agreement with
+experiment, we show below calculations for several values of U .  We also display how valence
+changes with the increasing correlation strength U , and
+
+0. 4
+
+
+0. 3
+
+
+0. 2
+
+
+0. 1
+
+
+0. 0
+La2 CuO4
+
+
+
+
+
+
+
+
+0. 2eV
+1eV 1. 5eV
+
+3    2    1    0    1    2    3
+ω[eV]
+as expected, we show that an infinite U would lead to integer valence. Notice that the DFT+DMFT
+valence in the actinides⁵⁴ agrees with the experiment better than the LDA valence.
+Fig. 3 shows the dependence of DOS in SrVO₃ on the local Coulomb repulsion U . In the plot we also
+show the occupancy of the V-t₂g states as well as the photoemis-sion spectra of thin film⁸². The U
+= 0 results correspond to the GGA calculation. The oxygen-p bands move to a slightly (< 0.5 eV)
+lower energy at U = 6 eV while they progressively move back to its DFT location at larger U . The
+quasiparticle peak slightly narrows with increasing U , but the Mott gap does not open even for
+very large U beyond 12 eV (not shown in the figure). Notice that
+
+FIG. 2:  Zoom-in of the low-energy DOS projected to the 3d orbitals for insulating compounds. For
+clarity, the curves were offset for 0.07/eV. The arrows mark the experimental size of the gap.
+
+
+with its bandwidth reduced from DFT for roughly a fac-tor of 2. These are all in excellent
+agreement with the experiment⁸²,⁸⁶,⁹⁴. Previous LDA+DMFT calculations of Refs. 31,94, where only
+the t₂g states were treated in the model, gave very similar electronic spectra, hence results are
+very robust with respect to the choice of the
+this is inconsistent with the universal phase diagram in Fig. 2 of Ref. 51 since n = 1.2 falls deep
+inside the in-sulating regime for d¹ systems in that phase diagram. The lower Hubbard band, located
+between the quasi-particle peak and oxygen bands, appears at U = 8 eV and becomes even more
+pronounced at U = 10 eV. The system is very mixed-valent (non-integer occupancy) in GGA, but it
+becomes less mixed-valent with increasing
+U . As expected, increasing correlation strength typically reduces mixed-valency. As is clear from
+Fig. 3, results are not very sensitive to the strength of the Coulomb repul-sion, and any value of
+U between 6-12 eV gives reasonable
+
+5
+
+
+4 SrVO3
+
+
+2
+
+
+
+0
+2
+
+
+
+0
+2
+
+
+
+0
+2
+
+
+
+
+
+nd =1.67
+
+
+nd =1.29
+
+
+
+nd =1.22
+
+
+
+nd =1.19
+
+U=0 U=6eV U=8eV U=10eV
+Exp
+4  LaVO3
+
+2
+
+
+0
+
+
+2
+
+
+0
+
+
+2
+
+
+0
+
+
+2
+
+nd =2.14
+
+
+
+
+
+
+nd =2.14
+
+
+
+
+nd =2.1
+
+
+
+
+nd =2.08
+U=0 U=4eV U=6eV U=10eV
+Exp
+
+
+0
+8   6   4   2  0   2   4   6   8
+ω[eV]
+0
+8   6   4   2  0   2   4   6   8
+ω[eV]
+
+
+
+FIG. 3: The dependence of the electronic structure of SrVO3 on the value of the local Coulomb
+repulsion U in this all-electron calculation. The text displays the valence of V ⁴⁺ ion. The
+thick-line presents the total DOS and the thin-line its projection to the 3d-ion subset. For
+clarity, the different electronic structures are offset for 3eV.
+
+
+agreement with experiment. The low energy t₂g spectra is in good agreement with earlier DMFT
+calculation of Ref. 31, which included only the t₂g states.
+Fig. 4 displays DOS for LaVO₃ for a range of U values. In GGA, the t₂g states cross the Fermi
+level, while the oxygen-p bands are below -3.5 eV and the La-f bands are just above the EF . For
+the correlation strength of 4 eV, LaVO₃ is still metallic, although the quasiparti-cle peak becomes
+extremely narrow, while the valence does not change appreciably from its GGA value. Larger U = 6 eV
+opens the Mott gap, (the critical U is ap-proximately 5 eV) and an incoherent shoulder appears
+around −1 eV, and mixed-valency is reduced. Finally at U = 10 eV the Mott gap is of the order of 1
+eV and the position of the incoherent shoulder is at −1.5 eV in good agreement with experiment⁸³.
+The partial occupancies of the t₂g orbitals at U = 10 eV are n¹  = 0.56, n²  = 0.76,
+FIG. 4: The electronic structure of LaVO3 for different values of the local Coulomb repulsion U .
+We also display the valence of V ³⁺ ion.
+
+
+In LaTiO₃, displayed in Fig. 5, the oxygen-p bands start around −4 eV and a very sharp La-f state
+appears just above the Fermi level at 1 eV. The position of this level is very sensitive to the
+rotation angle of the oxy-gen octahedra, and a larger rotation angle, which is ob-tained by the
+GGA-optimization of the structure, shifts the level up by 0.5 eV compared to experimentally
+de-termined crystal structure⁷⁸ used here. This can be ex-plained by the fact that octahedral
+rotations change the coordination of the A-site cation (La) drastically.⁸⁷ It is due to screening
+by this sharp La-f state that the Mott gap does not open for U = 8 eV and is very small (≈ 0.2 eV)
+at U = 10 eV.
+The orbital polarization is also very sensitive to the octahedral rotation, as pointed out in Ref.
+31. For the structure of Ref. 78, the orbital polarization is modest in our calculations (n¹  ≈
+0.67, n²  ≈ 0.20, n³  ≈ 0.20) but for only slightly larger rotation, as measured in Ref. 88, the
+polarization is almost complete (n¹  ≈ 0.93,
+
+and n³
+= 0.76, hence the orbital fluctuations are strong
+2
+t2g
+≈ 0.06, n³
+≈ 0.08).
+
+due to the important role of Hund’s coupling, which pre-vents orbital polarization. This is all in
+good agreement with earlier DMFT calculation of Ref. 33, which consid-ered only the low energy t₂g
+degrees of freedom. Notice that the oxygen-p bands do not shift appreciably with in-creasing U and
+their position is well determined by DFT, in strong contrast to the calculations in Ref. 50, where
+the oxygen-p bands move substantially for a small change in U .
+Due to the substantial hybridization of the t₂g states with the La-f states very near the Fermi
+energy (see Fig. 8), the screening is much stronger than it would be in the absence of this La-f
+level. Models which remove the La-f states from consideration would hence need sub-stantially
+reduced interaction U to reproduce the experi-mentally observed Mott gap⁸⁴. Indeed, our results
+clearly disagree with the phase diagram of Ref. 51, which leads us to believe that the U −nd phase
+diagram is more mate-
+
+6
+
+
+LaTiO3
+4
+
+
+2
+
+
+nd =1.12
+U=0 U=8eV U=10eV U=12eV
+Exp
+
+
+0
+
+2        nd =1.07
+
+
+0
+
+2        nd =1.09
+
+0
+
+2        nd =1.08
+
+
+0
+8   6   4   2  0   2   4   6   8
+ω[eV]
+
+FIG. 6:  The electronic structure of La2CuO4 for different values of the local Coulomb repulsion U
+. We also display the valence of Cu²⁺ ion.
+
+FIG. 5:  The electronic structure of LaTiO3 for different values of the local Coulomb repulsion U .
+We also display the valence of Ti³⁺ ion.
+
+
+rial specific, and also depends on presence of other states that can screen the interaction. To
+open a Mott gap, a near integer occupancy is needed, but the critical value of U and nd can be
+quite material specific. Notice that the double counting is also proportional to the Coulomb
+interaction U , hence in the large U limit, the upper and lower Hubbard bands are pushed to
+positive and negative infinity respectively; always resulting in an integer occu-pancy. We also
+display photoemission measurements for La₁−ₓSrₓTiO₃₊y with x + y = 0.04 from Ref. 84. The oxygen-p
+bands’ position is somewhat different than in experiment. However, this disagreement between DFT
+
+
+
+
+
+0. 3
+
+
+0. 2
+
+
+0. 1
+
+
+0. 0
+0. 2
+
+
+0. 1
+
+
+
+
+
+x² -y² z2 xz/yz xy
+total-3d oxygen-p
+
+and experiment might partially be attributed to slightly different chemical composition of the
+crystal. The local correlations on Ti do not improve the position of O-p state.
+Fig. 6 shows the DOS for La₂CuO₄, a late transition metal oxide, and the parent compound of cuprate
+super-conductors. Within GGA (U = 0), the eg states cross the Fermi level and the t₂g states start
+at -1 eV and strongly overlap with oxygen, which starts at -2 eV. The sharp peak at 2.5 eV is due
+to the La-f states. The screening by La-f states in cuprates is much weaker than in LaTiO₃, as the
+hybridization function, displayed in Fig. 8, has only a very weak peak at higher energy (2.4 eV)
+which couples primarily to t₂g states, but not to low energy x² − y² orbital. Once again, the
+oxygen-p states and the La-f states do not move appreciately with increasing cor-relation strength.
+The Mott gap opens around U = 8 eV. As in the model Hamiltonian studies within single site DMFT,
+once the insulating phase is reached¹⁵, the gap
+0. 0
+8   6   4   2  0   2   4   6   8
+ω[eV]
+
+
+FIG. 7: Orbitally resolved DOS for La2CuO4 at U = 10 eV. The total-3d and total oxygen-p DOS is
+offset for 0.25/eV.
+
+
+opens discontinuously, and is of the order of 1 eV. At U = 10 eV, it is approximately 1.5 eV, in
+agreement with the experiment⁸. The oxygen bands’ position is also in a good agreement with the
+experiment⁸⁵, centered at -3.5 eV. Fig. 7 resolves DOS in orbital space.  Clearly, the x² − y²
+orbital is half-filled, and in the interval between
+-1 eV and -2 eV the amount of total-3d states and oxy-gen states is almost exactly equal. This is
+the region of the Zhang-Rice singlet. The z² orbital is sharply peaked slightly below -2 eV, and
+the t₂g states start at -3 eV.
+A main finding of this paper is that the all-electron
+
+7
+
+
+
+2. 5
+
+
+2. 0
+
+
+O-p
+
+
+SrVO3
+LaTiO3 LaVO3 La2 CuO4
+the La-f states screen the Coulomb repulsion rather well, since they are located very near the
+Fermi level; hence elimination of La-f states from the model would need to be compensated by a very
+material specific U . Finally, some extra screening is also coming from eg states above
+
+1. 5
+
+
+1. 0
+
+
+0. 5
+
+
+
+
+
+
+
+
+t2g
+
+
+
+
+
+La-f eg
+the Fermi level, and since their position is very material dependent, their elimination requires
+further tuning of
+U . However, when all these states are kept in the model, the large part of the screening is
+already contained in the model, and hence the all-electron U is rather large and more universal.
+
+
+0. 0
+
+8   6   4   2   0   2   4   6   8
+ω[eV]
+IV. DISCUSSION AND COMPARISON TO OTHER STUDIES
+
+
+
+
+FIG. 8:  The imaginary part of the impurity hybridization function for various materials at U = 10
+eV. We also display what is the dominant source of various peaks in the hybridiza-tion function.
+
+
+treatment with a large energy window requires a much larger value of U than the corresponding
+LDA+DMFT study with the small energy window, which keeps the t₂g (or eg) states only. The bare
+Coulomb repulsion U of a model where all valence states are kept in the model is screened only by
+the degrees of freedom eliminated from the model, which are mostly core and semicore states,
+resulting in a much larger on-site Coulomb repulsion U in this treatment, but also more universal U
+across sim-ilar compounds. The screening from model-U down to the fully screened interaction W is
+achieved here by the impurity solver (see related discussion in the context of the model in
+Ref.95).
+On the one particle level, it is best demonstrated by the impurity hybridization function, which
+contains signa-tures of all the valence states in the solid that screen the local degrees of
+freedom. We show in Fig. 8 the average hybridization function (average over orbitals) for an
+elec-tron on transition metal site in different compounds. We can understand qualitatively the
+influence of the window on the characteristic scale of the impurity model from the following
+argument. The Kondo scale should not depend on the energy window chosen in the calculation. The
+Kondo scale is a function of U and impurity hybridization Tk ≈ exp(−const ∗ U/⟨Im∆⟩₀), where ⟨Im∆⟩₀
+is some weighted average of the displayed hybridization function, with larger weight given to the
+low energy. When only the t₂g states in early transition metal compounds are kept in the model, U
+has to be small, because the hy-bridization function is nonzero only within the narrow region
+around EF , and its average value is below 0.2 eV. When oxygen-p states are added, Im∆ increases
+tremen-dously in the interval −7 eV to −3 eV, and so does the weighted average ⟨Im∆⟩₀, hence U must
+increase to keep low energy scale intact. It is also clear from Fig. 8 that
+To asses the robustness of our results, we also tested the widely used fully localized limit (FLL)
+double count-ing of Ref. 73, namely Vdc = U (nd − 1/2) − J/2(nd − 1), where nd in the formula is
+computed self-consistently. We note that this makes charge self-consistency convergence a bit more
+challenging, but the results for the transi-tion metal insulators studies here, are almost
+identical to those presented above for fixed double counting.
+
+
+
+4 LaVO3                   Exp
+3                         total
+3d
+2
+1
+0
+₄ LaTiO3
+3
+2
+1
+0
+₆ La2 CuO4
+4
+
+2
+
+0
+10   8   6   4   2  0   2   4   6   8
+ω[eV]
+
+
+FIG. 9:  The total DOS and its projection to the 3d ion within DFT+DMFT for insulating transition
+metal oxides, computed using standard fully localized limit double counting and fixed U = 10 eV and
+JHunds = 0.7 eV. Experimental photoemission is the same as in Fig. 1.
+
+In Fig. 9 we plot the spectral functions of all four in-sulators but here computed using standard
+FLL double-counting.  Comparison with Fig. 1 shows that the dif-ferences between the two
+double-countings are extremely small and unimportant in these cases. This is not sur-prising given
+the converged DFT+DMFT occupancy of the correlated d orbitals. In Table I we list the 3d
+oc-cupancies for the calculations presented in Fig. 1 (de-
+
+8
+
+
+nd(DFT + DMFT )
+fixed-DC FLL-DC
+FLL-DC
+The above results appear to contradict conclusions
+
+La2CuO4 (RMT = 1.88)
+CSC
+9.031
+CSC
+9.042
+non-CSC
+9.049
+of Ref. 50,51, in which the authors assert that 3d oc-cupancy of LDA+DMFT calculations are
+consistently
+
+LaVO3 (RMT = 1.97)   2.075  2.098  2.093
+LaTiO3 (RMT = 2.01)  1.093  1.131  1.133
+TABLE I: The occupancy of the correlated 3d orbitals within DFT+DMFT calculation for insulating
+transition metal ox-ides.  The first row is for double-counting introduced in section II (fixed-DC)
+and full charge self-consistent calcula-tion (CSC). The second row stands for fully localized limit
+double-counting (FLL-DC) and charge self-consistency (CSS). The last column shows nd for FLL-DC
+without charge self-consistency (non-CSS).
+
+
+
+nominated by fixed-DC ) and for the standard FLL dou-ble counting (denominated FLL-DC ). Note that
+for the early transition metal oxides we count t2g charge here, since correlations are applied to
+t2g set of orbitals. For La₂CuO₄, we list total 3d occupancy, since the corre-lations are applied
+to all 3d electrons.  We also tested if charge self-consistency is important for insulating na-ture
+of these compounds. The charge-self consistent and non-charge self-consistent calculation is
+denoted by CSS and non-CSS in Table I. The differences in occupan-cies are insignificant.  The
+double-counting used above (fixed-DC) makes the insulating state slightly more ro-bust, since nd is
+closest to nominal valence (of the order of 0.02 electron less than FLL-DC), the alternative FLL
+double-counting slightly increases mixed valency, while the charge-self consistency has very small
+effect (of the order of 0.005) in these transition metal oxides.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FIG. 10:  The 3d density of states within DFT+DMFT for La2CuO4 using the three different
+methodologies explained in Table I.
+
+In Fig. 10 we show the 3d-DOS for La₂CuO₄ in the three types of calculations listed in table I.
+There are some minor differences in the spectra distribution, and as expected from slightly larger
+nd in FLL-DC case, the gap gets slightly smaller, but overall these differences are very small.
+too large to allow Mott insulating state. The authors then proposed to adjust the double-counting
+energy to allow the opening of the Mott gap within their imple-mentation of LDA+DMFT. They traced
+the problem to the d-occupancy being way too large even on the DFT level (U = 0).  To define the d
+occupancy, they con-structed the maximally localized Wannier orbitals with transition metal 3d and
+oxygen 2-p orbitals included in the model, and excluding all the rest.  In such a model, they
+noticed that the 3d occupancy in La₂CuO₄ is around nd ≈ 9.45, in LaVO₃ and in LaTiO₃ is around nt₂g
+≈ 2.55, and nt₂g ≈ 1.45, respectively. These num-bers are clearly larger than numbers obtained by
+our method at U = 0 in Figs. 4, 5, and 6, hence their work revealed difficulties with the
+formulation and implemen-tation of DFT+DMFT when Wannier basis is not suffi-ciently localized.
+To understand the difference, we implemented a flex-ible real space projectors, which generalize
+atomic like projectors introduced in Ref. 43, but can be extended into interstitial region or made
+very localized inside MT-sphere. The form of such a projector in real space is
+P (l, m, lm , rr ) = Ylm(ˆr)φl(r)φl(r )Ylm' (ˆr )   (2)
+In the above calculations, the projector was constructed from φl(r), which is a solution of the
+Dirac equation inside the muffin-thin sphere, and is zero outside the sphere. In the actual
+implementation of Ref. 43, we also added the small contribution coming from the energy derivative
+of the radial wave function, which turns out not to be important in these cases. Here we allow
+φl(r) to be any radial wave function constructed from solution of the Dirac equation ul(r, Eν) with
+Eν positioned at the center of the band, its first (dul(r, Eν)/dEν ≡ u˙l) and second derivative
+(d²ul(r, Eν)/d²Eν = u¨l). To gain an insight into the precise definition of the nd occupancy, we
+projected the Kohn-Sham solution to the variety of projectors, spanning the range of very localized
+to moder-ately delocalized, using a linear combination of above de-fined functions: φ(r) = aul(r) +
+bu˙l(r) + cu¨l(r). First we choose a very localized function φ(r) entirely contained in the
+MT-sphere and vanishing at the sphere with van-ishing derivative. We name the corresponding
+projector Proj(1) in Fig. 11. (Here the MT-spheres are chosen in such a way that the spheres of
+neighboring atoms touch). Notice that such combination of ul, u˙l and u¨l roughly corresponds to
+choosing the linearization energy at the bottom of the corresponding bands.
+The second projector Proj(2) takes ul only (i.e., sets
+b and c to zero, hence linearization energy is taken at the middle of the corresponding band), but
+it truncates the radial function at the MT-sphere. This projector is very similar to what is used
+in chapter III of this paper. (The precise definition, which includes the correction due to u˙ can
+be found in Ref.43.) Finally, we extended the projec-
+
+9
+
+
+tor to the interstitial region with projector Proj(3). In-
+nd(DFT ) Proj(1) Proj(2) Proj(3)
+
+side MT-sphere, we choose ul as in Proj(2), and outside we choose linear combination of ul, u˙l and
+u¨l such that the function vanishes at the nearest neighbor oxygen,
+La2CuO4
+LaVO3
+LaTiO3
+9.040
+2.096
+1.097
+9.131
+2.193
+1.195
+9.450
+2.872
+1.960
+
+and is continuous differentiable across the MT-sphere. When projecting the Kohn-Sham solution to
+the func-tion φ(r) beyond the MT-sphere of the 3d-ion (r > Rmt), we project to the plane-wave
+envelop functions only, to excluded the density concentrated inside the oxygen MT-spheres, which
+should not be counted as transition metal charge. We always normalize the projector, to exclude the
+trivial effect of volume increase.
+SrVO3   1.692  1.815  2.567
+
+TABLE II: The occupancy of the 3d orbitals using DFT (at U = 0) for the three projectors shown in
+Fig. 11. The MT-spheres are listed in Table I.
+
+
+
+in double-counting (fixed-DC or FLL-DC) or charge-self-
+
+1. 2
+1. 0
+0. 8
+0. 6
+0. 4
+0. 2
+0. 0
+
+Rmt
+Proj(1) Proj(2) Proj(3)
+consistency. On the other hand, Proj(3), which extends beyond the MT-boundary, contains some of the
+charge that should have been assigned to other itinerant states. As a result, it gives occupancy nd
+= 9.45, almost iden-tical to the charge on the Wannier orbitals of Ref. 50. Since construction of
+Wannier orbitals inevitable results
+
+0. 0    0. 5    1. 0    1. 5    2. 0    2. 5    3. 0    3. 5
+R[aB ]
+6
+Cu-3d(1), nd =9. 05
+5
+Cu-3d(2), nd =9. 14
+4                        Cu-3d(3), nd =9. 45
+3
+
+2
+
+1
+
+0
+8    6    4    2    0    2    4    6    8
+ω[eV]
+
+
+FIG. 11: The radial dependence of the function φ(r), which defines the projector to the correlated
+3d set of orbitals. Three different projectors (Proj(1),Proj(2) and Proj(3)) are defined in the
+upper panel. Lower panel shows the density of states within LDA for La2CuO4 using the three
+different projectors defined in the upper panel.
+
+In Fig. 11 we show the radial functions φ(r) for these three projectors in the case of La₂CuO₄,
+together with the DFT projected density of states (more precisely
+−Im(Gd(ω))). As is clear from the figure, the more de-localized projector has substantially more
+weight in the region between -7 to -4 eV, in the energy where oxygen is concentrated, while the
+localized projectors have more weight at the upper edge of the DOS and less concen-trated around
+oxygen. The net result is a different oc-cupancy nd. In table II we list the DFT occupancies
+ob-tained by projecting to these three projectors and for all compounds studied here. We again
+project to t2g states for early transition metal oxides, and to eg and t2g states in La₂CuO₄,
+because these are the states which are corre-lated in the DMFT calculations. For La₂CuO₄, we notice
+that the two localized projectors (Proj(1) and Proj(2)) both have occupancy close to nominal d⁹,
+and that the projector Proj(2) has slightly more charge (1% increase) than the most localized
+Proj(1). As shown by direct DFT+DMFT calculation above, Proj(2) gives the Mott insulating state in
+La₂CuO₄ irrespective of small details
+in some fraction of electrons being delocalized beyond the
+MT-boundary, it is not surprising that the 3d occupancy is similar to our more delocalized
+projector.  Namely, maximally localized Wannier orbitals need to faithfully represent a set of low
+energy bands, hence their local-ization is constrained to this condition. We verified that DFT+DMFT
+solution using Proj(3) and FLL-DC re-sults in metallic state, similar to finding of Ref. 50.
+For the insulating early transition metal oxides, the t2g occupancies of both localized projectors
+Proj(1) and Proj(2) are again quite close to nominal valence, namely d¹ for LaTiO₃ and d² for
+LaVO₃.  On the other hand, the delocalized projector Proj(3) results in much larger nd, even larger
+than reported in Ref. 50,51.  Hence, Wannier orbitals in Ref. 51 are more localized than our
+Proj(3), but less than Proj(2) or Proj(1). We verified that increasing localization of the
+projector always re-sults in increased nd occupancy. The Mott state within DFT+DMFT is again very
+robust using Proj(1) and Proj(2), but not when Proj(3) is used.  Finally, the 3d occupancy in SrVO₃
+is quite far from nominal d¹ valence even when using very localized projectors, and hence this
+mixed-valency results in metallic state even for very large values of local Coulomb repulsion U ,
+in agreement with experimental observation of a metallic state in SrVO₃.
+In the early transition metal oxides, we projected the Kohn-Sham solution to the t2g states,
+because the cen-ter of the eg states is sufficiently above the Fermi level that it does not require
+dynamic treatment within the DMFT. Since the eg states strongly hybridize with the oxygen, the eg
+occupancy does not exactly vanish. How-ever, the DFT+DMFT solution is very sensitive to the
+correlated t2g occupancy in early transition metal oxides, since the eg states behave very
+differently, having a large gap. Hence, the eg and t2g charge should not be counted together when
+assessing stability of the DMFT insulat-ing solution, hence we presented the t2g charge only in
+tables I,II.
+
+10
+
+
+V. CONCLUSIONS
+
+We have shown in this paper that with the DFT+DMFT methodology of Ref. 43, a reasonable
+qual-itative agreement between theory and experiment for the p and d spectra across the transition
+metal series is ob-tained, even when the Coulomb repulsion U and J are fixed across the entire
+series, hence no tuning param-eter is needed for qualitative description of correlated solids,
+which is a requirement for any ab-initio predictive method. This was possible because the DFT+DMFT
+method is implemented with a very localized projector, where the screening of the Coulomb repulsion
+by other valence states through hybridization is very efficient.
+A large effort was undertaken recently by several groups⁴³–⁴⁸ to implement DFT+DMFT in a way that
+does not require tuning parameters, and that has ab inito predictive power. In our opinion, such
+mature state of DFT+DMFT has largely been reached, as demon-strated on early and late transition
+metal oxides here. This method gives a zeroth-order picture of the physics in correlated materials
+such as transition metal oxides. However, the position of oxygen states is not very pre-cise is
+some compounds (see LaTiO₃), and better treat-ment of exchange would be needed to mitigate this
+defi-ciency. It was recently proposed in Ref.91 that additional Hartree term due to non-local
+interaction Upd could miti-gate this problem. However, in the charge-self-consistent DFT+DMFT used
+here, the Hartree terms are taken into account exactly, and therefore no extra Hartree shifts are
+justified. Further corrections could come only from bet-ter treatment of the non-local exchange.
+Furthermore, the gap sizes of Mott insulators and positions of Hubbard bands can be improved by
+calculating Coulomb U more precisely from first principles. This is an important open problem in
+condensed matter theory. Methods such as GW⁹² and constrained-RPA⁹³ show some promise in this
+direction, but more work is needed to get precise enough values of U for modern DFT+DMFT codes,
+which use localized atomic orbitals in a large energy window.
+In our implementation of DFT+DMFT, the position
+of oxygen states is not very far from its DFT value, and quite insensitive to the value of the
+correlation strength, in contrast to finding of Refs. 50,51.  While the posi-tion of the oxygen
+states in DFT are not always in very good agreement with experiment, their small displace-ment does
+not lead to a major failure of DFT+DMFT. This shortcoming of LDA is known to occur in other
+ma-terials (see for example Ref. 90) and can be corrected by a better treatment of the non-local
+exchange as in hybrid DFT or GW, but not by DMFT.
+We have also shown in this paper that in transition metal oxides the self-consistent value of the
+correlated electronic charge nd of LDA+DMFT is closer to nominal valence than its LDA value.  A
+similar finding was re-ported in Ref. 54 when studying the actinide series and its compounds. A
+systematic comparison with the X-ray data confirmed that the LDA+DMFT systematically im-proves the
+value of the correlated charge, nf , relative to its LDA value.
+Finally, the DMFT method is an orbitally dependent method, and the results depend on the choice of
+the cor-related set of orbitals. The convergence of the results with respect to the number of
+orbitals is not possible at present, because the quantum mechanical problem be-comes too expensive
+to solve. The quality of the results hence rest on the educated choice of the correlated or-bital
+(the choice of the projector) which determines the set of states that are treated very precisely,
+by summing all local Feynman diagrams, and those that are treated by DFT. Since DMFT truncates
+interaction and correla-tions beyond single site, a more localized orbital is clearly a better
+choice in this method. To recover similar results in a more delocalized basis, one would clearly
+need to go beyond single site approximation, which increases com-putational expense exponentially.
+We have shown that in transition metal oxides, the 3d occupancies (nd) on the transition metal ion
+are not very far from nominal valence when sufficiently localized ra-dial function is chosen for
+the projector. This is true even on the DFT level. We have also explicitly demonstrated that the
+choice of a more delocalized radial orbital leads to valences substantially larger than the nominal
+valence, which posses a problem for DMFT method, as noted in Refs. 50,51. For such a choice of
+correlated states, the non-local correlations would likely need to be considered to recover similar
+results as in more localized case.
+In conclusion, we successfully tested our implementa-tion of the DFT+DMFT method in 3d transition
+metal series. The method predicts qualitative features, such as existance of a metallic or
+insulating state starting from first principles. It can be made fully automated, and hence
+high-throughput screening of correlated materials is an attractive avenue for future research.
+
+VI. ACKNOWLEDGMENTS
+
+We thank A. Georges, C. H. Yee, H. Park, and
+A. J. Millis for stimulating discussion. KH, GK were sup-ported by NSF DMR–1405303, and NSF
+DMR–1308141,
+respectively.
+
+
+
+
+∗ Electronic address: haule@physics.rutgers.edu
+¹ H. Bethe, Ann. Phys. (Leipzig) 392, 55 (1928).
+² A. Sommerfeld, Z. Elektrochem. Angew. Phys. Chem. 34,
+426 (1928).
+³ F. Bloch, Z. Phys. 57, 545 (1929).
+⁴ A. A. Abrikosov, L. P. Gor’kov, and I. Ye. Dzyaloshinskii,
+
+11
+
+
+Quantum Field Theoretical Methods in Statistical Physics, 2nd ed. (Pergamon, Oxford, 1965).
+⁵ N. F. Mott, Proc. Phys. Soc. London 49 (Part 1), 72 (1937)
+⁶ N. F. Mott, Metal-Insulator Transitions. 2nd ed. Tayor
+⁷ N. F. Mott and R. Peierls, Proc. Phys. Soc. 49, A72 (1937). & Francis: London. 1990
+http://badmetals.magnet.fsu. edu/pdfs/Mott90book-chap8.pd
+⁸ M. Imada, A. Fujimori, and Y. Tokura, Rev. Mod. Phys.
+70, 1039 (1998).
+⁹ D.N. Basov, Richard D. Averitt, Dirk van der Marel Mar-tin Dressel, Kristjan Haule, Rev. Mod.
+Phys. 83, 471 (2011).
+¹⁰ P. Hohenberg, and W. Kohn, Phys. Rev. 136, B864B871 (1964).
+¹¹ A. Georges, and G. Kotliar, Phys. Rev. B 45, 6479 (1992).
+¹² W. Metzner and D. Vollhardt, Phys. Rev. Lett. 62, 324 (1989).
+¹³ A. Georges, G. Kotliar, W. Krauth, and M. J. Rozenberg, Rev. Mod. Phys.68, 13 (1996).
+¹⁴ G. Kotliar, and D. Vollhardt, Phys. Today 57 (3), 53
+(2004).
+¹⁵ X. Y. Zhang, M. J. Rozenberg, and G. Kotliar, Phys. Rev. Lett. 70, 1666 (1993).
+¹⁶ M. J. Rozenberg, G. Kotliar, and X. Y. Zhang, Phys. Rev. B 49, 10181 (1994).
+¹⁷ A. Georges and W. Krauth, Phys. Rev. Lett. 69, 1240 (1992).
+¹⁸ M. J. Rozenberg, G. Kotliar, H. Kajueter, G. A. Thomas,
+D. H. Rapkine, J. M. Honig and P. Metcalf, Phys. Rev. Lett. 75, 105 (1995).
+¹⁹ P. Limelette, A. Georges, D. Jerome, P. Wzietek, P. Met-calf, and J. M. Honig, Science 302, 89
+(2003).
+²⁰ P. Semon and A.-M. S. Tremblay, Phys. Rev. B 85, 201101(R) (2012).
+²¹ Anisimov, Poteryaev, Korotin, Anokhin, Kotliar J. Phys.: Condens. Matter 9, 7359 (1997);
+Lichtenstein, Katsnelson
+Phys. Rev. B 57, 6884 (1998)
+²² G. Kotliar, S. Y. Savrasov, K. Haue, V. S. Oudovenko,
+O. Parcollet, and C. A. Marianetti, Rev. Mod. Phys. 78, 865 (2006).
+²³ K. Held, Advances in Physics 56, 829 (2007).
+²⁴ S. Savrasov, G. Kotliar, and E. Abrahams, Nature (Lon-don) 410, 793 (2001).
+²⁵ X. Dai, S. Y. Savrasov, G. Kotliar, A. Migliori, H. Ledbet-ter, and E. Abrahams, Science 300,
+953 (2003).
+²⁶ J.H. Shim, K. Haule, G. Kotliar, Science 2007, 1615 (2007).
+²⁷ M.B Zolfl, I.A. Nekrasov, Th. Pruschke, V.I. Anisimov,
+J. Keller, Phys. Rev. Lett. 87, 276403 (2001).
+²⁸ K. Held, A.K. McMahan, R.T. Scalettar, Phys. Rev. Lett.
+87, 276404 (2001).
+²⁹ E.R. Ylvisaker, J. Kunes, A.K. McMahan, W.E. Pickett, Phys. Rev. Lett. 102, 246401 (2009).
+³⁰ B. Amadon, S. Biermann, A. Georges, and F. Aryaseti-awan, Phys. Rev. Lett. 96, 066402 (2006).
+³¹ E. Pavarini, S. Biermann, A. Poteryaev, A.I. Lichtenstein,
+A. Georges, O.K. Andersen, Phys. Rev. Lett. 92, 176403 (2004).
+³² E. Pavarini, A. Yamasaki, J. Nuss, O. K. Andersen, New
+J. Phys. 7, 188 (2005).
+³³ M. De Raychaudhury, E. Pavarini, and O. K. Andersen , Phys. Rev. Lett. 99, 126402 (2007).
+³⁴ I.A.  Nekrasov,  G.  Keller,  D.E.  Kondakov,  A.V. Kozhevnikov, Th. Pruschke, K. Held, D.
+Vollhardt, V.I.
+Anisimov, Phys. Rev. B 72, 155106 (2005).
+³⁵ K. Ohta, R.E. Cohen, K. Hirose, K. Haule, K. Shimizu,
+Y. Ohishi, Phys. Rev. Lett. 108, 026403 (2012).
+³⁶ E. Gorelov, M. Karolak, T.O. Wehling, F. Lechermann,
+A.I. Lichtenstein, E. Pavarini, Phys. Rev. Lett. 104, 226401 (2010).
+³⁷ J. Mravlje, M. Aichhorn, T. Miyake, K. Haule, G. Kotliar, and A. Georges, Phys. Rev. Lett. 106,
+096401 (2011).
+³⁸ H. Zhang, K. Haule, D. Vanderbilt, arXiv:1308.4471.
+³⁹ G.H. Wannier, Phys. Rev. 52, 191 (1937).
+⁴⁰ F. Aryasetiawan, M. Imada, A. Georges, G. Kotliar,
+S. Biermann, and A. I. Lichtenstein, Phys. Rev. B 70, 195104 (2004).
+⁴¹ T. Miyake, F. Aryasetiawan, and M. Imada, Phys. Rev. B 80, 155134 (2009).
+⁴² S. Y. Savrasov and G. Kotliar, Phys. Rev. B 69, 245101 (2004).
+⁴³ K. Haule, C.-H. Yee, and K. Kim, Phys. Rev. B 81, 195107 (2010).
+⁴⁴ B. Amadon, F. Lechermann, A. Georges, F. Jollet,
+T. O. Wehling, and A. I. Lichtenstein, Phys. Rev. B 77, 205112 (2008).
+⁴⁵ B. Amadon, J. Phys.: Condens. Matter 24 075604 (2012).
+⁴⁶ F. Lechermann, A. Georges, A. Poteryaev, S. Biermann,
+M. Posternak, A. Yamasaki, and O. K. Andersen, Phys. Rev. B 74, 125120 (2006).
+⁴⁷ O. Granas, I. Di Marco, P. Thunstrom, L. Nordstrom,
+O. Eriksson, T. Bjorkman, and J. M. Wills, Computational Materials Science 55, 295 (2012).
+⁴⁸ M. Aichhorn, L. Pourovskii, and A. Georges, Phys. Rev. B 84, 054529 (2011).
+⁴⁹ N. Marzari, A.A. Mostofi, J.R. Yates, I. Souza, and D. Van-derbilt, Rev. Mod. Phys. 84, 1419
+(2012).
+⁵⁰ X. Wang, M. J. Han, L. de Medici, H. Park, C. A. Mari-anetti, and A. J. Millis, Phys. Rev. B 86,
+195136 (2012).
+⁵¹ Hung T. Dang, Andrew J. Millis, and Chris A. Marianetti, Phys. Rev. B 89, 161113(R) (2014).
+⁵² J. H. Shim, K. Haule, and G. Kotliar, Nature 446, 513-516 (2007).
+⁵³ J. H. Shim, K. Haule, S. Savrasov, G. Kotliar, Phys. Rev. Lett. 101, 126403 (2008).
+⁵⁴ J. H. Shim, K. Haule and G. Kotliar, Eur. Phys. Lett. 85, 17007 (2009).
+⁵⁵ K. Haule and G. Kotliar, Nature Physics 5, 796 - 799
+(2009).
+⁵⁶ Chuck-Hou Yee, G. Kotliar, and K. Haule, Phys. Rev. B 81, 035105 (2010).
+⁵⁷ M. K. Stewart, J. Liu, R. K. Smith, B. C. Chapler, C.-
+H. Yee, K. Haule, J. Chakhalian, D. N. Basov, J. Appl. Phys. 110, 033514 (2011).
+⁵⁸ Z. P. Yin, K. Haule, G. Kotliar, Nature Physics 7, 294 (2011).
+⁵⁹ M. E. Pezzoli, K. Haule, and G. Kotliar, Phys. Rev. Lett.
+106, 016403 (2011).
+⁶⁰ M. K. Stewart, C.-H. Yee, J. Liu, M. Kareev, R. K. Smith,
+B. C. Chapler, M. Varela, P. J. Ryan, K. Haule,
+J. Chakhalian, and D. N. Basov, Phys. Rev. B 83, 075125 (2011).
+⁶¹ Q. Yin, A. Kutepov, K. Haule, G. Kotliar, S. Y. Savrasov,
+W. E. Pickett, Phys. Rev. B 84, 195111 (2011).
+⁶² Z. P. Yin, K. Haule, G. Kotliar, Nature Materials 10, 932-935 (2011).
+⁶³ J.-X. Zhu, P. H. Tobash, E. D. Bauer, F. Ronning,
+B. L. Scott, K. Haule, G. Kotliar, R. C. Albers, J. M. Wills,
+
+12
+
+
+Eur. Phys. Lett. 97, 57001 (2012).
+⁶⁴ K. Ohta, R. E. Cohen, K. Hirose, K. Haule, K. Shimizu,
+Y. Ohishi, Phys. Rev. Lett. 108, 026403 (2012).
+⁶⁵ X. Deng, K. Haule, G. Kotliar, arXiv:1308.2245
+⁶⁶ M. Liu, L. W. Harriger, H. Luo, M. Wang, R. A. Ewings,
+T. Guidi, H. Park, K. Haule, G. Kotliar, S. M. Hayden, and P. Dai, Nature Physics 8, 376 (2012).
+⁶⁷ J. M. Tomczak , K. Haule, and G. Kotliar, Proc. Natl. Acad. Sci. USA 109 3243 (2012).
+⁶⁸ H. C. Choi, B. I. Min, J. H. Shim, K. Haule, G. Kotliar, Phys. Rev. Lett. 108, 016402 (2012).
+⁶⁹ G. Lee, H. S. Ji, Y. Kim, C. Kim, K. Haule, G. Kotliar,
+B. Lee, S. Khim, K. H. Kim, K. S. Kim, K.S. Kim, and
+J. H. Shim, Phys. Rev. Lett. 109, 177001 (2012).
+⁷⁰ H. C. Choi, K. Haule, G. Kotliar, B. I. Min, and J. H. Shim, Phys. Rev. B 88, 125111 (2013).
+⁷¹ K. Haule, Phys. Rev. B 75, 155113 (2007).
+⁷² P. Werner, A. Comanac, L. de Medici, M. Troyer, and
+A. J. Millis, Phys. Rev. Lett. 97, 076405 (2006).
+⁷³ V. I. Anisimov, F. Aryasetiawan, and A. I. Lichtenstein, J. Phys.: Condens. Matter 9, 767
+(1997).
+⁷⁴ P. Blaha, K. Schwarz, G. K. H. Madsen, K. Kvasnicka, and J. Luitz, in Wien2K, edited by K.
+Schwarz (Technische Universitat Wien), Austria, 2001.
+⁷⁵ J.P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett.
+77, 3865 (1996).
+⁷⁶ M. J. Rey, Ph. Dehaudt, J. C. Joubert, B. Lambert-Andron, M. Cyrot and F. Cyrot-Lackmann,
+Journal of Solid State Chemistry 86, 101 (1990).
+⁷⁷ P. Bordet, C. Chaillout, M. Marezio, Q. Huang, A. San-toro, S.-W. Cheong, H. Takagi, C. S.
+Oglesby, B. Batlogg, Journal of Solid State Chemistry 106, 253 (1993).
+⁷⁸ D.A. MacLean, H. H. Ng, J. E. Greedan, Journal of Solid State Chemistry (1979) 30, 35 (1979).
+⁷⁹ T. Kajitani, K. Hiraga, T. Sakurai, M. Hirabayashi,
+S. Hosoya, T. Fukuda and K. Oh-Ishi, Physica C: Super-conductivity 171, 491 (1990).
+⁸⁰ M. Jarrell, and J. E. Gubernatis, Physics Reports 269, 133 (1996).
+⁸¹ K. Momma, and F. Izumi, J. Appl. Crystallogr. 44, 1272 (2011).
+⁸² K. Yoshimatsu, T. Okabe, H. Kumigashira, S. Okamoto,
+S. Aizaki, A. Fujimori, and M. Oshima, Phys. Rev. Lett.
+104 147601 (2010).
+⁸³ K. Maiti and D. D. Sarma, Phys. Rev. B 61, 2525 (2000).
+⁸⁴ T. Yoshida, A. Ino, T. Mizokawa, A. Fujimori, Y. Taguchi,
+T. Katsufuji and Y. Tokura, Europhys. Lett. 59, 258 (2002).
+⁸⁵ T. Takahashi, F. Maeda, H. Katayama-Yoshida, Y. Okabe, and T. Suzuki, A. Fujimori, S. Hosoya, S.
+Shamoto and
+M. Sato, Phys. Rev. B 37, 9788 (1988).
+⁸⁶ T. Yoshida, K. Tanaka, H. Yagi, A. Ino, H. Eisaki, A. Fuji-mori, and Z.-X. Shen, Phys. Rev.
+Lett. 95, 146404 (2005).
+⁸⁷ P.M. Woodward, Acta Crystallogr. Sect. A. 53, 44 (1997).
+⁸⁸ M. Cwik, T. Lorenz, J. Baier, R. Muller, G. Andre,
+F. Bouree, F. Lichtenberg, A. Freimuth, R. Schmitz,
+E. Muller-Hartmann, and M. Braden, Phys. Rev. B 68, 060401(R) (2003).
+⁸⁹ V. S. Oudovenko, G. Palsson, S. Y. Savrasov, K. Haule, and G. Kotliar, Phys. Rev B 70, 125112
+(2004).
+⁹⁰ Z. P. Yin, A. Kutepov, and G. Kotliar, Phys. Rev. X 3, 021011 (2013).
+⁹¹ P. Hansmann, N. Parragh, A. Toschi, G. Sangiovanni, and
+K. Held, arXiv:1312.2757.
+⁹² A. Kutepov, K. Haule, S.Y. Savrasov, G. Kotliar, Phys. Rev. B 82, 045105 (2010).
+⁹³ F. Aryasetiawan, M. Imada, A. Georges, G. Kotliar, S. Biermann, and A. I. Lichtenstein, Phys.
+Rev. B 70, 195104 (2004).
+⁹⁴ M. Takizawa, M. Minohara, H. Kumigashira, D. Toyota,
+M. Oshima, H. Wadati, T. Yoshida, A. Fujimori, M. Lipp-maa, M. Kawasaki, H. Koinuma, G. Sordi, and
+M. Rozen-berg, Phys. Rev. B 80, 235104 (2009).
+⁹⁵ G. Sordi, A. Amaricci, and M. J. Rozenberg, Phys. Rev. Lett. 99, 196403 (2007).
+⁹⁶ Juho Lee and Kristjan Haule, arXiv:1403.2474v1.

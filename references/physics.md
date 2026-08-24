@@ -117,10 +117,11 @@ this as already-existing functionality.
 ## Grounding claims in the literature
 
 `references/research/` holds papers spanning the method's foundations to applications this group
-cares about, sorted into three topic subfolders: `quantum_cluster_methods/` (CPT/VCA/CDMFT
-foundations and pyqcm itself), `periodization/` (periodization/interpolation schemes), and
+cares about, sorted into four topic subfolders: `quantum_cluster_methods/` (CPT/VCA/CDMFT
+foundations and pyqcm itself), `periodization/` (periodization/interpolation schemes),
 `cuprates/` (multilayer cuprates, oxygen level/charge distribution effects on superconductivity,
-twisted bilayer cuprates, topological superconductivity). For general quantum-cluster-theory
+twisted bilayer cuprates, topological superconductivity), and `double_counting/` (DFT+DMFT double
+counting; see the dedicated entry below). For general quantum-cluster-theory
 questions not specific to any one application — comparing CPT/CDMFT/DCA on general grounds,
 causality/conservation properties of cluster methods, broken-symmetry phases, susceptibilities — start
 from Maier, Jarrell, Pruschke & Hettler's "Quantum Cluster Theories" review (`references/research/
@@ -170,3 +171,34 @@ explicitly ignore antiferromagnetism near half-filling (no AFM order parameter i
 paper), so an SC value found close to half-filling by a similarly AFM-free script may be a
 sector-restricted result rather than the true ground state — cross-check against the AFM/SC
 coexistence paper above if that matters for the result being reported.
+
+For **double counting** — what to subtract when a correlated model is embedded in a band-structure
+calculation — see `references/research/double_counting/`. This only arises once a model is derived
+from or coupled to DFT; a standalone Hubbard/Emery script with hand-chosen parameters has no double
+counting problem, and the term is being used loosely if it comes up there. Two genuinely distinct
+meanings live in this folder, worth separating before reasoning about either:
+
+1. **The DFT+DMFT double counting.** The exchange-correlation functional already contains part of the
+   local interaction that `U` then adds again, so a potential `V_DC` must be subtracted. It is not
+   uniquely defined. Three schemes appear here: the widely used **fully-localized-limit (FLL)**, the
+   **nominal** one (`V_DC` fixed by a chosen integer occupancy rather than the self-consistent `n_d`),
+   and Haule's **exact** double counting derived from a continuum representation of DMFT
+   (`1501.03438v1.txt`). The headline result is that nominal is much closer to exact than FLL is — so
+   FLL numbers and nominal numbers are not interchangeable, and a scheme change alone can move the
+   charge-transfer energy and the p–d splitting. `1310.1158v2.txt` (Haule, Birol & Kotliar) is the
+   companion on covalency in transition-metal oxides and shows how strongly the choice feeds through
+   to `n_d`; `0907.0195v2.txt` is the implementation paper for charge-self-consistent DFT+DMFT in
+   full-potential methods.
+2. **Double counting the local self-energy when nesting cluster DMFT inside a charge-self-consistent
+   loop.** Distinct problem, same name. If the charge self-consistency is driven by single-site DMFT
+   while the physics of interest comes from a cluster solver, the single-site local self-energy has to
+   be subtracted from the cluster one or it enters twice. This is the one a pyqcm user is most likely
+   to meet in practice, since pyqcm supplies the cluster side.
+
+`2410.10019v2.txt` (Bacq-Labreuil, Lacasse, Tremblay, Sénéchal & Haule) is the paper to start from:
+it is this group's own work, uses both notions, and is the reference for the charge-self-consistent
+CDMFT+DFT route to material-specific cuprate predictions. Its physical result — Tc growing from
+single- to tri-layer compounds via a reduced charge-transfer gap and hence larger superexchange `J`
+— is also the cleanest available demonstration that the charge-transfer gap, not a plain Mott gap,
+is the controlling scale in these materials. The same file is duplicated under
+`references/research/cuprates/`; it is deliberately in both places.
