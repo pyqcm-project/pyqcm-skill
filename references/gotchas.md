@@ -330,55 +330,6 @@ pyqcm source. Only the last bullet is Wannier90-specific — the rest apply to a
 - **`set_params_from_file()` needs the parameter set already defined** — call `set_parameters(...)`
   once first (to declare/instantiate all params), then `set_params_from_file(tsv, n=-1)` overwrites
   with the converged row.
-- **`.win` parsing is not uniform across materials.** `unit_cell_cart` may carry a leading units
-  line (`ang`/`bohr`); atoms may be `atoms_cart` or `atoms_frac` (fractional → convert with the
-  cell); structural atoms without a `projections` entry (Ba/Y in YBCO) must be filtered. Wannier
-  centres count can exceed the pyqcm subspace size (YBCO: 49 centres, 36-orbital model).
-
-## One-body / band checks on a model with a bath and a point group
-
-Hit while writing a U=0 validation script for a two-cluster bilayer Emery model. Four traps in a row,
-none of which are in the docs, all of which look like bugs in your own script.
-
-- **`dispersion()` is a `model_instance` method, not a `lattice_model` one.** You still have to build
-  `pyqcm.model_instance(model)` to reach it; `lattice_model` has no `dispersion`/`tk`, so the
-  `AttributeError` reads as if the API changed when it didn't. (Same for `tk()` and `epsilon()`.)
-  **Whether that forces an ED solve is version-dependent.** Up to v2.26.x, `QCM::dispersion` built the
-  cluster Green function first, so target sectors and a full parameter set were mandatory before you
-  could look at `t(k)`. As of v2.29.x it calls `bare_epsilon` and diagonalizes directly — a pure
-  one-body path, no ED (`src_qcm/QCM.cpp`, `dispersion`; upstream commit `6813034`, "functions that
-  compute the dispersion relation without performing ED first"). Source-verified, not yet
-  runtime-verified: if a one-body check still demands solvable clusters on a recent pyqcm, that is
-  worth reporting upstream rather than working around.
-- **`U=0` *exactly* breaks a cluster that declares `generators=...`.** pyqcm routes a fully
-  non-interacting cluster to `one_body_solve()`, which throws
-  `The symmetry group must be trivial when using 'one_body_solve()'` and aborts via `libc++abi`
-  (an uncaught C++ exception, not a Python traceback, so it can't be caught). Use `U=1e-6` instead:
-  it keeps the ED path and leaves the one-body physics untouched.
-- **Irrep sectors with unspecified `N` are only legal while something anomalous is switched on.**
-  A production sector list like `R0:S0/R1:S0/R2:S0/R3:S0` (see the irrep-sector entry above) leaves
-  particle number free, which is correct for a superconducting run. Switch the anomalous bath and
-  pairing field off (`db=0`, `D=0`) for a normal-state or one-body check and pyqcm raises
-  `sector string R0:S0 defines a non conserved particle number, but particle number is conserved in
-  the model`. Pin `N` for the test (`N12:S0`) and keep the free-`N` list for production; don't
-  "fix" the production list.
-- **`set_parameters()` may only be called once per model** (`ValueError: The function
-  set_parameters() can only be called once`). To vary something afterwards use `set_parameter()`
-  (singular) per parameter. This bites when a script wants to reset to a clean baseline between
-  successive tests in one process.
-
-## kz Brillouin period follows the physical basis, not 1
-
-What: For a model with a non-cubic `set_basis` (e.g. a c-axis vector of length `C/(NZ*A)` in units of
-the in-plane lattice constant), the reciprocal-space period along that axis in the reduced k used by
-`dispersion()` is **not** 1. Sampling `kz` over `[0, 1)` silently samples a fraction (or several
-copies) of the true Brillouin zone.
-Why it happens: this is the concrete consequence of "`set_basis` enters the k-phase" in the W90 entry
-above. `dispersion()` takes k in units of `2*pi` in the *physical* basis, so a basis vector of length
-`L` has period `1/L`.
-What to do instead: compute the period explicitly (`period = 1/L`, e.g. `NZ*A/C`) and verify
-numerically that `E(kz=0)` and `E(kz=period)` agree to machine precision before trusting any c-axis
-dispersion plot or any claim about bilayer/interlayer physics.
 
 ## Tied (dependent) parameters must stay out of the `varia` list
 
@@ -392,30 +343,6 @@ Why it happens: a dependent parameter is derived, so listing it in `varia` as we
 a degree of freedom that the constraint immediately overwrites.
 What to do instead: put only the master names in `varia`. Build the varia list and the tie string from
 the same code path so they cannot drift apart.
-
-**The general trap behind this: a symmetric seed is self-confirming.** Any symmetry imposed by
-*seeding* rather than by *declaring* will appear to hold no matter whether it actually does, because
-the symmetric subspace is an invariant manifold of the map being iterated. If the seed respects a
-symmetry that the lattice model and cluster also respect, the impurity solution respects it, so the
-updated parameters respect it, forever. The gradient out of the manifold is exactly zero. This is not
-specific to bath ties, or to CDMFT:
-
-- Untying a tie and re-running from the symmetric converged solution reproduces the tied answer to
-  machine precision and reads as independent confirmation that the tie was justified. It is a
-  tautology, not evidence.
-- A symmetry-broken order parameter seeded at exactly zero stays exactly zero and the run reports "no
-  order" whether or not the ordered phase is actually the ground state — the usual way an AFM or SC
-  solution gets missed.
-- In VCA the same thing appears as a stationarity artifact rather than a fixed point: an order
-  parameter at zero is *always* a stationary point of the Potthoff functional by symmetry, so a
-  Newton search started there sits still regardless of whether a nontrivial saddle exists nearby.
-
-Round-off can in principle knock a run off the manifold, but slowly and unreliably — never rely on it,
-and never treat a run that happened to drift off as the normal case.
-What to do instead: perturb *off* the manifold deliberately. Jitter the freed parameters by a few
-percent, or start from a deliberately asymmetric converged solution and check the symmetry is
-*restored* rather than merely preserved. Only a run that could have left and didn't is evidence the
-symmetry holds.
 
 ## Converged bath parameters are gauge-dependent
 
@@ -438,37 +365,3 @@ channels the bath declares, not on the model or material:
 The first two are always live. The sign one means **the sign of an individual `tb_i` carries no
 information** — only relative signs within an orbital do. The permutation one is why bath orbitals can
 appear to trade places discontinuously along a continuation sweep.
-
-The particle-hole flip is the one that most often gets misread, because it moves weight *between*
-channels: it turns the normal hybridization `tb c_i^dag c_b` into an anomalous one and vice versa. So a
-converged orbital showing `tb_i` near zero with `db_i` appreciable is usually **not** a decoupled
-orbital carrying optimizer noise in its anomalous amplitude — it is the same orbital in the flipped
-branch, physically identical to one with `tb_i` appreciable and `db_i` near zero. Every bath orbital
-carries its own copy of this Z2. It is exact only because the standard `eb`/`tb`/`db` parametrization
-has no bath-internal pairing term; add one and the degeneracy breaks. (This case needs an anomalous
-channel to exist, so in practice it shows up in superconducting runs — but it is a property of the
-parametrization, not of superconductivity, and the same reasoning applies to any parametrization whose
-channels mix under a transformation that preserves `Gamma(z)`.)
-
-What to do instead: before treating a surprising bath table as physics worth pinning away or reporting,
-test the gauge hypothesis. It is cheap and decisive, and the recipe is the same for all three rows:
-
-- **Do the parameters map onto each other?** For the flip: does `eb_i` have the opposite sign to the
-  same orbital in the neighbouring or previous solution, and does `|db_i|` in one run equal `|tb_i|` in
-  the other to optimizer tolerance? For a permutation: does the *multiset* of triples match even though
-  the per-index table doesn't?
-- **Do the observables match?** `E_kin`, the densities, the order parameters and `min_dist` are
-  invariant under all three. This is the check that settles it — gauge moves cannot move an observable.
-- **Does `E0` move by the predicted amount?** Sign and permutation leave `E0` alone. The flip shifts it
-  by `2 * sum(eb_i)` over the flipped orbitals, taking `eb_i` from the run you are transforming *from*
-  (so the shift correctly reverses sign when you flip back), out of `n_b -> 1 - n_b` for both spins.
-
-If those hold, there is nothing wrong and nothing to fix. Genuine noise in a truly decoupled orbital
-looks different: `eb` does not flip, and no relation ties the two runs' numbers together.
-
-Two corollaries. First, do not compare `E0` across runs without checking the bath gauge first, or a
-pure relabelling reads as a level crossing. Second, pinning `db_i = 0` on a flipped-looking orbital is
-not a no-op even though it usually reproduces the same answer: it forbids the small residual pairing
-left over after the rotation, which restricts the variational space slightly and can cost a nearby
-solution branch in a continuation sweep. If a pinned sweep loses a solution the free sweep had, suspect
-that before concluding the free sweep's solution was spurious.
