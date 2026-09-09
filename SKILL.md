@@ -5,14 +5,14 @@ description: Assists with pyqcm, the Python/C++ library for quantum cluster meth
 
 # pyqcm
 
-Pyqcm implements three related quantum cluster methods — Cluster Perturbation Theory (CPT), the
-Variational Cluster Approach (VCA), and Cellular/Cluster Dynamical Mean Field Theory (CDMFT) — for
-approximating the physics of strongly correlated (Hubbard-like) lattice models. The impurity solver
-is exact diagonalization (Lanczos and variants) on sparse matrices. Core numerics are C++; the
-day-to-day interface is Python.
+Pyqcm implements three related quantum cluster methods, Cluster Perturbation Theory (CPT), the
+Variational Cluster Approach (VCA), and Cellular/Cluster Dynamical Mean Field Theory (CDMFT), for
+approximating strongly correlated (Hubbard-like) lattice models. The impurity solver is exact
+diagonalization (Lanczos and variants) on sparse matrices. Core numerics are C++; the day-to-day
+interface is Python.
 
 This skill covers three distinct jobs. Figure out which one the user needs (often more than one at
-once — e.g. debugging a script *and* interpreting why the physics looks wrong) and read the matching
+once, e.g. debugging a script *and* interpreting why the physics looks wrong) and read the matching
 reference file before acting:
 
 | Job | When | Read |
@@ -21,63 +21,53 @@ reference file before acting:
 | Interpret physics results | Explaining a spectral function, self-energy, order parameter, or phase diagram; connecting output to the underlying theory | `references/physics.md` |
 | Modify pyqcm itself | Touching `src_ed/`, `src_qcm/`, `src_python/`, or the pure-Python `pyqcm/*.py` wrapper | `references/contributing.md` |
 
-**Always check `references/gotchas.md` first**, regardless of which job it is. It's a running list
-of hard-won lessons from this specific research group about pyqcm's sharp edges — conventions, past
-mistakes, build quirks — that aren't written down anywhere else. If you learn a new one during a
-session (a mistake you made, a surprising API behavior, a fix that wasn't obvious from the docs),
-add it there before finishing, so the next session benefits too.
+**Always check `references/gotchas.md` first**, regardless of the job. It is a running list of
+hard-won lessons from this research group about pyqcm's sharp edges (conventions, past mistakes,
+build quirks) that aren't written down anywhere else. If you learn a new one during a session (a
+mistake you made, a surprising API behavior, a fix that wasn't obvious from the docs), add it there
+before finishing so the next session benefits too.
 
 **Also check `references/physics.md`'s "Grounding claims in the literature" section whenever the work
 targets a specific named material or system** (a real compound, not a generic toy Hubbard model),
 even if the job otherwise classifies as pure scripting. Setting model parameters, choosing a
-cluster/bath decomposition, or reasoning about expected order-parameter behavior are
-physics-grounding decisions regardless of whether the file being edited is a Python script — the job
-table above picks *one* reference file per session, which is not enough by itself when a real,
+cluster/bath decomposition, and reasoning about expected order-parameter behavior are
+physics-grounding decisions regardless of whether the file being edited is a Python script, and the
+job table above picks *one* reference file per session, which is not enough when a real,
 previously-studied material is involved. See "Grounding a named material/system in the literature" in
 `references/gotchas.md`.
 
 ## Coding conventions (always follow these)
 
-These apply whenever this skill is used to write or modify code, scripts, or commits (not to prose
-explanations of physics, where standard Greek notation is correct and expected):
-
-1. **No AI-tell characters in code, comments, or commit messages.** No em dashes, no Greek unicode
-   letters. Spell things out (`Delta`, `Sigma`, `mu`) or match whatever ASCII convention the
-   surrounding pyqcm code already uses instead.
-2. **Do not overcomment.** Comments should be rare, short, and only explain a non-obvious "why" (a
-   workaround, a hidden constraint). Never restate what the code already makes clear. Match pyqcm's
-   own sparse commenting style.
-3. **Do not over-engineer.** If a simple, direct implementation solves the task, use that. Do not add
-   abstractions, configurability, or generality the task did not ask for.
-4. **Never commit or push.** Staging, writing the commit message, and pushing are the user's job, not
-   this skill's, every time, regardless of how the request is phrased or how large the diff is. The
-   user is expected to know git/GitHub themselves; do not offer to do it for them.
+Always consult `./references/guidelines.md`, which states the guidelines for every user of the pyqcm
+skill. They apply whenever this skill is used to write or modify code, scripts, prose, or commits.
 
 ## Repo layout
 
-- `pyqcm/pyqcm/` — the Python package (`__init__.py` is the main API surface: `cluster_model`,
+- `pyqcm/pyqcm/`: the Python package (`__init__.py` is the main API surface: `cluster_model`,
   `cluster`, `lattice_model`, `model_instance`, etc.). A few submodules are pure Python
   (`cdmft.py`, `vca.py`, `_loop.py`, `_spectral.py`, `_draw.py`, `green_structure.py`).
-- `pyqcm/src_ed/` — the C++ exact-diagonalization impurity solver (Lanczos, Green's functions,
+- `pyqcm/src_ed/`: the C++ exact-diagonalization impurity solver (Lanczos, Green's functions,
   sectors, symmetry).
-- `pyqcm/src_qcm/` — the C++ lattice/CPT-VCA-CDMFT engine (periodization, Green's functions on the
+- `pyqcm/src_qcm/`: the C++ lattice/CPT-VCA-CDMFT engine (periodization, Green's functions on the
   lattice, parameter sets).
-- `pyqcm/src_python/` — nanobind bindings gluing the C++ core into the `pyqcm.qcm` extension module.
-- `pyqcm/docs/source/*.rst` — the authoritative API/workflow documentation. Build it locally (see
+- `pyqcm/src_python/`: nanobind bindings gluing the C++ core into the `pyqcm.qcm` extension module.
+- `pyqcm/docs/source/*.rst`: the authoritative API/workflow documentation. Build it locally (see
   `references/build.md`) if you need the rendered HTML; there's no pre-built copy in this repo.
-- `pyqcm/notebooks/*.py` / `*.ipynb` — worked examples (1D Hubbard chains, antiferromagnetism,
-  superconductivity, CDW, Rashba coupling, graphene Mott transition, etc.) — the best source of
-  idiomatic usage patterns.
-- `pyqcm/tests/` — `test_all.py` runs everything; individual tests live in `tests/test_files/`.
-- `references/pyqcm-bath-parametrizer/` — submodule providing symmetry-constrained bath
+- `pyqcm/notebooks/*.py` / `*.ipynb`: worked examples (1D Hubbard chains, antiferromagnetism,
+  superconductivity, CDW, Rashba coupling, graphene Mott transition), the best source of idiomatic
+  usage patterns.
+- `pyqcm/tests/`: `test_all.py` runs everything; individual tests live in `tests/test_files/`.
+- `references/pyqcm-bath-parametrizer/`: submodule providing symmetry-constrained bath
   parametrization for CDMFT (point-group generators, SALC-based hybridization).
   `BathParametrizer.get_pyqcm_generators()` is the one-call path to
   `cluster_model(generators=..., bath_irrep=True)`, with or without subbaths. See
   `references/gotchas.md` for usage notes.
-- `references/research/` — papers on the underlying theory, sorted by topic into
-  `quantum_cluster_methods/`, `periodization/`, `cuprates/`, and `double_counting/` (DFT+DMFT `V_DC`
-  schemes, and the separate problem of double-counting the local self-energy when nesting cluster
-  DMFT in a charge-self-consistent loop) — ground physics explanations in these, not just intuition.
+- `references/research/CITATIONS.md`: the papers this skill cites, by arXiv id and DOI, grouped into
+  quantum cluster methods, periodization, cuprates, and double counting (DFT+DMFT `V_DC` schemes, and
+  the separate problem of double-counting the local self-energy when nesting cluster DMFT in a
+  charge-self-consistent loop). Ground physics explanations in these papers, not just intuition.
+  **Paper full texts are not stored in this repo**; the manifest has a fetch command, and fetched
+  copies are git-ignored.
 
 ## Build state
 
@@ -88,7 +78,7 @@ of `pyqcm` succeed even when the extension is missing, but simulations will fail
 python3 -c "import pyqcm" 2>&1 | tail -3
 ```
 
-If it reports it "was unable to load the QCM library," it needs building — see
+If it reports it "was unable to load the QCM library," it needs building. See
 `references/build.md` for the build workflow and common failure modes on this machine before assuming
 a code change is broken. Don't chase a phantom bug in Python logic when the real issue is a stale or
 missing build.

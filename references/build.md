@@ -10,14 +10,14 @@ pyqcm was unable to load the QCM library. You will not be able to run simulation
 Please reinstall pyqcm!
 ```
 
-Diagnose *that* before debugging what looks like a Python bug — a stale or missing build produces
-confusing symptoms (e.g. `AttributeError` on things that clearly exist in `__init__.py`, or silent
-`qcm = None`).
+Diagnose *that* before debugging what looks like a Python bug. A stale or missing build produces
+confusing symptoms, e.g. `AttributeError` on things that clearly exist in `__init__.py`, or silent
+`qcm = None`.
 
 ## Prerequisites
 
 - CMake (`brew install cmake` on macOS, `apt install cmake` on Debian/Ubuntu)
-- A BLAS/LAPACK implementation — on macOS the Accelerate framework is picked up automatically; on
+- A BLAS/LAPACK implementation. On macOS the Accelerate framework is picked up automatically; on
   Linux install `libopenblas-dev` (or similar) or point at one with `-DBLA_VENDOR=...`
 - Eigen (`libeigen3-dev` on Debian/Ubuntu) if building with `EIGEN_HAMILTONIAN=1` (the default)
 - A C/C++ compiler. On Apple platforms, CMakeLists.txt forces `clang`/`clang++` unless you override
@@ -38,10 +38,10 @@ pip install -e .
 ```
 
 Editable installs still trigger a full CMake/scikit-build-core rebuild whenever the extension's
-source changes — there's no incremental C++ rebuild wired into `pip install -e .` on its own, so
+source changes; there's no incremental C++ rebuild wired into `pip install -e .` on its own, so
 after touching anything under `src_ed/`, `src_qcm/`, or `src_python/`, re-run the install command
 to pick up the change. If iterating quickly on C++, consider driving CMake directly instead
-(configure once into a build dir, then `cmake --build`) to get incremental compilation — see
+(configure once into a build dir, then `cmake --build`) to get incremental compilation. See
 `pyqcm/CMakeLists.txt` for the target layout.
 
 To customize the build (BLAS vendor, PRIMME eigensolver, Eigen Hamiltonian), set `CMAKE_ARGS` before
@@ -78,5 +78,5 @@ cd pyqcm/docs && ./makedoc
 ```
 
 produces HTML under `docs/html/`. There's no pre-built copy checked into this repo (the docs are
-fully contained in the `pyqcm` submodule itself, so mirroring a build here was redundant) — rebuild
-locally when you need to browse them.
+fully contained in the `pyqcm` submodule itself, so mirroring a build here was redundant), so
+rebuild locally when you need to browse them.

@@ -175,7 +175,7 @@ What: A cluster of related conventions around bath parametrization and CDMFT con
   `grid_type="legendre", specs=(1, 10, 5, 10, 5)` up to v2.26.x and is
   `grid_type="regular", specs=(10, 50, 10)` as of v2.29.x (commit `6813034`). A run that relied on the
   old default silently changes grid on upgrade, so pin `grid_type` explicitly rather than inheriting
-  it if you are comparing against older numbers. Sénéchal's bath-optimization paper (`references/research/quantum_cluster_methods/1005.1685v1.txt`) is the detailed
+  it if you are comparing against older numbers. Sénéchal's bath-optimization paper (`arXiv:1005.1685`) is the detailed
   study behind this choice, benchmarking several weight functions `W(omega)` against Potthoff's
   self-energy functional approach (treated as the reference "best possible" bath). Its findings: a
   weight proportional to `Tr Sigma^2` is the most successful overall, especially for tracking a
@@ -208,7 +208,7 @@ naming quirk.
 
 What: When sweeping a parameter like chemical potential specifically to probe a Mott transition (as
 opposed to studying a single fixed filling), the ground-state particle number `N` is expected to
-change across the sweep — e.g. Fig. 7 of the subbath paper (`references/research/quantum_cluster_methods/2509.07931v2.txt`)
+change across the sweep — e.g. Fig. 7 of the subbath paper (`arXiv:2509.07931`)
 tracks density `n` vs. `μ` exactly this way, with `n` moving continuously except for a jump/plateau at
 the Mott transition itself. A `model.set_target_sectors(...)` call listing only a single `N` will not
 track this: the solver only ever searches the sector(s) you declare, so fixing `N` throughout the
@@ -224,9 +224,8 @@ What to do instead:
   sector — an odd number of electrons cannot produce total spin projection zero. Use both signs, e.g.
   `R0:N3:S-1/R0:N3:S1`, rather than `R0:N3:S0` (which is not a valid target and would either error or
   silently mean something other than intended).
-- Mott transitions specifically are discussed in the subbath paper (`references/research/
-  quantum_cluster_methods/2509.07931v2.txt`, Fig. 7) and in the SciPost pyqcm codebase paper
-  (`references/research/quantum_cluster_methods/SciPostPhysCodeb_23.txt`, around the 1D Hubbard Mott gap example) — check those before reasoning
+- Mott transitions specifically are discussed in the subbath paper (`arXiv:2509.07931`, Fig. 7) and in the SciPost pyqcm codebase paper
+  (`SciPost Phys. Codebases 23`, around the 1D Hubbard Mott gap example) — check those before reasoning
   about expected sector/filling behavior from general Hubbard-model intuition alone.
 
 ## Target sectors when point-group generators are declared
@@ -253,10 +252,10 @@ parameters, cluster/bath geometry, expected order-parameter behavior — without
 Why it happens: `SKILL.md`'s routing table is a single-job classification ("figure out which one the
 user needs, read the matching file") rather than a set of independently-triggered checks — a script
 task never trips the physics-file read even when it involves a real material with existing literature
-under `references/research/`.
+listed in `references/research/CITATIONS.md`.
 What to do instead: whenever a script targets a specific named physical system (a real material or
 compound, not a generic toy Hubbard model), check `references/physics.md`'s "Grounding claims in the
-literature" section and the relevant `references/research/<topic>/` papers for that system
+literature" section and the relevant papers in `references/research/CITATIONS.md` for that system
 *regardless* of whether the session otherwise reads as pure script/mechanics work — parameter choices
 and expected qualitative behavior (order-parameter shape, competing orders, known discontinuities) are
 physics claims even when the actual edit is a Python script.
