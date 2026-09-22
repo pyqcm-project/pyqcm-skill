@@ -14,14 +14,8 @@ interpreting what the outputs physically mean, and contributing to the project.
 /plugin install pyqcm-skill@pyqcm-skill
 ```
 
-Update later with `/plugin update pyqcm-skill`.
-
-For the claude.ai web app instead, download a zip of the repo and upload it under
-Settings > Capabilities > Skills.
-
-## Point it at your pyqcm checkout
-
-The skill ships **no pyqcm source**. Most of what it knows refers to a pyqcm checkout, so tell it
+Update later with `/plugin update pyqcm-skill`. For the claude.ai web app instead, download a zip of the repo and upload it under
+Settings > Capabilities > Skills. The skill ships **no pyqcm source**. Most of what it knows refers to a pyqcm checkout, so tell it
 where yours is:
 
 ```bash
@@ -35,7 +29,7 @@ asking you. If you have no checkout yet:
 git clone https://github.com/pyqcm-project/pyqcm.git
 ```
 
-## What is in here
+## Contents
 
 | Path | Contents |
 |---|---|
@@ -49,7 +43,7 @@ git clone https://github.com/pyqcm-project/pyqcm.git
 | `references/hpc.md` | Module-based HPC clusters |
 | `references/research/CITATIONS.md` | Cited papers by arXiv id and DOI |
 
-## Relationship to pyqcm
+## Relationship to Pyqcm
 
 This repository contains **no pyqcm source code**. pyqcm is authored by David Senechal and licensed
 GPL-3.0-or-later; see https://github.com/pyqcm-project/pyqcm.
