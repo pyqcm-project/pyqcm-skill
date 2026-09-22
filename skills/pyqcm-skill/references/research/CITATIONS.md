@@ -1,7 +1,7 @@
 # Research paper citations
 
 **This repo cites papers; it does not redistribute them.** No paper full text is tracked here,
-regardless of its licence, its publisher, or who wrote it. `references/research/**/*.txt` and
+regardless of its licence, its publisher, or who wrote it. `skills/pyqcm-skill/references/research/**/*.txt` and
 `*.pdf` are git-ignored, so a local copy you fetch stays local.
 
 The skill's reference files cite papers by arXiv id or DOI. Use this table to resolve one, then
@@ -11,11 +11,11 @@ fetch it if you need the full text.
 
 ```bash
 # one paper
-curl -L -o references/research/periodization/2602.16351.pdf https://arxiv.org/pdf/2602.16351
+curl -L -o skills/pyqcm-skill/references/research/periodization/2602.16351.pdf https://arxiv.org/pdf/2602.16351
 
 # all arXiv-hosted papers below
 while read -r id dir; do
-  curl -L -o "references/research/$dir/$(echo "$id" | tr / _).pdf" "https://arxiv.org/pdf/$id"
+  curl -L -o "skills/pyqcm-skill/references/research/$dir/$(echo "$id" | tr / _).pdf" "https://arxiv.org/pdf/$id"
 done <<'EOF'
 cond-mat/0205044 quantum_cluster_methods
 cond-mat/0404055 quantum_cluster_methods

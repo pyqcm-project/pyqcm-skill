@@ -31,9 +31,9 @@ git clone https://github.com/pyqcm-project/pyqcm.git
 
 ## Contents
 
-| Path | Contents |
+| Path (under prefix `skills/pyqcm-skill/`) | Contents |
 |---|---|
-| `skills/pyqcm-skill/SKILL.md` | Job routing and the `$PYQCM_ROOT` resolution |
+| `SKILL.md` | Job routing and the `$PYQCM_ROOT` resolution |
 | `references/practice.md` | The maintainer's working notes: sharp edges, conventions, and mistakes worth not repeating |
 | `references/install.md` | Getting a working build |
 | `references/scripting.md` | Writing and debugging pyqcm scripts |

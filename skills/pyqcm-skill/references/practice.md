@@ -1,4 +1,4 @@
-# Pyqcm Gotchas
+# Pyqcm Good Practices
 
 A list of worth-knowing behaviours of [Pyqcm](https://github.com/pyqcm-project/pyqcm), mostly related to my daily usage of Cluster Dynamical Mean-Field Theory (CDMFT).
 
@@ -252,6 +252,7 @@ gens = p.get_pyqcm_generators(8, "C2v", subbath={"nsb": 3, "irreps": "replica"})
 > Bath-phase blocks follow the SALC label order, so declare your `eb{i}`/`tb{i}` in that same order. A mismatch silently couples the wrong bath orbitals, which is the nastiest failure mode here since nothing complains.
 
 Setup and the full API are in `references/bath-parametrizer.md`.
+
 ## `hopping_operators` amplitude convention
 
 Write `hopping_operators` with amplitude `-1`. It is a sign convention matching how the group writes the Hamiltonian, not a code requirement. Using `+1` runs fine but flips the sign of the hopping term, so flag it if you meet it in someone else's script before interpreting the physics.

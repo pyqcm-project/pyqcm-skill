@@ -38,12 +38,14 @@ Research data storage is 190T, redundant, backed up daily and archived to tape w
 
 ## Installing pyqcm on the cluster
 
-**Precompiled package**, the fast path:
+**Precompiled package**:
 
 Do not use the precompiled package unless you know what you are doing. It is
 a stale/un-maintained version.
 
-**From source**, for a development version or to experiment with build options:
+**From source**:
+
+For a development version or to experiment with build options:
 
 ```bash
 git clone https://github.com/pyqcm-project/pyqcm.git qcm_wed

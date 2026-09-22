@@ -44,20 +44,15 @@ interpreting why the physics looks wrong) and read the matching reference before
 | Modify pyqcm itself | Touching `$PYQCM_ROOT/src_ed/`, `src_qcm/`, `src_python/`, or the pure-Python `pyqcm/*.py` wrapper | `references/modifying-pyqcm.md` |
 
 **Always check `references/practice.md` first**, whichever job it is. It is the single running record
-of pyqcm's sharp edges and of how this group actually works: the maintainer's hand-written notes on
-install, OpenMP threads, target sectors, ground-state consistency, operator naming, lattice versus
-superlattice, and the global and CDMFT parameter choices they rely on (`grid`, `iteration`, `alpha`,
-`method`), followed by the accumulated failure catalogue (bath-parametrizer symmetry, bath parameter
-naming and starting values, model-construction landmines, tied parameters and `varia`, gauge-dependent
-converged baths). Nothing in it is written down anywhere else.
+of pyqcm's sharp edges and of how this group actually works, hand-written by the maintainer and
+written down nowhere else. Skim its headings for the topic at hand rather than trusting any summary
+of its contents.
 
-**Also check `references/physics.md`'s "Grounding claims in the literature" section whenever the work
-targets a specific named material or system** (a real compound, not a generic toy Hubbard model), even
-if the job otherwise classifies as pure scripting. Setting model parameters, choosing a cluster/bath
-decomposition, and reasoning about expected order-parameter behaviour are physics-grounding decisions
-regardless of which file is being edited, and the table above picks *one* reference per job, which is
-not enough when a real, previously studied material is involved. See "Grounding a named
-material/system in the literature" in `references/practice.md`.
+**Also read `references/physics.md`'s "Grounding claims in the literature" section whenever the work
+targets a specific named material or compound**, rather than a generic toy Hubbard model, even when
+the job otherwise classifies as pure scripting. The table above routes to one reference per job, which
+is not enough here. `references/practice.md`, "Grounding a named material in the literature", says
+why.
 
 ## Other references
 
@@ -118,12 +113,11 @@ This skill is public and takes pull requests. At the **end** of a session, sugge
   different model or system.
 - **Durable**: it is a property of pyqcm or of the method, not of one script, one dataset, or one
   parameter choice.
-- **New**: it is not already in `references/practice.md` or in the upstream docs.
 - **It cost something real**: wasted time, a wrong result, a discarded run, or a genuinely confusing
   error. Merely interesting is not enough.
 
-When it does fire, encourage the user to write the entry manually. Then, you may format it to the
-template in `CONTRIBUTING.md` so the maintainer's review is a yes or no rather than an editing job.
+When it does fire, encourage the user to write the entry manually. Then, you may format it as excpected
+from `CONTRIBUTING.md` so the maintainer's review is a yes or no rather than an editing job.
 Never edit `references/practice.md` yourself: it is hand-written and hand-maintained by the author,
 and the installed copy is overwritten on plugin update anyway, so the change would be silently lost.
 Propose it to them instead. See `CONTRIBUTING.md` at the repo root.

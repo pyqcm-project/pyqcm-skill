@@ -15,6 +15,3 @@ CLAUDE.md
 # carries the DOIs and a fetch command; fetched copies land here and stay local.
 **/references/research/**/*.txt
 **/references/research/**/*.pdf
-
-# Python environments
-.venv/

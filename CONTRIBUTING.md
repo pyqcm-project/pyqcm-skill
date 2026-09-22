@@ -19,12 +19,12 @@ one accepted quickly rather than a hurdle to clear before opening it.
 ## Format
 
 New entries go in `skills/pyqcm-skill/references/practice.md`. Keep them short and concrete: that file
-is meant to be skimmed, not read end to end. Use this shape. Name pyqcm versions explicitly when behaviour
+is meant to be skimmed, not read end to end. Name pyqcm versions explicitly when behaviour
 depends on them, and flag anything that reflects a maintainer's choice that could change upstream rather
 than a fixed property of the method.
 
 ## Everything else
 
 Corrections, clearer wording, and updates when upstream changes are all welcome. Two house rules from
-`references/guidelines.md`. Do not add pyqcm source code to this repository. pyqcm is GPL-3.0-or-later
+`skills/pyqcm-skill/references/guidelines.md`. Do not add pyqcm source code to this repository. pyqcm is GPL-3.0-or-later
 and this repo is MIT; describe behaviour in your own words instead of pasting it.
