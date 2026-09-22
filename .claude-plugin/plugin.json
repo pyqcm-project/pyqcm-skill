@@ -1,0 +1,21 @@
+{
+  "name": "pyqcm-skill",
+  "version": "0.1.0",
+  "description": "Assistant for pyqcm, a quantum cluster methods library (CPT, VCA, CDMFT) for strongly correlated electron models. Covers installing it, writing and debugging scripts, interpreting physics output, and contributing to the project.",
+  "author": {
+    "name": "Antoine de Lagrave",
+    "url": "https://github.com/antoinedelagrave"
+  },
+  "homepage": "https://github.com/pyqcm-project/pyqcm-skill",
+  "license": "MIT",
+  "keywords": [
+    "pyqcm",
+    "quantum-cluster-methods",
+    "cdmft",
+    "vca",
+    "cpt",
+    "hubbard-model",
+    "exact-diagonalization",
+    "condensed-matter"
+  ]
+}

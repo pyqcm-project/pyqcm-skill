@@ -15,13 +15,13 @@ intuition about Hubbard models, since the specifics of CPT/VCA/CDMFT matter.
   cluster Hamiltonian as variational parameters, and extremizes the Potthoff self-energy functional
   over them. A stationary point (not necessarily a minimum in every direction, so check which
   parameters are saddle-point vs. minimum) signals the true value of that variational parameter; its
-  magnitude away from zero is the order parameter. See `pyqcm/docs/source/vca.rst` and Sénéchal et
+  magnitude away from zero is the order parameter. See `$PYQCM_ROOT/docs/source/vca.rst` and Sénéchal et
   al. 2002 ("Cluster perturbation theory for Hubbard models",
   `arXiv:cond-mat/0205044`) for the CPT/VCA foundations.
 - **CDMFT** (Cellular/Cluster DMFT): clusters are coupled to a bath of uncorrelated orbitals whose
   parameters are tuned so the cluster's hybridization function best reproduces the lattice
   self-consistency condition, iterated to convergence. This captures local dynamical correlations
-  (unlike VCA/CPT) at the cost of the bath-fitting approximation. See `pyqcm/docs/source/cdmft.rst`.
+  (unlike VCA/CPT) at the cost of the bath-fitting approximation. See `$PYQCM_ROOT/docs/source/cdmft.rst`.
 - **Subbath CDMFT**: a variant published this year by this group (de Lagrave, Sénéchal &
   Charlebois; `arXiv:2509.07931`), where a cluster is
   associated with *more than one* independent bath system instead of one. In pyqcm this is not a
@@ -30,7 +30,7 @@ intuition about Hubbard models, since the specifics of CPT/VCA/CDMFT matter.
   self-energy Sigma_i and hybridization function Gamma_i from its own impurity problem; by default
   pyqcm averages these when building the host from the projected lattice Green's function, giving a
   tighter effective correspondence between host and impurity models than a single larger bath would
-  at the same cost (`pyqcm/docs/source/cdmft.rst`, "Subbaths" section; feature since pyqcm > 2.19).
+  at the same cost (`$PYQCM_ROOT/docs/source/cdmft.rst`, "Subbaths" section; feature since pyqcm > 2.19).
   Physically this buys an extended bath representation (better hybridization fit, e.g. sharper Mott
   gap reproduction, see the subbath paper's Fig. 8/10 comparisons) at a fraction of the ED cost of
   one large bath, because each subbath is diagonalized as its own smaller impurity problem.
@@ -38,12 +38,12 @@ intuition about Hubbard models, since the specifics of CPT/VCA/CDMFT matter.
   **This is a genuinely new method (2026), not yet widely used or benchmarked outside this group.**
   General CDMFT intuition doesn't automatically transfer to the multi-system averaging behavior, so
   read the subbath paper and the `cdmft.rst` "Subbaths" section before assuming otherwise. For
-  working code (more useful than prose here), see `pyqcm/tests/test_files/test_cdmft_sb.py` (a
+  working code (more useful than prose here), see `$PYQCM_ROOT/tests/test_files/test_cdmft_sb.py` (a
   2-cluster ladder model where one cluster has two bath systems and the other has none, the mixed
   case) and `test_cdmft_1x4_4b_2sb.py` (a single 1x4-chain cluster with two subbath systems, each
   built from its own `cluster_model` with `generators=`/`bath_irrep=True` for a C2 irrep, the
   symmetry-adapted case, showing the `eb{i}_{k}`/`tb{i}_{k}` bath-parameter naming where `k` indexes
-  which subbath system a parameter belongs to). Both run automatically under `pyqcm/tests/test_all.py`.
+  which subbath system a parameter belongs to). Both run automatically under `$PYQCM_ROOT/tests/test_all.py`.
 
 Mixing up which method produced a result changes what conclusions are even valid to draw. A CPT
 calculation cannot show a stable symmetry-broken phase (it has no variational or self-consistent
@@ -66,7 +66,7 @@ explaining it away.
 - **DoS** (`plot_DoS`): the k-integrated spectral function; a gap here signals an insulating phase, a
   Mott gap in particular if driven by U rather than by band structure. If the calculation *sweeps* a
   parameter (e.g. chemical potential) specifically to probe the Mott transition rather than sit at a
-  fixed filling, see the sector-declaration gotcha in `references/gotchas.md`: the target sectors need
+  fixed filling, see the sector-declaration gotcha in `references/practice.md`: the target sectors need
   to track the filling change, not stay fixed at one `N`.
 - **Self-energy**: encodes the correlation physics beyond mean-field. Strong frequency dependence
   near zero frequency is the fingerprint of strong correlation effects, as opposed to a self-energy
@@ -80,8 +80,8 @@ periodization (CDMFT) or interpolation (DCA) step. pyqcm exposes several traditi
 `period=` argument to spectral-function calls (or
 `pyqcm.set_global_parameter('periodization', ...)`): `'G'` (periodize the Green's function directly,
 the default), `'M'` (periodize the cumulant instead), plus `'S'`, `'C'`, `'N'` variants. See
-`pyqcm/docs/source/spectral.rst`, `pyqcm/pyqcm/_spectral.py` docstrings, and `src_qcm/CPT.cpp`, where
-this is actually computed (layer 3 in `references/contributing.md`'s architecture). Which scheme is
+`$PYQCM_ROOT/docs/source/spectral.rst`, `$PYQCM_ROOT/pyqcm/_spectral.py` docstrings, and `src_qcm/CPT.cpp`, where
+this is actually computed (layer 3 in `references/modifying-pyqcm.md`'s architecture). Which scheme is
 "right" is not a solved question in general: different choices can disagree noticeably away from
 particle-hole symmetry, and traditional interpolation of a frequency-dependent quantity can violate
 causality or wash out fine Fermi-surface structure such as hole pockets.

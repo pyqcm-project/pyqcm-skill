@@ -6,7 +6,7 @@ responsibilities, and touching the wrong one either won't compile or won't be re
 
 ## Layers, outside-in
 
-1. **`pyqcm/pyqcm/*.py`**: pure Python. This is where the user-facing API lives (`__init__.py`, about
+1. **`$PYQCM_ROOT/pyqcm/*.py`**: pure Python. This is where the user-facing API lives (`__init__.py`, about
    3300 lines) plus higher-level pure-Python logic that doesn't need C++ performance: `cdmft.py`
    (CDMFT self-consistency driver), `vca.py` (VCA driver), `_loop.py` (parameter sweeps),
    `_spectral.py`, `_draw.py`, `green_structure.py` (Green's function representations: Lehmann,
@@ -15,13 +15,13 @@ responsibilities, and touching the wrong one either won't compile or won't be re
    way to post-process a Green's function) rather than about the ED solver or lattice engine
    themselves, it likely belongs here and can be developed and tested without touching CMake at all.
 
-2. **`pyqcm/src_python/`**: the nanobind glue (`qcm_lib.cpp` is the module entry point,
+2. **`$PYQCM_ROOT/src_python/`**: the nanobind glue (`qcm_lib.cpp` is the module entry point,
    `qcm_wrap.hpp`/`qcm_ED_wrap.hpp` register the actual bound functions, `common_Py.cpp` has shared
    conversion helpers). New C++ functionality only becomes callable from Python once it's registered
    here. If a new C++ function exists but `pyqcm.<name>` raises `AttributeError`, check whether it
    was actually exposed through this layer.
 
-3. **`pyqcm/src_qcm/`**: the lattice/CPT-VCA-CDMFT engine: `lattice_model`/`lattice_model_instance`
+3. **`$PYQCM_ROOT/src_qcm/`**: the lattice/CPT-VCA-CDMFT engine: `lattice_model`/`lattice_model_instance`
    (the lattice-level model and its solved instances), `lattice_operator` (lattice Hamiltonian
    terms), `CPT.cpp` (periodization), `Chern.cpp` (topological invariants), `parameter_set.cpp`
    (lattice parameter bookkeeping), `Green_function.hpp`, `basis3D.cpp`/`lattice3D.cpp` (geometry).
@@ -33,7 +33,7 @@ responsibilities, and touching the wrong one either won't compile or won't be re
    scheme, though as of this writing that work hasn't started. Confirm current status before assuming
    otherwise.
 
-4. **`pyqcm/src_ed/`**: the exact-diagonalization impurity solver, independent of any lattice
+4. **`$PYQCM_ROOT/src_ed/`**: the exact-diagonalization impurity solver, independent of any lattice
    concept. `model.hpp`/`model.cpp` define a cluster's parameter-independent structure;
    `model_instance*.cpp` solve it for specific parameter values; `sector.cpp`/`ED_basis.cpp` handle
    Hilbert space sectors and symmetry-adapted bases; `Hamiltonian/` holds the different Hamiltonian
@@ -55,14 +55,14 @@ a consistent pattern.
 
 ## Build/test loop while developing
 
-- Rebuild after any C++ change: see `references/build.md` (editable installs still trigger a full
+- Rebuild after any C++ change: see `references/install.md` (editable installs still trigger a full
   CMake reconfigure and rebuild; there's no standalone incremental-only path via `pip install -e .`).
-- Run `pyqcm/tests/test_all.py` after non-trivial changes to `src_ed`/`src_qcm`. A change meant to be
+- Run `$PYQCM_ROOT/tests/test_all.py` after non-trivial changes to `src_ed`/`src_qcm`. A change meant to be
   purely additive can silently perturb existing solvers, e.g. via shared Hamiltonian-construction
   code paths.
-- If a change only touches `pyqcm/pyqcm/*.py`, no C++ rebuild is needed at all; just re-run the
+- If a change only touches `$PYQCM_ROOT/pyqcm/*.py`, no C++ rebuild is needed at all; just re-run the
   affected script or test.
-- `pyqcm/bench/` (ED, integrals, VCA) holds performance benchmarks. Check these if a change could
+- `$PYQCM_ROOT/bench/` (ED, integrals, VCA) holds performance benchmarks. Check these if a change could
   plausibly affect performance-sensitive code paths (Hamiltonian construction and diagonalization,
   integration routines).
 
