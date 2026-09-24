@@ -19,7 +19,7 @@ Settings > Capabilities > Skills. The skill ships **no pyqcm source**. Most of w
 where yours is:
 
 ```bash
-export PYQCM_ROOT=/path/to/pyqcm     # the repo root, the directory containing src_ed/
+export PYQCM_ROOT=/path/to/pyqcm  # the repo root, the directory containing src_ed/
 ```
 
 Without it, the skill tries to derive the path from an installed `pyqcm` package and falls back to
@@ -31,17 +31,9 @@ git clone https://github.com/pyqcm-project/pyqcm.git
 
 ## Contents
 
-| Path (under prefix `skills/pyqcm-skill/`) | Contents |
-|---|---|
-| `SKILL.md` | Job routing and the `$PYQCM_ROOT` resolution |
-| `references/practice.md` | The maintainer's working notes: sharp edges, conventions, and mistakes worth not repeating |
-| `references/install.md` | Getting a working build |
-| `references/scripting.md` | Writing and debugging pyqcm scripts |
-| `references/physics.md` | Reading pyqcm output as physics |
-| `references/modifying-pyqcm.md` | Layer boundaries in the C++ and Python source |
-| `references/bath-parametrizer.md` | Symmetry-constrained CDMFT bath parametrization |
-| `references/hpc.md` | Module-based HPC clusters |
-| `references/research/CITATIONS.md` | Cited papers by arXiv id and DOI |
+The entry point is [`skills/pyqcm-skill/SKILL.md`](skills/pyqcm-skill/SKILL.md). It resolves
+`$PYQCM_ROOT`, routes each kind of question to the right reference, and lists every file under
+`references/`.
 
 ## Relationship to Pyqcm
 

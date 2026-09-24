@@ -23,6 +23,32 @@ CCDB credentials plus Duo MFA. `ssh-copy-id` works and is worth doing. Note the 
 use the SSH public keys registered in your CCDB account; you must copy your key explicitly. The login
 node is `iv11`.
 
+### An `~/.ssh/config` entry worth having
+
+```
+ServerAliveInterval 60
+
+Host iq
+    HostName hpc.iq.ccs.usherbrooke.ca
+    User <your-ccdb-username>
+    IdentityFile ~/.ssh/id_ed25519_iq
+    ControlMaster auto
+    ControlPath ~/.ssh/cm-%r@%h:%p
+    ControlPersist 60m
+```
+
+The three `Control` lines turn on connection multiplexing: the first `ssh iq` opens a master connection
+and leaves its socket at `ControlPath`. Every later session to the same host rides that socket. Hence,
+authentication happens once per connection, and this cluster authenticates with CCDB credentials plus
+Duo MFA, so multiplexing means one MFA prompt rather than one per transfer. `ControlPersist 60m` keeps
+the master alive for an hour after the last session closes.
+
+`ServerAliveInterval 60` sends a keepalive every minute, which stops an idle `salloc` session or a
+long-running `tail -f` from being dropped by an intermediate firewall.
+
+A per-host `IdentityFile` pairs with the `ssh-copy-id` note above. The cluster ignores the keys
+registered in CCDB, so naming the key explicitly here documents which one you actually copied.
+
 ## Storage, and the rule that matters
 
 | Location | Use for | Do not use for |

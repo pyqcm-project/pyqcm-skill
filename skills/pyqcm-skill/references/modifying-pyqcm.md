@@ -55,7 +55,7 @@ a consistent pattern.
 
 ## Build/test loop while developing
 
-- Rebuild after any C++ change: see `references/install.md` (editable installs still trigger a full
+- Rebuild after any C++ change: see `references/practice.md` (editable installs still trigger a full
   CMake reconfigure and rebuild; there's no standalone incremental-only path via `pip install -e .`).
 - Run `$PYQCM_ROOT/tests/test_all.py` after non-trivial changes to `src_ed`/`src_qcm`. A change meant to be
   purely additive can silently perturb existing solvers, e.g. via shared Hamiltonian-construction

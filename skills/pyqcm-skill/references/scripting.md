@@ -62,16 +62,22 @@ here before assuming it isn't demonstrated anywhere in the codebase.
 | Parallelism (multi-core ED, integrals) | `$PYQCM_ROOT/docs/source/parallel.rst` |
 | Everything else (misc functions) | `$PYQCM_ROOT/docs/source/other_functions.rst` |
 
-If searching rendered docs is easier than grepping `.rst` files, build them locally with
-`cd $PYQCM_ROOT/docs && ./makedoc` (see `references/install.md`). The output includes the C++ API reference
-(`cpp_api/`) which isn't mirrored as `.rst`.
+If searching rendered docs is easier than grepping `.rst` files, build them locally:
+
+```bash
+cd $PYQCM_ROOT/docs && ./makedoc
+```
+
+This produces HTML under `docs/html/`, including the C++ API reference (`cpp_api/`) which isn't
+mirrored as `.rst`. This skill ships no pre-built copy, so rebuild locally when you need to browse
+the docs, or read the hosted build at https://qcm-wed.readthedocs.io/.
 
 ## Debugging checklist
 
 Before diving into the C++ layer, rule out the cheap stuff first:
 
-1. **Is the extension actually built?** See `references/install.md`; a missing or stale build produces
-   errors that look like Python bugs.
+1. **Is the extension actually built?** See `references/practice.md`, "When the compiled extension is
+   missing"; a missing or stale build produces errors that look like Python bugs.
 2. **Do operators and parameters match 1:1?** Every operator declared via `*_operator(...)` needs a
    corresponding entry in `set_parameters(...)`, and vice versa.
 3. **Is the target sector consistent with the model?** Wrong particle number or spin sector for the

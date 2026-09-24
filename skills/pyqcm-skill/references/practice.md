@@ -7,24 +7,25 @@ I will hopefully update this document on a daily basis in order to enhance the p
 > **Note**:
 > Some entries below depend on the Pyqcm version and name it explicitly (e.g. "up to v2.26.x", "as of v2.29.x"). This skill ships no Pyqcm source and is not pinned to a release, so check which version is actually installed (`python3 -c "import pyqcm; print(pyqcm.__version__)"`) and what `$PYQCM_ROOT` is checked out at (`git -C $PYQCM_ROOT describe --tags`) before trusting a version-qualified claim. They are not necessarily the same.
 >
-> Some of what follows reflects choices made by the code owner (David Senechal) that could change in a future release. Those are flagged where they occur, so double-check rather than trusting them blindly.
+> Some of what follows reflects choices made by the code owner (David Senechal) and contributers that could change in a future release. Those are flagged where they occur, so double-check rather than trusting them blindly.
 
 ## Installation
 
+Pyqcm on PyPI is **source-only**: there is an sdist but no wheels, so even `pip install pyqcm` compiles from source exactly like a checkout does. There is no binary fast path, and every install needs a C++ compiler, CMake and BLAS.
+
 The most straight-forward way to install Pyqcm is by using `pip install .`. However, this command won't work unless those numerical libraries are properly installed on the machine:
 
-- C++ compiler
-- LAPACK, OpenBLAS
-- Eigen
+- A C++ compiler. On Apple platforms, `CMakeLists.txt` forces `clang`/`clang++` unless you override `CMAKE_C_COMPILER`/`CMAKE_CXX_COMPILER` explicitly.
+- CMake (`brew install cmake` on MacOS, `apt install cmake` on Debian/Ubuntu)
+- LAPACK, OpenBLAS. On MacOS the Accelerate framework is picked up automatically; on Linux install `libopenblas-dev` or point at another one with `-DBLA_VENDOR=...`
+- Eigen (`libeigen3-dev` on Debian/Ubuntu), needed as long as you build with `EIGEN_HAMILTONIAN=1`, which is the default
 - HDF5
 - OpenMP
 
-On MacOS, the best way to install those libraries is by using the [Homebrew](https://brew.sh) package manager whereas on Linux, I am pretty sure you already have your personal favorite... On Institut Quantique's HPC nodes, the story is different, and I think that you should always refer to the updated(?) [documentation](https://ccs-udes.github.io/hpc-iq/en/). BUT, as for now, loading the following modules works for me:
+On MacOS, the best way to install those libraries is by using the [Homebrew](https://brew.sh) package manager whereas on Linux, I am pretty sure you already have your personal favorite...
 
-```bash
-$ module purge
-$ module load StdEnv/2023 gcc Eigen scipy-stack nlopt cmake hdf5
-```
+> **Note**:
+> On an HPC cluster, read `references/hpc.md` before doing anything else.
 
 About the Python environnement, I highly suggest that you use a *virtual environnement manager* (which is way less fancy than it sounds like). Most of the group members use [uv](https://github.com/astral-sh/uv), a blazing fast rust-based manager. A typical workflow for new virtual environnement looks like this:
 
@@ -41,8 +42,28 @@ Anyway, when installing Pyqcm with `pip install .`, the only thing that changes 
 > 
 > Concretely, all of the files ./pyqcm/pyqcm/\*.py will be the ones used by your virtual environnement whereas without the `-e` flag, the files used will be copied in your virtual environnement (e.g. pyqcm-venv/lib/python3.x/site-packages/pyqcm/\*.py) and won't change unless you reinstall the library.
 
+> The `-e` flag only buys you that for the **Python** layer. An editable install still triggers a full CMake/scikit-build-core rebuild whenever the compiled extension's sources change, and there is no incremental C++ build wired into `pip install -e .` on its own. Re-run the install command after touching anything under `src_ed/`, `src_qcm/` or `src_python/`. If you are iterating quickly on C++, drive CMake directly instead: configure once into a build directory, then `cmake --build`.
+
 > **Note**:
-> On other Digital Research Alliance clusters, expect a similar `StdEnv/2023`-style module environment, but confirm the exact module names for that cluster rather than assuming they match Grappe IQ. The full IQ recipe, including the `CMAKE_ARGS` line, lives in `references/hpc.md`.
+> Decide on the non-default build options (PRIMME, Eigen, a specific BLAS vendor) **before** installing. They change performance meaningfully and are awkward to revisit later. They are passed through `CMAKE_ARGS`:
+>
+> ```bash
+> $ export CMAKE_ARGS="-DBLA_VENDOR=OpenBLAS -DWITH_PRIMME=1 -DDOWNLOAD_PRIMME=1"
+> $ uv pip install -e . --no-build-isolation
+> ```
+>
+> The full catalogue of options is in `$PYQCM_ROOT/INSTALL.md` and `$PYQCM_ROOT/docs/source/intro.rst`.
+
+### Verifying the install
+
+```bash
+$ python3 -c "import pyqcm; print(pyqcm.__version__)"
+```
+
+`$PYQCM_ROOT/tests/test_all.py` runs the whole test suite when you want a fuller check (outputs land in `tests/test_outputs/`), and the individual tests under `tests/test_files/` run standalone when you only need to check one solver path.
+
+> **Note**:
+> Diagnose that before debugging what looks like a Python bug. A stale or missing build produces confusing symptoms: `AttributeError` on things that clearly exist in `__init__.py`, or a silent `qcm = None`. Nothing in the traceback points at the build.
 
 ## OpenMP threads
 
@@ -79,11 +100,11 @@ depending on the CPU cores budget.
 > #SBATCH --job-name=<name of your job>
 > #SBATCH --account=<your supervisor account>
 > #SBATCH --time=<time of your job>
-> #SBATCH --cpus-per-task=16
+> #SBATCH --cpus-per-task=8
 > #SBATCH --mem-per-cpu=<number of gigabytes per CPU cores>G
 > #SBATCH --partition=<partition of your supervisor, if applicable>
 > 
-> export OMP_NUM_THREADS=8
+> export OMP_NUM_THREADS=4
 > ```
 > **Note**:
 > The empirical half-the-cores rule above may have a concrete cause. If Pyqcm is compiled with GCC but linked against Intel MKL as the BLAS backend, two OpenMP runtimes are active at once (GCC's and Intel's), and requesting $n$ threads spawns $n\times n$ instead of $n$. Building against the FlexiBLAS interface (`-DBLA_VENDOR=FlexiBLAS` in `CMAKE_ARGS`) avoids it. See `references/hpc.md`.
@@ -266,9 +287,6 @@ Bath parameters are named `ebi` for a bath energy and `tbi` for a cluster-bath h
 > The default frequency grid changed upstream. `frequency_grid` in `pyqcm/cdmft.py` was `grid_type="legendre", specs=(1, 10, 5, 10, 5)` up to v2.26.x and is `grid_type="regular", specs=(10, 50, 10)` as of v2.29.x. A script relying on the old default silently changes grid on upgrade, so pin it explicitly when comparing against older numbers.
 >
 > Senechal's bath-optimization paper (arXiv:1005.1685) is the study behind the weight-function choice. A weight proportional to `Tr Sigma^2` works best overall, especially for tracking a U-driven Mott transition, while `W = 1/omega` does badly in metallic phases where the self-energy is already small at low frequency. It also suggests `beta = 100/t` for the frequency spacing. It is a 2010 paper on a narrower set of models than we run now, so treat it as the strongest existing guidance rather than a closed case.
-## Grounding a named material in the literature
-
-When a script targets a real compound rather than a generic toy Hubbard model, the parameter choices, the cluster and bath geometry, and the expected order-parameter behaviour are all physics claims, even though what you are editing is a Python script. Check the "Grounding claims in the literature" section of `references/physics.md` and the relevant papers in `references/research/CITATIONS.md` before settling them.
 ## Model-construction landmines
 
 Met while building `pyqcm-w90-builder` (2026-07), all verified against the Pyqcm source. Only the orbital-label point is Wannier90-specific.

@@ -38,21 +38,20 @@ interpreting why the physics looks wrong) and read the matching reference before
 
 | Job | When | Read |
 |---|---|---|
-| Set up or fix an installation | `import pyqcm` fails, "unable to load the QCM library", a build error, a fresh venv, moving to a cluster | `references/install.md`, plus `$PYQCM_ROOT/INSTALL.md` for the full `CMAKE_ARGS` catalogue |
+| Set up or fix an installation | `import pyqcm` fails, "unable to load the QCM library", a build error, a fresh venv, moving to a cluster | `references/practice.md` ("Installation"), `references/hpc.md` on a cluster, plus `$PYQCM_ROOT/INSTALL.md` for the full `CMAKE_ARGS` catalogue |
 | Write or debug a script | Defining clusters/models/operators, running ED/CDMFT/VCA, fixing a traceback, choosing sectors | `references/scripting.md` |
 | Interpret physics results | Explaining a spectral function, self-energy, order parameter, or phase diagram; connecting output to the underlying theory | `references/physics.md` |
 | Modify pyqcm itself | Touching `$PYQCM_ROOT/src_ed/`, `src_qcm/`, `src_python/`, or the pure-Python `pyqcm/*.py` wrapper | `references/modifying-pyqcm.md` |
 
 **Always check `references/practice.md` first**, whichever job it is. It is the single running record
-of pyqcm's sharp edges and of how this group actually works, hand-written by the maintainer and
-written down nowhere else. Skim its headings for the topic at hand rather than trusting any summary
-of its contents.
+of pyqcm's sharp edges hand-written by the maintainer and written down nowhere else. Skim its headings
+for the topic at hand rather than trusting any summary of its contents.
 
 **Also read `references/physics.md`'s "Grounding claims in the literature" section whenever the work
 targets a specific named material or compound**, rather than a generic toy Hubbard model, even when
 the job otherwise classifies as pure scripting. The table above routes to one reference per job, which
-is not enough here. `references/practice.md`, "Grounding a named material in the literature", says
-why.
+is not enough here: the parameter choices, the cluster and bath geometry, and the expected
+order-parameter behaviour are all physics claims, even when what you are editing is a Python script.
 
 ## Other references
 
@@ -73,16 +72,16 @@ code, scripts, prose, or commits.
 
 ## Checking build state before debugging
 
-The compiled `qcm` extension must be built before any script can run. Pure Python imports of `pyqcm`
-succeed even when the extension is missing, but simulations fail. Check with:
+Pure Python imports of `pyqcm` succeed even when the compiled `qcm` extension is missing, but
+simulations fail. Check with:
 
 ```bash
 python3 -c "import pyqcm" 2>&1 | tail -3
 ```
 
-If it reports it "was unable to load the QCM library", it needs building. Go to `references/install.md`
-before assuming a code change is broken. Do not chase a phantom bug in Python logic when the real
-issue is a stale or missing build.
+If it reports it "was unable to load the QCM library", it needs building. See
+`references/practice.md`, "When the compiled extension is missing", before assuming a code change is
+broken.
 
 ## pyqcm layout, relative to `$PYQCM_ROOT`
 
@@ -96,7 +95,7 @@ issue is a stale or missing build.
   parameter sets).
 - `src_python/`: nanobind bindings gluing the C++ core into the `pyqcm.qcm` extension module.
 - `docs/source/*.rst`: the authoritative API/workflow documentation. Build it locally (see
-  `references/install.md`) for rendered HTML, or read
+  `references/scripting.md`) for rendered HTML, or read
   https://qcm-wed.readthedocs.io/.
 - `notebooks/*.py` / `*.ipynb`: worked examples (1D Hubbard chains, antiferromagnetism,
   superconductivity, CDW, Rashba coupling, graphene Mott transition), the best source of idiomatic
@@ -106,8 +105,8 @@ issue is a stale or missing build.
 
 ## Contributing a gotcha back
 
-This skill is public and takes pull requests. At the **end** of a session, suggest a contribution to
-`references/practice.md` only when all of these hold:
+This skill is public and takes pull requests. At the **end** of a session, you may suggest a
+contribution to `references/practice.md` only when all of these hold:
 
 - **General**: the lesson would have changed the outcome for someone who is not this user, on a
   different model or system.
@@ -116,8 +115,7 @@ This skill is public and takes pull requests. At the **end** of a session, sugge
 - **It cost something real**: wasted time, a wrong result, a discarded run, or a genuinely confusing
   error. Merely interesting is not enough.
 
-When it does fire, encourage the user to write the entry manually. Then, you may format it as excpected
-from `CONTRIBUTING.md` so the maintainer's review is a yes or no rather than an editing job.
-Never edit `references/practice.md` yourself: it is hand-written and hand-maintained by the author,
-and the installed copy is overwritten on plugin update anyway, so the change would be silently lost.
-Propose it to them instead. See `CONTRIBUTING.md` at the repo root.
+When it does fire, encourage the user to write the entry manually, explaining what they learned from it.
+Then, you may format it as excpected from `CONTRIBUTING.md`. Never edit `references/practice.md` yourself:
+it is hand-written and hand-maintained by the author, and the installed copy is overwritten on plugin
+update anyway, so the change would be silently lost.
