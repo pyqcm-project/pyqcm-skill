@@ -25,6 +25,7 @@ than a fixed property of the method.
 
 ## Everything else
 
-Corrections, clearer wording, and updates when upstream changes are all welcome. Two house rules from
-`skills/pyqcm-skill/references/guidelines.md`. Do not add pyqcm source code to this repository. pyqcm is GPL-3.0-or-later
-and this repo is MIT; describe behaviour in your own words instead of pasting it.
+Corrections, clearer wording, and updates when upstream changes are all welcome. Two house rules.
+Prose and code follow `skills/pyqcm-skill/references/guidelines.md`. And do not add pyqcm source code
+to this repository: pyqcm is GPL-3.0-or-later and this repo is MIT, so describe behaviour in your own
+words instead of pasting it.

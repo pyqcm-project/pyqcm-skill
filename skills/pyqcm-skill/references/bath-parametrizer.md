@@ -5,11 +5,8 @@ derive the `generators=[...]` / `bath_irrep=True` encoding for a symmetric clust
 hand is error-prone: each generator row encodes both the cluster-site permutation and the phase every
 bath orbital picks up under that group operation.
 
-It is a separate package, not part of pyqcm and not bundled with this skill.
-
-- Source: https://github.com/antoinedelagrave/pyqcm-bath-parametrizer
-- Read `references/practice.md`, section "Symmetries via `bath-parametrizer`", before using it. That
-  section documents the sharp edges (return-type switching, silent mis-coupling, unsupported cases).
+It is a separate package, not part of pyqcm and not bundled with this skill. Source:
+https://github.com/antoinedelagrave/pyqcm-bath-parametrizer
 
 ## Setup
 
@@ -56,6 +53,10 @@ get_pyqcm_generators(n_baths, abelian_pg, subbath=None, linked_sites=None) -> li
 
 Returns a flat generators list when `nsb` is 1, and a dict keyed by 1-based subbath index when
 `nsb > 1`, one flat list per subbath cluster model. Check which you got before passing it on.
+
+Bath-phase blocks follow the SALC label order, so declare your `eb{i}`/`tb{i}` in that same order. A
+mismatch silently couples the wrong bath orbitals, which is the nastiest failure mode here since
+nothing complains.
 
 For SB-CDMFT:
 

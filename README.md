@@ -5,7 +5,7 @@ quantum cluster methods (CPT, VCA, CDMFT) for strongly correlated electron model
 model.
 
 It can help with four things: getting pyqcm installed, writing and debugging pyqcm scripts,
-interpreting what the outputs physically mean, and contributing to the project.
+interpreting what the outputs physically mean, and modifying pyqcm itself.
 
 ## Install
 
@@ -37,14 +37,9 @@ The entry point is [`skills/pyqcm-skill/SKILL.md`](skills/pyqcm-skill/SKILL.md).
 
 ## Relationship to Pyqcm
 
-This repository contains **no pyqcm source code**. pyqcm is authored by David Senechal and licensed
+This repository contains no pyqcm source code. Pyqcm is authored by David Sénéchal and licensed
 GPL-3.0-or-later; see https://github.com/pyqcm-project/pyqcm.
 
-It also contains **no paper text**. Cited work stays under its authors' and
-publishers' copyright, so the skill cites by arXiv id only. Copies you
-fetch into `skills/pyqcm-skill/references/research/` (create it; it ships empty) are git-ignored and
-stay local.
+## Credits
 
-## Contributing
-
-Gotchas are the most valuable thing you can send. See [CONTRIBUTING.md](CONTRIBUTING.md).
+This skill has been designed with the help of Claude Code.

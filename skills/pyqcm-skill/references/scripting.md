@@ -76,8 +76,8 @@ the docs, or read the hosted build at https://qcm-wed.readthedocs.io/.
 
 Before diving into the C++ layer, rule out the cheap stuff first:
 
-1. **Is the extension actually built?** See `references/practice.md`, "When the compiled extension is
-   missing"; a missing or stale build produces errors that look like Python bugs.
+1. **Is the extension actually built?** See `references/practice.md`, "Verifying the install"; a
+   missing or stale build produces errors that look like Python bugs.
 2. **Do operators and parameters match 1:1?** Every operator declared via `*_operator(...)` needs a
    corresponding entry in `set_parameters(...)`, and vice versa.
 3. **Is the target sector consistent with the model?** Wrong particle number or spin sector for the

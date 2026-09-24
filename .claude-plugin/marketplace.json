@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "pyqcm-skill",
-      "description": "Assistant for pyqcm, a quantum cluster methods library (CPT, VCA, CDMFT) for strongly correlated electron models. Covers installing it, writing and debugging scripts, interpreting physics output, and contributing to the project.",
+      "description": "Assistant for pyqcm, a quantum cluster methods library (CPT, VCA, CDMFT) for strongly correlated electron models. Covers installing it, writing and debugging scripts, interpreting physics output, and modifying the library itself.",
       "source": "./",
       "category": "physics",
       "homepage": "https://github.com/pyqcm-project/pyqcm-skill"

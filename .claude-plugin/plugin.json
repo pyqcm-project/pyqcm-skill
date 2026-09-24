@@ -1,7 +1,7 @@
 {
   "name": "pyqcm-skill",
-  "version": "0.2.0",
-  "description": "Assistant for pyqcm, a quantum cluster methods library (CPT, VCA, CDMFT) for strongly correlated electron models. Covers installing it, writing and debugging scripts, interpreting physics output, and contributing to the project.",
+  "version": "0.3.0",
+  "description": "Assistant for pyqcm, a quantum cluster methods library (CPT, VCA, CDMFT) for strongly correlated electron models. Covers installing it, writing and debugging scripts, interpreting physics output, and modifying the library itself.",
   "author": {
     "name": "Antoine de Lagrave",
     "url": "https://github.com/antoinedelagrave"

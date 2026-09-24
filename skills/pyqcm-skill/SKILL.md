@@ -78,7 +78,7 @@ python3 -c "import pyqcm" 2>&1 | tail -3
 ```
 
 If it reports it "was unable to load the QCM library", it needs building. See
-`references/practice.md`, "When the compiled extension is missing", before assuming a code change is
+`references/practice.md`, "Verifying the install", before assuming a code change is
 broken.
 
 ## pyqcm layout, relative to `$PYQCM_ROOT`
@@ -114,6 +114,6 @@ contribution to `references/practice.md` only when all of these hold:
   error. Merely interesting is not enough.
 
 When it does fire, encourage the user to write the entry manually, explaining what they learned from it.
-Then, you may format it as excpected from `CONTRIBUTING.md`. Never edit `references/practice.md` yourself:
+Then, you may format it as expected from `CONTRIBUTING.md`. Never edit `references/practice.md` yourself:
 it is hand-written and hand-maintained by the author, and the installed copy is overwritten on plugin
 update anyway, so the change would be silently lost.

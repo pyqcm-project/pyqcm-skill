@@ -90,8 +90,8 @@ different group, and implementing and benchmarking it against the existing G/M s
 direction this group intends to pursue, part of why this skill exists: onboarding new contributors,
 including incoming interns, onto this specific piece of forward work. If asked to help implement or
 evaluate it, don't assume any existing pyqcm code does this. `CPT.cpp` (layer 3) is the natural place
-a periodization scheme lives architecturally, but confirm current status with Antoine before treating
-this as already-existing functionality.
+a periodization scheme lives architecturally, but confirm current status with the maintainers before
+treating this as already-existing functionality.
 
 ## Conventions you will meet in this group's scripts
 

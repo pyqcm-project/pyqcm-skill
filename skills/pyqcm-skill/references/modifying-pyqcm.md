@@ -1,6 +1,6 @@
 # Modifying pyqcm itself
 
-pyqcm has three C++ layers plus a pure-Python layer on top. Know which layer a change belongs in
+pyqcm has a pure-Python layer on top of four C++ ones. Know which layer a change belongs in
 before writing code: the same concept (e.g. "an operator") exists at multiple layers with different
 responsibilities, and touching the wrong one either won't compile or won't be reachable from Python.
 
@@ -43,7 +43,7 @@ responsibilities, and touching the wrong one either won't compile or won't be re
    (`HS_*`) matrix-element form; `continued_fraction*.cpp`/`matrix_continued_fraction.cpp` compute
    the cluster Green's function from the solved ground state via continued fractions.
 
-5. **`pyqcm/src_util/`**: shared numerical utilities not specific to ED or lattice logic: dense and
+5. **`$PYQCM_ROOT/src_util/`**: shared numerical utilities not specific to ED or lattice logic: dense and
    sparse matrix wrappers (`matrix.cpp`), BLAS/LAPACK shims (`lapack-blas.h`, `cblas.h`), HDF5 I/O
    (`hdf5_io.cpp`), numerical integration (`integrate.cpp`), the input parser (`parser.cpp`).
 
