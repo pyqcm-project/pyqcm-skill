@@ -40,6 +40,11 @@ The entry point is [`skills/pyqcm-skill/SKILL.md`](skills/pyqcm-skill/SKILL.md).
 This repository contains **no pyqcm source code**. pyqcm is authored by David Senechal and licensed
 GPL-3.0-or-later; see https://github.com/pyqcm-project/pyqcm.
 
+It also contains **no paper text**. Cited work stays under its authors' and
+publishers' copyright, so the skill cites by arXiv id only. Copies you
+fetch into `skills/pyqcm-skill/references/research/` (create it; it ships empty) are git-ignored and
+stay local.
+
 ## Contributing
 
 Gotchas are the most valuable thing you can send. See [CONTRIBUTING.md](CONTRIBUTING.md).

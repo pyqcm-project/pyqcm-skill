@@ -10,8 +10,6 @@ Icon[]
 .claude/
 CLAUDE.md
 
-# Papers are cited, never redistributed. No paper full text is tracked in this
-# repo, whatever its licence or authorship. references/research/CITATIONS.md
-# carries the DOIs and a fetch command; fetched copies land here and stay local.
+# Papers are cited, never redistributed.
 **/references/research/**/*.txt
 **/references/research/**/*.pdf

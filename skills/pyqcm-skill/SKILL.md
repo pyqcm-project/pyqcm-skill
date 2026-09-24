@@ -40,18 +40,18 @@ interpreting why the physics looks wrong) and read the matching reference before
 |---|---|---|
 | Set up or fix an installation | `import pyqcm` fails, "unable to load the QCM library", a build error, a fresh venv, moving to a cluster | `references/practice.md` ("Installation"), `references/hpc.md` on a cluster, plus `$PYQCM_ROOT/INSTALL.md` for the full `CMAKE_ARGS` catalogue |
 | Write or debug a script | Defining clusters/models/operators, running ED/CDMFT/VCA, fixing a traceback, choosing sectors | `references/scripting.md` |
-| Interpret physics results | Explaining a spectral function, self-energy, order parameter, or phase diagram; connecting output to the underlying theory | `references/physics.md` |
+| Interpret physics results | Explaining what a spectral function, self-energy, order parameter, or phase diagram *is*, and what the method does and does not support concluding from it | `references/physics.md` |
 | Modify pyqcm itself | Touching `$PYQCM_ROOT/src_ed/`, `src_qcm/`, `src_python/`, or the pure-Python `pyqcm/*.py` wrapper | `references/modifying-pyqcm.md` |
 
 **Always check `references/practice.md` first**, whichever job it is. It is the single running record
 of pyqcm's sharp edges hand-written by the maintainer and written down nowhere else. Skim its headings
 for the topic at hand rather than trusting any summary of its contents.
 
-**Also read `references/physics.md`'s "Grounding claims in the literature" section whenever the work
-targets a specific named material or compound**, rather than a generic toy Hubbard model, even when
-the job otherwise classifies as pure scripting. The table above routes to one reference per job, which
-is not enough here: the parameter choices, the cluster and bath geometry, and the expected
-order-parameter behaviour are all physics claims, even when what you are editing is a Python script.
+**Also read `references/physics.md` whenever the work targets a specific named material or compound**,
+rather than a generic toy Hubbard model, even when the job otherwise classifies as pure scripting. The
+table above routes to one reference per job, which is not enough here: the parameter choices and the
+cluster and bath geometry follow published decompositions, so a script that looks wrong may just be
+following one.
 
 ## Other references
 
@@ -60,10 +60,8 @@ order-parameter behaviour are all physics claims, even when what you are editing
   `cluster_model(generators=..., bath_irrep=True)`, with or without subbaths.
 - `references/hpc.md`: running pyqcm in a module-based HPC environment, using the Institut quantique
   cluster as a worked example. Read it before advising on any cluster install or SLURM job.
-- `references/research/CITATIONS.md`: the papers this skill cites, by arXiv id and DOI, grouped into
-  quantum cluster methods, periodization, cuprates, and double counting. Ground physics explanations
-  in these papers, not just intuition. **Paper full texts are not stored in this repo**; the manifest
-  has a fetch command, and fetched copies are git-ignored.
+- `references/physics.md`, "Related reading": the papers this skill cites, by arXiv id. Point at these
+  rather than explaining a result from general intuition.
 
 ## Coding conventions (always follow these)
 
