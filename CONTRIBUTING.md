@@ -1,16 +1,16 @@
 # Contributing
 
-The useful contribution here is a **gotcha**: something about pyqcm that cost you real time and is not
+The useful contribution here is something about pyqcm that cost you real time and is not
 written down anywhere else. Pull requests are reviewed before merging, so the bar below is what gets
 one accepted quickly rather than a hurdle to clear before opening it.
 
 (For contributing to pyqcm *itself*, the library, this is the wrong repo. See
 `skills/pyqcm-skill/references/modifying-pyqcm.md` and the upstream project.)
 
-## Conditions for a new gotcha
+## Conditions for a new contribution
 
 - **General.** It would have changed the outcome for someone other than you, on a different model or
-  system. A fix specific to your Hamiltonian is not a gotcha.
+  system. A fix specific to your Hamiltonian is not valid.
 - **Durable.** It is a property of pyqcm or of the method, not of one script, one dataset, or one
   parameter choice. If the next pyqcm release makes it false, say so and name the version.
 - **It cost something.** Wasted hours, a wrong result, a discarded run, or an error message that sent
